@@ -15,7 +15,7 @@
                 {"&"c, New List(Of (Integer, Integer)) From {(0, 0), (2, 0), (1, 1), (0, 2), (2, 2), (0, 3), (1, 4), (2, 4)}},
                 {"'"c, New List(Of (Integer, Integer)) From {(2, 0), (1, 1)}},
                 {"("c, New List(Of (Integer, Integer)) From {(2, 0), (1, 1), (1, 2), (1, 3), (2, 4)}},
-                {")"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 1), (1, 2), (1, 3), (0, 4)}},
+                {")"c, New List(Of (Integer, Integer)) From {(1, 0), (2, 1), (2, 2), (2, 3), (1, 4)}},
                 {"*"c, New List(Of (Integer, Integer)) From {(0, 1), (2, 1), (1, 2), (0, 3), (2, 3)}},
                 {"+"c, New List(Of (Integer, Integer)) From {(1, 1), (0, 2), (1, 2), (2, 2), (1, 3)}},
                 {","c, New List(Of (Integer, Integer)) From {(2, 3), (2, 4), (1, 5)}},
@@ -53,7 +53,23 @@
                 {"L"c, New List(Of (Integer, Integer)) From {(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 4), (2, 4)}},
                 {"M"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1), (0, 2), (2, 2), (0, 3), (2, 3), (0, 4), (2, 4)}},
                 {"N"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (0, 1), (2, 1), (0, 2), (2, 2), (0, 3), (2, 3), (0, 4), (2, 4)}},
-                {"O"c, New List(Of (Integer, Integer)) From {(1, 0), (0, 1), (2, 1), (0, 2), (2, 2), (0, 3), (2, 3), (1, 4)}}
+                {"O"c, New List(Of (Integer, Integer)) From {(1, 0), (0, 1), (2, 1), (0, 2), (2, 2), (0, 3), (2, 3), (1, 4)}},
+                {"P"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (2, 0), (0, 1), (2, 1), (0, 2), (1, 2), (2, 2), (0, 3), (0, 4)}},
+                {"Q"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (2, 0), (0, 1), (2, 1), (0, 2), (2, 2), (0, 3), (1, 3), (2, 3), (0, 4), (1, 4), (2, 4)}},
+                {"R"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (0, 1), (2, 1), (0, 2), (2, 2), (0, 3), (1, 3), (0, 4), (2, 4)}},
+                {"S"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (2, 0), (0, 1), (0, 2), (1, 2), (2, 2), (2, 3), (0, 4), (1, 4), (2, 4)}},
+                {"T"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (2, 0), (1, 1), (1, 2), (1, 3), (1, 4)}},
+                {"U"c, New List(Of (Integer, Integer)) From {(0, 0), (2, 0), (0, 1), (2, 1), (0, 2), (2, 2), (0, 3), (2, 3), (0, 4), (1, 4), (2, 4)}},
+                {"V"c, New List(Of (Integer, Integer)) From {(0, 0), (2, 0), (0, 1), (2, 1), (0, 2), (2, 2), (0, 3), (1, 3), (0, 4)}},
+                {"W"c, New List(Of (Integer, Integer)) From {(0, 0), (2, 0), (0, 1), (2, 1), (0, 2), (1, 2), (2, 2), (0, 3), (1, 3), (2, 3), (0, 4), (2, 4)}},
+                {"X"c, New List(Of (Integer, Integer)) From {(0, 0), (2, 0), (0, 1), (2, 1), (1, 2), (0, 3), (2, 3), (0, 4), (2, 4)}},
+                {"Y"c, New List(Of (Integer, Integer)) From {(0, 0), (2, 0), (0, 1), (2, 1), (1, 2), (1, 3), (1, 4)}},
+                {"Z"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (2, 0), (2, 1), (1, 2), (0, 3), (0, 4), (1, 4), (2, 4)}},
+                {"["c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (0, 1), (0, 2), (0, 3), (1, 4), (0, 4)}},
+                {"\"c, New List(Of (Integer, Integer)) From {(1, 0), (1, 1), (1, 2), (1, 3), (1, 4)}},
+                {"]"c, New List(Of (Integer, Integer)) From {(1, 0), (2, 0), (2, 1), (2, 2), (2, 3), (1, 4), (2, 4)}},
+                {"^"c, New List(Of (Integer, Integer)) From {(1, 0), (0, 1), (2, 1)}},
+                {"_"c, New List(Of (Integer, Integer)) From {(0, 5), (1, 5), (2, 5), (3, 5)}}
             },
             4)
     End Sub

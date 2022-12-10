@@ -7,7 +7,7 @@
     Private _texture As Texture2D
     Private _buffer As Integer()
     Private _isQuit As Boolean = False
-    Private _uiScale As Integer = 4
+    Private _uiScale As Integer = 8
 
     Public ReadOnly Property WindowTitle As String Implements IPresentationContext.WindowTitle
         Get

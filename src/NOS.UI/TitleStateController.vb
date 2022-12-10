@@ -19,6 +19,7 @@
         _context.GetFont(DefaultFontName).WriteString(0, 18, "PQRSTUVWXYZ[\]^_", Hue.White)
         _context.GetFont(DefaultFontName).WriteString(0, 24, "`abcdefghijklmno", Hue.White)
         _context.GetFont(DefaultFontName).WriteString(0, 30, "pqrstuvwxyz{|}~" + ChrW(127), Hue.White)
+        _context.GetFont(DefaultFontName).WriteString(0, 42, "HELLO, WORLD!", Hue.Blue)
         _context.SetPixel(_x, _y, Hue.Blue)
     End Sub
 
