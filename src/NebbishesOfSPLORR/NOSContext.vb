@@ -8,6 +8,7 @@
     Private _buffer As Integer()
     Private _isQuit As Boolean = False
     Private _uiScale As Integer = 8
+    Private _keysPressed As New Queue(Of String)
 
     Public ReadOnly Property WindowTitle As String Implements IPresentationContext.WindowTitle
         Get
@@ -70,8 +71,14 @@
         End Get
     End Property
 
-    Public Sub HandleKey(key As Keys) Implements IPresentationContext.HandleKey
-        RaiseEvent OnKey(key.ToString)
+    Public ReadOnly Property HasKey As Boolean Implements IUIContext.HasKey
+        Get
+            Return _keysPressed.Any
+        End Get
+    End Property
+
+    Public Sub AddKeyPress(key As Keys) Implements IPresentationContext.AddKeyPress
+        _keysPressed.Enqueue(key.ToString())
     End Sub
 
     Public Sub Update(ticks As Long) Implements IPresentationContext.Update
@@ -95,7 +102,6 @@
             {Hue.White, &HFFFFFF}
         }
     Public Event OnUpdate As IUIContext.OnUpdateEventHandler Implements IUIContext.OnUpdate
-    Public Event OnKey As IUIContext.OnKeyEventHandler Implements IUIContext.OnKey
     Public Event OnUIScale() Implements IPresentationContext.OnUIScale
 
     Public Sub SetPixel(plotX As Integer, plotY As Integer, hue As Hue) Implements IUIContext.SetPixel
@@ -126,4 +132,8 @@
     Public Sub SetFont(fontName As String, font As Font) Implements IUIContext.SetFont
         _fonts(fontName) = font
     End Sub
+
+    Public Function ReadKey() As String Implements IUIContext.ReadKey
+        Return _keysPressed.Dequeue
+    End Function
 End Class

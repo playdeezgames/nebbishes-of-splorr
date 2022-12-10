@@ -32,7 +32,7 @@
         _keyboardState = Keyboard.GetState()
         For Each key In _keyboardState.GetPressedKeys()
             If Not _oldKeyboardState.IsKeyDown(key) Then
-                _context.HandleKey(key)
+                _context.AddKeyPress(key)
             End If
         Next
         _context.Update(gameTime.ElapsedGameTime.Ticks)

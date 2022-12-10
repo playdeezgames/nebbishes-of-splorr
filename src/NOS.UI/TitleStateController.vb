@@ -7,6 +7,8 @@
         _world = world
     End Sub
 
+    Public Event ChangeState(uiState As UIStates) Implements IStateController.ChangeState
+
     Public Sub Update() Implements IStateController.Update
         _context.GetFont(DefaultFontName).WriteString(0, 0, " !""#$%&'()*+,-./", Hue.White)
         _context.GetFont(DefaultFontName).WriteString(0, 6, "0123456789:;<=>?", Hue.White)
@@ -17,6 +19,6 @@
         _context.GetFont(DefaultFontName).WriteString(0, 42, "Nebbishes of SPLORR!!", Hue.Blue)
     End Sub
 
-    Public Sub HandleKey(keyName As String) Implements IStateController.HandleKey
+    Public Sub Restart() Implements IStateController.Restart
     End Sub
 End Class

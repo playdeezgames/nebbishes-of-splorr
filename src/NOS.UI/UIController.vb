@@ -8,13 +8,16 @@ Public Class UIController
         _world = New World
         _context.SetFont(DefaultFontName, New DefaultFont(_context))
         AddHandler context.OnUpdate, AddressOf OnUpdate
-        AddHandler context.OnKey, AddressOf OnKey
         _states.Add(UIStates.Title, New TitleStateController(_context, _world))
-        _state = UIStates.Title
+        For Each state In _states
+            AddHandler state.Value.ChangeState, AddressOf OnChangeState
+        Next
+        OnChangeState(UIStates.Title)
     End Sub
 
-    Private Sub OnKey(keyName As String)
-        _states(_state).HandleKey(keyName)
+    Private Sub OnChangeState(uiState As UIStates)
+        _state = uiState
+        _states(_state).Restart()
     End Sub
 
     Private Sub OnUpdate()

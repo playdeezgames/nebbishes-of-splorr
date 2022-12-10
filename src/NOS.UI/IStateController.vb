@@ -1,4 +1,5 @@
 ﻿Friend Interface IStateController
+    Sub Restart()
     Sub Update()
-    Sub HandleKey(keyName As String)
+    Event ChangeState(uiState As UIStates)
 End Interface

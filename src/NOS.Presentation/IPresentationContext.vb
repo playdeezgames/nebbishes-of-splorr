@@ -6,7 +6,7 @@
     ReadOnly Property ScreenWidth As Integer
     ReadOnly Property ScreenHeight As Integer
     ReadOnly Property IsQuit As Boolean
-    Sub HandleKey(key As Keys)
+    Sub AddKeyPress(key As Keys)
     Sub Update(ticks As Long)
     WriteOnly Property Texture As Texture2D
     Event OnUIScale()

@@ -6,7 +6,8 @@
     Sub DrawGlyph(x As Integer, y As Integer, hue As Hue, glyph As IEnumerable(Of (Integer, Integer)))
     Sub SignalExit()
     Event OnUpdate()
-    Event OnKey(keyName As String)
+    ReadOnly Property HasKey As Boolean
+    Function ReadKey() As String
     Sub SignalUIScale(uiScale As Integer)
     Sub SetFont(fontName As String, font As Font)
     Function GetFont(fontName As String) As Font
