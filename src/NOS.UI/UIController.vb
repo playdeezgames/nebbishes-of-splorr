@@ -1,7 +1,9 @@
 Public Class UIController
     Private ReadOnly _context As IUIContext
+    Private ReadOnly _world As IWorld
     Sub New(context As IUIContext)
         _context = context
+        _world = New World
         AddHandler context.OnUpdate, AddressOf OnUpdate
         AddHandler context.OnKey, AddressOf OnKey
     End Sub

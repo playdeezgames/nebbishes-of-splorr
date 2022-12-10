@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>NOS.UI</RootNamespace>
+    <RootNamespace>NOS.Business</RootNamespace>
     <TargetFramework>netstandard2.1</TargetFramework>
     <OptionStrict>On</OptionStrict>
   </PropertyGroup>
@@ -13,14 +13,5 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\NOS.Business\NOS.Business.vbproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Import Include="Microsoft.Win32.SafeHandles" />
-    <Import Include="NOS.Business" />
-  </ItemGroup>
 
 </Project>
