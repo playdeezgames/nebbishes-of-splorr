@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>NebbishesOfSPLORR</RootNamespace>
+    <RootNamespace>NOS.Presentation</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
   </PropertyGroup>
@@ -16,18 +15,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Import Include="Microsoft.Win32.SafeHandles" />
     <Import Include="Microsoft.Xna.Framework" />
     <Import Include="Microsoft.Xna.Framework.Design" />
     <Import Include="Microsoft.Xna.Framework.Graphics" />
     <Import Include="Microsoft.Xna.Framework.Graphics.PackedVector" />
     <Import Include="Microsoft.Xna.Framework.Input" />
-    <Import Include="NebbishesOfSPLORR.My" />
-    <Import Include="NOS.Presentation" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\NOS.Presentation\NOS.Presentation.vbproj" />
   </ItemGroup>
 
 </Project>

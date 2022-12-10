@@ -5,10 +5,13 @@
     Private _spriteBatch As SpriteBatch
     Private _oldKeyboardState As New KeyboardState
     Private _keyboardState As New KeyboardState
+    Private _texture As Texture2D
     Private ReadOnly _viewWidth As Integer
     Private ReadOnly _viewHeight As Integer
     Private ReadOnly _windowTitle As String
-    Sub New(windowTitle As String, viewWidth As Integer, viewHeight As Integer, uiScale As Integer)
+    Private _presentationContext As IPresentationContext
+    Sub New(presentationContext As IPresentationContext, windowTitle As String, viewWidth As Integer, viewHeight As Integer, uiScale As Integer)
+        _presentationContext = presentationContext
         _uiScale = uiScale
         _viewHeight = viewHeight
         _viewWidth = viewWidth
@@ -32,6 +35,7 @@
     Protected Overrides Sub LoadContent()
         MyBase.LoadContent()
         _spriteBatch = New SpriteBatch(GraphicsDevice)
+        _texture = New Texture2D(GraphicsDevice, _viewWidth, _viewHeight)
     End Sub
     Protected Overrides Sub Update(gameTime As GameTime)
         _oldKeyboardState = _keyboardState
@@ -48,7 +52,7 @@
     Protected Overrides Sub Draw(gameTime As GameTime)
         GraphicsDevice.Clear(Color.Black)
         _spriteBatch.Begin(samplerState:=SamplerState.PointClamp)
-        'TODO: draw things
+        _spriteBatch.Draw(_texture, New Rectangle(0, 0, _viewWidth * _uiScale, _viewHeight * _uiScale), Color.White)
         _spriteBatch.End()
         MyBase.Draw(gameTime)
     End Sub
