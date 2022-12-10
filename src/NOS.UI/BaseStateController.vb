@@ -13,5 +13,5 @@
 
     End Sub
 
-    Public MustOverride Sub Update() Implements IStateController.Update
+    Public MustOverride Sub Update(ticks As Long) Implements IStateController.Update
 End Class

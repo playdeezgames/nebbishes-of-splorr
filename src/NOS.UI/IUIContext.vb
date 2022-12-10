@@ -5,7 +5,7 @@
     Sub SetPixel(x As Integer, y As Integer, hue As Hue)
     Sub DrawGlyph(x As Integer, y As Integer, hue As Hue, glyph As IEnumerable(Of (Integer, Integer)))
     Sub SignalExit()
-    Event OnUpdate()
+    Event OnUpdate(ticks As Long)
     ReadOnly Property HasKey As Boolean
     Function ReadKey() As String
     Sub SignalUIScale(uiScale As Integer)

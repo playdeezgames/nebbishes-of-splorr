@@ -20,8 +20,8 @@ Public Class UIController
         _states(_state).Restart()
     End Sub
 
-    Private Sub OnUpdate()
+    Private Sub OnUpdate(ticks As Long)
         _context.Fill(0, 0, _context.ViewWidth, _context.ViewHeight, Hue.Black)
-        _states(_state).Update()
+        _states(_state).Update(ticks)
     End Sub
 End Class

@@ -5,7 +5,7 @@
         MyBase.New(context, world)
     End Sub
 
-    Public Overrides Sub Update()
+    Public Overrides Sub Update(ticks As Long)
         Dim font = _context.GetFont(DefaultFontName)
         font.WriteString(32, 30, "*************************", Hue.Red)
         font.WriteString(32, 36, "*                       *", Hue.Red)

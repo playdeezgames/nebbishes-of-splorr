@@ -82,7 +82,7 @@
     End Sub
 
     Public Sub Update(ticks As Long) Implements IPresentationContext.Update
-        RaiseEvent OnUpdate()
+        RaiseEvent OnUpdate(ticks)
         _texture.SetData(_buffer)
     End Sub
 
