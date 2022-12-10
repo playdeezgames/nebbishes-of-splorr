@@ -1,24 +1,18 @@
 ﻿Friend Class TitleStateController
-    Implements IStateController
-    Private _context As IUIContext
-    Private _world As IWorld
+    Inherits BaseStateController
+
     Public Sub New(context As IUIContext, world As IWorld)
-        _context = context
-        _world = world
+        MyBase.New(context, world)
     End Sub
 
-    Public Event ChangeState(uiState As UIStates) Implements IStateController.ChangeState
-
-    Public Sub Update() Implements IStateController.Update
-        _context.GetFont(DefaultFontName).WriteString(0, 0, " !""#$%&'()*+,-./", Hue.White)
-        _context.GetFont(DefaultFontName).WriteString(0, 6, "0123456789:;<=>?", Hue.White)
-        _context.GetFont(DefaultFontName).WriteString(0, 12, "@ABCDEFGHIJKLMNO", Hue.White)
-        _context.GetFont(DefaultFontName).WriteString(0, 18, "PQRSTUVWXYZ[\]^_", Hue.White)
-        _context.GetFont(DefaultFontName).WriteString(0, 24, "`abcdefghijklmno", Hue.White)
-        _context.GetFont(DefaultFontName).WriteString(0, 30, "pqrstuvwxyz{|}~" + ChrW(127), Hue.White)
-        _context.GetFont(DefaultFontName).WriteString(0, 42, "Nebbishes of SPLORR!!", Hue.Blue)
-    End Sub
-
-    Public Sub Restart() Implements IStateController.Restart
+    Public Overrides Sub Update()
+        Dim font = _context.GetFont(DefaultFontName)
+        font.WriteString(32, 30, "*************************", Hue.Red)
+        font.WriteString(32, 36, "*                       *", Hue.Red)
+        font.WriteString(32, 42, "*                       *", Hue.Red)
+        font.WriteString(32, 48, "*                       *", Hue.Red)
+        font.WriteString(32, 54, "*************************", Hue.Red)
+        font.WriteString(40, 42, "Nebbishes of SPLORR!!", Hue.Blue)
+        font.WriteString(16, 84, "A production of TheGrumpyGameDev", Hue.White)
     End Sub
 End Class
