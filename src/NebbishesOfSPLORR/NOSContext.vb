@@ -6,6 +6,7 @@
     Private Const ViewHeight = 90
     Private _texture As Texture2D
     Private _buffer As Integer()
+    Private _isQuit As Boolean = False
 
     Public ReadOnly Property WindowTitle As String Implements IPresentationContext.WindowTitle
         Get
@@ -15,7 +16,7 @@
 
     Public ReadOnly Property UIScale As Integer Implements IPresentationContext.UIScale
         Get
-            Return 4
+            Return 8
         End Get
     End Property
 
@@ -33,7 +34,7 @@
 
     Public ReadOnly Property IsQuit As Boolean Implements IPresentationContext.IsQuit
         Get
-            Return False
+            Return _isQuit
         End Get
     End Property
 
@@ -69,17 +70,18 @@
     End Property
 
     Public Sub HandleKey(key As Keys) Implements IPresentationContext.HandleKey
-        'TODO: handle key
+        RaiseEvent OnKey(key.ToString)
     End Sub
 
     Public Sub Update(ticks As Long) Implements IPresentationContext.Update
+        RaiseEvent OnUpdate()
         _texture.SetData(_buffer)
     End Sub
 
     Public Sub Fill(x As Integer, y As Integer, width As Integer, height As Integer, hue As Hue) Implements IUIContext.Fill
         For plotY = y To y + height - 1
             For plotX = x To x + width - 1
-                Pset(plotX, plotY, hue)
+                SetPixel(plotX, plotY, hue)
             Next
         Next
     End Sub
@@ -91,10 +93,16 @@
             {Hue.Blue, &HFF0000},
             {Hue.White, &HFFFFFF}
         }
+    Public Event OnUpdate As IUIContext.OnUpdateEventHandler Implements IUIContext.OnUpdate
+    Public Event OnKey As IUIContext.OnKeyEventHandler Implements IUIContext.OnKey
 
-    Private Sub Pset(plotX As Integer, plotY As Integer, hue As Hue)
+    Public Sub SetPixel(plotX As Integer, plotY As Integer, hue As Hue) Implements IUIContext.SetPixel
         If plotY >= 0 AndAlso plotX >= 0 AndAlso plotY < _texture.Height AndAlso plotX < _texture.Width Then
             _buffer(plotY * _texture.Width + plotX) = hueTable(hue)
         End If
+    End Sub
+
+    Public Sub SignalExit() Implements IUIContext.SignalExit
+        _isQuit = True
     End Sub
 End Class
