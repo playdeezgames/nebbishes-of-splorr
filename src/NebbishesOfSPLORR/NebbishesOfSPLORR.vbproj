@@ -22,12 +22,15 @@
     <Import Include="Microsoft.Xna.Framework.Graphics" />
     <Import Include="Microsoft.Xna.Framework.Graphics.PackedVector" />
     <Import Include="Microsoft.Xna.Framework.Input" />
+    <Import Include="MonoGame.OpenGL" />
     <Import Include="NebbishesOfSPLORR.My" />
     <Import Include="NOS.Presentation" />
+    <Import Include="NOS.UI" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NOS.Presentation\NOS.Presentation.vbproj" />
+    <ProjectReference Include="..\NOS.UI\NOS.UI.vbproj" />
   </ItemGroup>
 
 </Project>

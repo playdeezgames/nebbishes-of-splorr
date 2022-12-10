@@ -1,21 +1,15 @@
 ﻿Public Class NOSContext
     Implements IPresentationContext
+    Implements IUIContext
+
+    Private Const ViewWidth = 160
+    Private Const ViewHeight = 90
+    Private _texture As Texture2D
+    Private _buffer As Integer()
 
     Public ReadOnly Property WindowTitle As String Implements IPresentationContext.WindowTitle
         Get
             Return "Nebbishes of SPLORR!!"
-        End Get
-    End Property
-
-    Public ReadOnly Property ViewWidth As Integer Implements IPresentationContext.ViewWidth
-        Get
-            Return 160
-        End Get
-    End Property
-
-    Public ReadOnly Property ViewHeight As Integer Implements IPresentationContext.ViewHeight
-        Get
-            Return 90
         End Get
     End Property
 
@@ -27,13 +21,80 @@
 
     Public ReadOnly Property ScreenWidth As Integer Implements IPresentationContext.ScreenWidth
         Get
-            Return ViewWidth * UIScale
+            Return IPresentationContext_ViewWidth * UIScale
         End Get
     End Property
 
     Public ReadOnly Property ScreenHeight As Integer Implements IPresentationContext.ScreenHeight
         Get
-            Return ViewHeight * UIScale
+            Return IPresentationContext_ViewHeight * UIScale
         End Get
     End Property
+
+    Public ReadOnly Property IsQuit As Boolean Implements IPresentationContext.IsQuit
+        Get
+            Return False
+        End Get
+    End Property
+
+    Public ReadOnly Property IPresentationContext_ViewWidth As Integer Implements IPresentationContext.ViewWidth
+        Get
+            Return ViewWidth
+        End Get
+    End Property
+
+    Public ReadOnly Property IPresentationContext_ViewHeight As Integer Implements IPresentationContext.ViewHeight
+        Get
+            Return ViewHeight
+        End Get
+    End Property
+
+    Public WriteOnly Property Texture As Texture2D Implements IPresentationContext.Texture
+        Set(value As Texture2D)
+            _texture = value
+            ReDim _buffer(_texture.Width * _texture.Height - 1)
+        End Set
+    End Property
+
+    Private ReadOnly Property IUIContext_ViewWidth As Integer Implements IUIContext.ViewWidth
+        Get
+            Return ViewWidth
+        End Get
+    End Property
+
+    Private ReadOnly Property IUIContext_ViewHeight As Integer Implements IUIContext.ViewHeight
+        Get
+            Return ViewHeight
+        End Get
+    End Property
+
+    Public Sub HandleKey(key As Keys) Implements IPresentationContext.HandleKey
+        'TODO: handle key
+    End Sub
+
+    Public Sub Update(ticks As Long) Implements IPresentationContext.Update
+        _texture.SetData(_buffer)
+    End Sub
+
+    Public Sub Fill(x As Integer, y As Integer, width As Integer, height As Integer, hue As Hue) Implements IUIContext.Fill
+        For plotY = y To y + height - 1
+            For plotX = x To x + width - 1
+                Pset(plotX, plotY, hue)
+            Next
+        Next
+    End Sub
+    Private ReadOnly hueTable As IReadOnlyDictionary(Of Hue, Integer) =
+        New Dictionary(Of Hue, Integer) From
+        {
+            {Hue.Black, &H0},
+            {Hue.Red, &HFF},
+            {Hue.Blue, &HFF0000},
+            {Hue.White, &HFFFFFF}
+        }
+
+    Private Sub Pset(plotX As Integer, plotY As Integer, hue As Hue)
+        If plotY >= 0 AndAlso plotX >= 0 AndAlso plotY < _texture.Height AndAlso plotX < _texture.Width Then
+            _buffer(plotY * _texture.Width + plotX) = hueTable(hue)
+        End If
+    End Sub
 End Class
