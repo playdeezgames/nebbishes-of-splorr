@@ -136,4 +136,8 @@
     Public Function ReadKey() As String Implements IUIContext.ReadKey
         Return _keysPressed.Dequeue
     End Function
+
+    Public Sub FlushKeys() Implements IUIContext.FlushKeys
+        _keysPressed.Clear()
+    End Sub
 End Class

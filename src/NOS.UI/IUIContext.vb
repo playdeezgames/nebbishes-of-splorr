@@ -11,4 +11,5 @@
     Sub SignalUIScale(uiScale As Integer)
     Sub SetFont(fontName As String, font As Font)
     Function GetFont(fontName As String) As Font
+    Sub FlushKeys()
 End Interface

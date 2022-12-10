@@ -13,5 +13,17 @@
 
     End Sub
 
-    Public MustOverride Sub Update(ticks As Long) Implements IStateController.Update
+    Protected MustOverride Sub HandleKey(keyName As String)
+
+    Public Sub Update(ticks As Long) Implements IStateController.Update
+        While _context.HasKey
+            HandleKey(_context.ReadKey)
+        End While
+        Redraw(ticks)
+    End Sub
+    Protected MustOverride Sub Redraw(ticks As Long)
+    Protected Sub SetState(uiState As UIStates)
+        _context.FlushKeys()
+        RaiseEvent ChangeState(uiState)
+    End Sub
 End Class
