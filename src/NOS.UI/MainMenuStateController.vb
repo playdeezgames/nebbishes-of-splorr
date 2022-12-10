@@ -12,6 +12,14 @@
                 _item = (_item + 2) Mod 3
             Case "Down"
                 _item = (_item + 1) Mod 3
+            Case "Enter", "Space"
+                Select Case _item
+                    Case 2
+                        If _world.IsInPlay Then
+                        Else
+                            SetState(UIStates.ConfirmQuit)
+                        End If
+                End Select
         End Select
     End Sub
 

@@ -10,6 +10,7 @@ Public Class UIController
         AddHandler context.OnUpdate, AddressOf OnUpdate
         _states.Add(UIStates.Title, New TitleStateController(_context, _world))
         _states.Add(UIStates.MainMenu, New MainMenuStateController(_context, _world))
+        _states.Add(UIStates.ConfirmQuit, New ConfirmQuitStateController(_context, _world))
         For Each state In _states
             AddHandler state.Value.ChangeState, AddressOf OnChangeState
         Next
