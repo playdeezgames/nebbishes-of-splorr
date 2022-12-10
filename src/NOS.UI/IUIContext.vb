@@ -6,4 +6,5 @@
     Sub SignalExit()
     Event OnUpdate()
     Event OnKey(keyName As String)
+    Sub SignalUIScale(uiScale As Integer)
 End Interface

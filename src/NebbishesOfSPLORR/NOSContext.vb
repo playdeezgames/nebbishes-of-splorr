@@ -7,6 +7,7 @@
     Private _texture As Texture2D
     Private _buffer As Integer()
     Private _isQuit As Boolean = False
+    Private _uiScale As Integer = 4
 
     Public ReadOnly Property WindowTitle As String Implements IPresentationContext.WindowTitle
         Get
@@ -16,7 +17,7 @@
 
     Public ReadOnly Property UIScale As Integer Implements IPresentationContext.UIScale
         Get
-            Return 8
+            Return _uiScale
         End Get
     End Property
 
@@ -95,6 +96,7 @@
         }
     Public Event OnUpdate As IUIContext.OnUpdateEventHandler Implements IUIContext.OnUpdate
     Public Event OnKey As IUIContext.OnKeyEventHandler Implements IUIContext.OnKey
+    Public Event OnUIScale() Implements IPresentationContext.OnUIScale
 
     Public Sub SetPixel(plotX As Integer, plotY As Integer, hue As Hue) Implements IUIContext.SetPixel
         If plotY >= 0 AndAlso plotX >= 0 AndAlso plotY < _texture.Height AndAlso plotX < _texture.Width Then
@@ -104,5 +106,10 @@
 
     Public Sub SignalExit() Implements IUIContext.SignalExit
         _isQuit = True
+    End Sub
+
+    Public Sub SignalUIScale(uiScale As Integer) Implements IUIContext.SignalUIScale
+        _uiScale = uiScale
+        RaiseEvent OnUIScale()
     End Sub
 End Class

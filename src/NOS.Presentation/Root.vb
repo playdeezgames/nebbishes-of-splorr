@@ -9,6 +9,7 @@
     Sub New(presentationContext As IPresentationContext)
         _context = presentationContext
         _graphics = New GraphicsDeviceManager(Me)
+        AddHandler _context.OnUIScale, AddressOf ResizeScreen
     End Sub
     Private Sub ResizeScreen()
         _graphics.PreferredBackBufferWidth = _context.ScreenWidth

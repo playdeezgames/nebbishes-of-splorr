@@ -10,6 +10,14 @@ Public Class UIController
         Select Case keyName
             Case "Escape"
                 _context.SignalExit()
+            Case "D1"
+                _context.SignalUIScale(4)
+            Case "D2"
+                _context.SignalUIScale(8)
+            Case "D3"
+                _context.SignalUIScale(12)
+            Case "D4"
+                _context.SignalUIScale(16)
         End Select
     End Sub
 

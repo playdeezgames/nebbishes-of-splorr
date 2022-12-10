@@ -9,4 +9,5 @@
     Sub HandleKey(key As Keys)
     Sub Update(ticks As Long)
     WriteOnly Property Texture As Texture2D
+    Event OnUIScale()
 End Interface
