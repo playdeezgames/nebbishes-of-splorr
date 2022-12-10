@@ -13,14 +13,12 @@
     End Sub
 
     Public Sub Update() Implements IStateController.Update
-        _context.DrawGlyph(0, 0, Hue.White, New List(Of (Integer, Integer)) From
-                           {
-                            (0, 0), (2, 0),
-                            (0, 1), (2, 1),
-                            (0, 2), (1, 2), (2, 2),
-                            (0, 3), (2, 3),
-                            (0, 4), (2, 4)
-                            })
+        _context.GetFont(DefaultFontName).WriteString(0, 0, " !""#$%&'()*+,-./", Hue.White)
+        _context.GetFont(DefaultFontName).WriteString(0, 6, "0123456789:;<=>?", Hue.White)
+        _context.GetFont(DefaultFontName).WriteString(0, 12, "@ABCDEFGHIJKLMNO", Hue.White)
+        _context.GetFont(DefaultFontName).WriteString(0, 18, "PQRSTUVWXYZ[\]^_", Hue.White)
+        _context.GetFont(DefaultFontName).WriteString(0, 24, "`abcdefghijklmno", Hue.White)
+        _context.GetFont(DefaultFontName).WriteString(0, 30, "pqrstuvwxyz{|}~" + ChrW(127), Hue.White)
         _context.SetPixel(_x, _y, Hue.Blue)
     End Sub
 

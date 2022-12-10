@@ -1,0 +1,60 @@
+﻿Public Class DefaultFont
+    Inherits Font
+
+    Public Sub New(context As IUIContext)
+        MyBase.New(
+            context,
+            New Dictionary(Of Char, IEnumerable(Of (Integer, Integer))) From
+            {
+                {" "c, New List(Of (Integer, Integer))},
+                {"!"c, New List(Of (Integer, Integer)) From {(1, 0), (1, 1), (1, 2), (1, 4)}},
+                {""""c, New List(Of (Integer, Integer)) From {(0, 0), (0, 1), (2, 0), (2, 1)}},
+                {"#"c, New List(Of (Integer, Integer)) From {(1, 0), (0, 1), (1, 1), (2, 1), (1, 2), (0, 3), (1, 3), (2, 3), (1, 4)}},
+                {"$"c, New List(Of (Integer, Integer)) From {(1, 0), (2, 0), (0, 1), (1, 1), (1, 2), (1, 3), (2, 3), (0, 4), (1, 4), (1, 5)}},
+                {"%"c, New List(Of (Integer, Integer)) From {(0, 0), (2, 0), (2, 1), (1, 2), (0, 3), (0, 4), (2, 4)}},
+                {"&"c, New List(Of (Integer, Integer)) From {(0, 0), (2, 0), (1, 1), (0, 2), (2, 2), (0, 3), (1, 4), (2, 4)}},
+                {"'"c, New List(Of (Integer, Integer)) From {(2, 0), (1, 1)}},
+                {"("c, New List(Of (Integer, Integer)) From {(2, 0), (1, 1), (1, 2), (1, 3), (2, 4)}},
+                {")"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 1), (1, 2), (1, 3), (0, 4)}},
+                {"*"c, New List(Of (Integer, Integer)) From {(0, 1), (2, 1), (1, 2), (0, 3), (2, 3)}},
+                {"+"c, New List(Of (Integer, Integer)) From {(1, 1), (0, 2), (1, 2), (2, 2), (1, 3)}},
+                {","c, New List(Of (Integer, Integer)) From {(2, 3), (2, 4), (1, 5)}},
+                {"-"c, New List(Of (Integer, Integer)) From {(0, 2), (1, 2), (2, 2)}},
+                {"."c, New List(Of (Integer, Integer)) From {(1, 4)}},
+                {"/"c, New List(Of (Integer, Integer)) From {(2, 1), (1, 2), (0, 3)}},
+                {"0"c, New List(Of (Integer, Integer)) From {(1, 0), (0, 1), (2, 1), (0, 2), (1, 2), (2, 2), (0, 3), (2, 3), (1, 4)}},
+                {"1"c, New List(Of (Integer, Integer)) From {(1, 0), (0, 1), (1, 1), (1, 2), (1, 3), (0, 4), (1, 4), (2, 4)}},
+                {"2"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (2, 1), (1, 2), (0, 3), (0, 4), (1, 4), (2, 4)}},
+                {"3"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (2, 0), (2, 1), (1, 2), (2, 2), (2, 3), (0, 4), (1, 4), (2, 4)}},
+                {"4"c, New List(Of (Integer, Integer)) From {(0, 0), (0, 1), (2, 0), (2, 1), (0, 2), (1, 2), (2, 2), (2, 3), (2, 4)}},
+                {"5"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (2, 0), (0, 1), (0, 2), (1, 2), (2, 3), (0, 4), (1, 4)}},
+                {"6"c, New List(Of (Integer, Integer)) From {(1, 0), (0, 1), (0, 2), (1, 2), (0, 3), (2, 3), (1, 4)}},
+                {"7"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (2, 0), (2, 1), (1, 2), (1, 3), (1, 4)}},
+                {"8"c, New List(Of (Integer, Integer)) From {(1, 0), (0, 1), (2, 1), (1, 2), (0, 3), (2, 3), (1, 4)}},
+                {"9"c, New List(Of (Integer, Integer)) From {(1, 0), (0, 1), (2, 1), (1, 2), (2, 2), (2, 3), (2, 4)}},
+                {":"c, New List(Of (Integer, Integer)) From {(1, 1), (1, 3)}},
+                {";"c, New List(Of (Integer, Integer)) From {(1, 1), (1, 3), (0, 4)}},
+                {"<"c, New List(Of (Integer, Integer)) From {(2, 0), (1, 1), (0, 2), (1, 3), (2, 4)}},
+                {"="c, New List(Of (Integer, Integer)) From {(0, 1), (1, 1), (2, 1), (0, 3), (1, 3), (2, 3)}},
+                {">"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 1), (2, 2), (1, 3), (0, 4)}},
+                {"?"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (2, 0), (2, 1), (1, 2), (2, 2), (1, 4)}},
+                {"@"c, New List(Of (Integer, Integer)) From {(1, 0), (0, 1), (1, 1), (2, 1), (0, 2), (1, 2), (2, 2), (0, 3), (1, 4), (2, 4)}},
+                {"A"c, New List(Of (Integer, Integer)) From {(1, 0), (0, 1), (2, 1), (0, 2), (1, 2), (2, 2), (0, 3), (2, 3), (0, 4), (2, 4)}},
+                {"B"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (0, 1), (2, 1), (0, 2), (1, 2), (0, 3), (2, 3), (0, 4), (1, 4)}},
+                {"C"c, New List(Of (Integer, Integer)) From {(1, 0), (2, 0), (0, 1), (0, 2), (0, 3), (1, 4), (2, 4)}},
+                {"D"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (0, 1), (2, 1), (0, 2), (2, 2), (0, 3), (2, 3), (0, 4), (1, 4)}},
+                {"E"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (2, 0), (0, 1), (0, 2), (1, 2), (0, 3), (0, 4), (1, 4), (2, 4)}},
+                {"F"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (2, 0), (0, 1), (0, 2), (1, 2), (0, 3), (0, 4)}},
+                {"G"c, New List(Of (Integer, Integer)) From {(1, 0), (0, 1), (2, 0), (0, 2), (1, 2), (2, 2), (0, 3), (2, 3), (1, 4)}},
+                {"H"c, New List(Of (Integer, Integer)) From {(0, 0), (2, 0), (0, 1), (2, 1), (0, 2), (1, 2), (2, 2), (0, 3), (2, 3), (0, 4), (2, 4)}},
+                {"I"c, New List(Of (Integer, Integer)) From {(1, 0), (1, 1), (1, 2), (1, 3), (1, 4)}},
+                {"J"c, New List(Of (Integer, Integer)) From {(2, 0), (2, 1), (2, 2), (2, 3), (1, 4), (0, 3), (0, 2)}},
+                {"K"c, New List(Of (Integer, Integer)) From {(0, 0), (2, 0), (0, 1), (2, 1), (0, 2), (1, 2), (0, 3), (2, 3), (0, 4), (2, 4)}},
+                {"L"c, New List(Of (Integer, Integer)) From {(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 4), (2, 4)}},
+                {"M"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1), (0, 2), (2, 2), (0, 3), (2, 3), (0, 4), (2, 4)}},
+                {"N"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (0, 1), (2, 1), (0, 2), (2, 2), (0, 3), (2, 3), (0, 4), (2, 4)}},
+                {"O"c, New List(Of (Integer, Integer)) From {(1, 0), (0, 1), (2, 1), (0, 2), (2, 2), (0, 3), (2, 3), (1, 4)}}
+            },
+            4)
+    End Sub
+End Class

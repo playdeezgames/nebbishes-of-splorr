@@ -6,6 +6,7 @@ Public Class UIController
     Sub New(context As IUIContext)
         _context = context
         _world = New World
+        _context.SetFont(DefaultFontName, New DefaultFont(_context))
         AddHandler context.OnUpdate, AddressOf OnUpdate
         AddHandler context.OnKey, AddressOf OnKey
         _states.Add(UIStates.Title, New TitleStateController(_context, _world))

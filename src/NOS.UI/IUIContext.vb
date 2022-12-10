@@ -8,4 +8,6 @@
     Event OnUpdate()
     Event OnKey(keyName As String)
     Sub SignalUIScale(uiScale As Integer)
+    Sub SetFont(fontName As String, font As Font)
+    Function GetFont(fontName As String) As Font
 End Interface

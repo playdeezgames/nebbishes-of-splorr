@@ -118,4 +118,12 @@
             SetPixel(x + pixel.Item1, y + pixel.Item2, hue)
         Next
     End Sub
+    Private ReadOnly _fonts As New Dictionary(Of String, Font)
+    Public Function GetFont(fontName As String) As Font Implements IUIContext.GetFont
+        Return _fonts(fontName)
+    End Function
+
+    Public Sub SetFont(fontName As String, font As Font) Implements IUIContext.SetFont
+        _fonts(fontName) = font
+    End Sub
 End Class
