@@ -19,8 +19,8 @@
     End Sub
 
     Friend Shared Function Create(worldData As WorldData, location As ILocation) As Character
-        Dim id = worldData.Characters.Count
-        worldData.Characters.Add(New CharacterData With {.LocationId = location.Id})
+        Dim id = If(worldData.Characters.Any, worldData.Characters.Keys.Max + 1, 0)
+        worldData.Characters.Add(id, New CharacterData With {.LocationId = location.Id})
         Return New Character(worldData, id)
     End Function
 End Class
