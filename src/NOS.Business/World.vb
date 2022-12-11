@@ -11,7 +11,7 @@ Public Class World
 
     Public ReadOnly Property PlayerCharacter As ICharacter Implements IWorld.PlayerCharacter
         Get
-            Return New Character(_worldData, _worldData.PlayerCharacterId)
+            Return New Character(_worldData, _worldData.PlayerCharacterId.Value)
         End Get
     End Property
 
