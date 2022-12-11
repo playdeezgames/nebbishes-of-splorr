@@ -1,6 +1,10 @@
 # Nebbishes of SPLORR!!
 Another fine starvation simulator.
 
+# TODOs
+* make font writing take tuples
+* make font writing take line lengths and line heights?
+
 # Keyboard Commands
 * Up - Move ahead
 * Down - Move back
