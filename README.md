@@ -10,14 +10,14 @@ Another fine starvation simulator.
 * A -
 * B -
 * C -
-* D -
-* E -
+* D - Down?
+* E - 
 * F -
 * G -
 * H - Help
 * I -
 * K -
-* L -
+* L - 
 * M -
 * N -
 * O -
@@ -26,7 +26,7 @@ Another fine starvation simulator.
 * R -
 * S -
 * T -
-* U -
+* U - Up?
 * V -
 * W -
 * X -

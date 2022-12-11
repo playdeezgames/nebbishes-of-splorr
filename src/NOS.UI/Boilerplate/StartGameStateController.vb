@@ -12,6 +12,7 @@
     Protected Overrides Sub Redraw(ticks As Long)
         Dim font = _context.GetFont(DefaultFontName)
         font.WriteString(0, 0, "TODO: put prolog here", Hue.White)
+        font.WriteString(0, 78, "Remember: H is for Help!", Hue.Red)
         font.WriteString(0, 84, "Press any key.", Hue.White)
     End Sub
 

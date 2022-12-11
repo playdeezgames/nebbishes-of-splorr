@@ -10,6 +10,6 @@
 
     Protected Overrides Sub Redraw(ticks As Long)
         Dim font = _context.GetFont(DefaultFontName)
-        font.WriteString(0, 0, "Navigation:", Hue.Blue)
+        font.WriteString(0, 0, $"Location: {_world.PlayerCharacter.Location.Name}", Hue.Blue)
     End Sub
 End Class
