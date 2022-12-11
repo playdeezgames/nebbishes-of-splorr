@@ -2,4 +2,5 @@
     Title
     MainMenu
     ConfirmQuit
+    Options
 End Enum

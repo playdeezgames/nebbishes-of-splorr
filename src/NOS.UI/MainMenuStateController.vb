@@ -15,6 +15,8 @@
                 _menu.NextItem()
             Case "Enter", "Space"
                 Select Case _menu.CurrentItem
+                    Case 2
+                        SetState(UIStates.Options)
                     Case 3
                         If _world.IsInPlay Then
                         Else
