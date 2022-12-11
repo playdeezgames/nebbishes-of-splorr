@@ -9,13 +9,13 @@
 
     Protected Overrides Sub HandleKey(keyName As String)
         Select Case keyName
-            Case "Up"
+            Case UpKeyName
                 _menu.PreviousItem()
-            Case "Down"
+            Case DownKeyName
                 _menu.NextItem()
-            Case "Escape"
+            Case EscapeKeyName
                 SetState(UIStates.MainMenu)
-            Case "Space", "Enter"
+            Case EnterKeyName, SpaceKeyName
                 _context.SignalUIScale(_menu.CurrentItem * 4 + 4)
         End Select
     End Sub
