@@ -10,5 +10,15 @@ Public Class World
 
     Public Sub Start() Implements IWorld.Start
         _worldData = New WorldData
+        Dim location = CreateLocation()
+        Dim character = CreateCharacter(location)
+        character.SetAsPlayerCharacter()
     End Sub
+
+    Private Function CreateLocation() As Location
+        Return Location.Create(_worldData)
+    End Function
+    Private Function CreateCharacter(location As Location) As Character
+        Return Character.Create(_worldData, location)
+    End Function
 End Class

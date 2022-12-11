@@ -6,7 +6,7 @@
     End Sub
 
     Protected Overrides Sub HandleKey(keyName As String)
-        SetState(UIStates.MainMenu)
+        SetState(UIStates.InPlay)
     End Sub
 
     Protected Overrides Sub Redraw(ticks As Long)

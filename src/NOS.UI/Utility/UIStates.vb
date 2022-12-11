@@ -4,4 +4,6 @@
     ConfirmQuit
     Options
     StartGame
+    InPlay
+    Navigation
 End Enum
