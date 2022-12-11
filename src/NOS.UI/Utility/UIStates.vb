@@ -3,4 +3,5 @@
     MainMenu
     ConfirmQuit
     Options
+    StartGame
 End Enum

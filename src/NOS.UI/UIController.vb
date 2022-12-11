@@ -12,6 +12,7 @@ Public Class UIController
         _states.Add(UIStates.MainMenu, New MainMenuStateController(_context, _world))
         _states.Add(UIStates.ConfirmQuit, New ConfirmQuitStateController(_context, _world))
         _states.Add(UIStates.Options, New OptionsStateController(_context, _world))
+        _states.Add(UIStates.StartGame, New StartGameStateController(_context, _world))
         For Each state In _states
             AddHandler state.Value.ChangeState, AddressOf OnChangeState
         Next

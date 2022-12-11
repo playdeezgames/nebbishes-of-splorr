@@ -15,13 +15,14 @@
                 _menu.NextItem()
             Case EnterKeyName, SpaceKeyName
                 Select Case _menu.CurrentItem
+                    Case 0
+                        SetState(UIStates.StartGame)
+                    Case 1
+                        'TODO: load
                     Case 2
                         SetState(UIStates.Options)
                     Case 3
-                        If _world.IsInPlay Then
-                        Else
-                            SetState(UIStates.ConfirmQuit)
-                        End If
+                        SetState(UIStates.ConfirmQuit)
                 End Select
         End Select
     End Sub
