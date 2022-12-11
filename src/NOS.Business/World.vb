@@ -40,12 +40,34 @@ Public Class World
     Private Const WorldColumns = 16
     Private Const WorldRows = 16
     Private Sub CreateOverworld()
+        Dim overworld As New Dictionary(Of (Integer, Integer), ILocation)
         For column = 0 To WorldColumns - 1
             For row = 0 To WorldRows - 1
-                CreateLocation($"({column}, {row})")
+                overworld.Add((column, row), CreateLocation($"({column}, {row})"))
+            Next
+        Next
+        For column = 0 To WorldColumns - 1
+            For row = 0 To WorldRows - 1
+                Dim start = overworld((column, row))
+                If row > 0 Then
+                    CreateRoute(start, Directions.North, overworld((column, row - 1)))
+                End If
+                If column < WorldColumns - 1 Then
+                    CreateRoute(start, Directions.East, overworld((column + 1, row)))
+                End If
+                If row < WorldRows - 1 Then
+                    CreateRoute(start, Directions.South, overworld((column, row + 1)))
+                End If
+                If column > 0 Then
+                    CreateRoute(start, Directions.West, overworld((column - 1, row)))
+                End If
             Next
         Next
     End Sub
+
+    Private Function CreateRoute(start As ILocation, direction As Directions, finish As ILocation) As IRoute
+        Return Route.Create(_worldData, start, direction, finish)
+    End Function
 
     Private Function CreateLocation(name As String) As ILocation
         Return Location.Create(_worldData, name)
