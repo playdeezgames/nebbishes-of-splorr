@@ -15,8 +15,8 @@
     End Sub
 
     Friend Shared Function Create(worldData As WorldData, name As String) As Location
-        Dim id = worldData.Locations.Count
-        worldData.Locations.Add(New LocationData With {.Name = name})
+        Dim id = If(worldData.Locations.Any, worldData.Locations.Keys.Max + 1, 0)
+        worldData.Locations.Add(id, New LocationData With {.Name = name})
         Return New Location(worldData, id)
     End Function
 End Class
