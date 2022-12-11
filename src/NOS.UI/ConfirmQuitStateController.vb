@@ -1,17 +1,18 @@
 ﻿Friend Class ConfirmQuitStateController
     Inherits BaseStateController
-    Dim _item As Integer
+    Private _menu As Menu
 
     Public Sub New(context As IUIContext, world As IWorld)
         MyBase.New(context, world)
+        _menu = New Menu(context, DefaultFontName, (0, 6), (160, 6), (Hue.White, Hue.Black), "No", "Yes")
     End Sub
 
     Protected Overrides Sub HandleKey(keyName As String)
         Select Case keyName
             Case "Up", "Down"
-                _item = 1 - _item
+                _menu.NextItem()
             Case "Enter", "Space"
-                Select Case _item
+                Select Case _menu.CurrentItem
                     Case 0
                         SetState(UIStates.MainMenu)
                     Case 1
@@ -23,8 +24,6 @@
     Protected Overrides Sub Redraw(ticks As Long)
         Dim font = _context.GetFont(DefaultFontName)
         font.WriteString(0, 0, "Are you sure you want to quit?", Hue.Red)
-        _context.Fill(0, _item * 6 + 6, 160, 6, Hue.White)
-        font.WriteString(0, 6, "No", If(_item = 0, Hue.Black, Hue.White))
-        font.WriteString(0, 12, "Yes", If(_item = 1, Hue.Black, Hue.White))
+        _menu.Draw()
     End Sub
 End Class

@@ -1,20 +1,21 @@
 ﻿Friend Class MainMenuStateController
     Inherits BaseStateController
-    Private _item As Integer
+    Private _menu As Menu
 
     Public Sub New(context As IUIContext, world As IWorld)
         MyBase.New(context, world)
+        _menu = New Menu(context, DefaultFontName, (0, 6), (160, 6), (Hue.White, Hue.Black), "New Game", "Load Game", "Options", "Quit")
     End Sub
 
     Protected Overrides Sub HandleKey(keyName As String)
         Select Case keyName
             Case "Up"
-                _item = (_item + 2) Mod 3
+                _menu.PreviousItem()
             Case "Down"
-                _item = (_item + 1) Mod 3
+                _menu.NextItem()
             Case "Enter", "Space"
-                Select Case _item
-                    Case 2
+                Select Case _menu.CurrentItem
+                    Case 3
                         If _world.IsInPlay Then
                         Else
                             SetState(UIStates.ConfirmQuit)
@@ -26,9 +27,6 @@
     Protected Overrides Sub Redraw(ticks As Long)
         Dim font = _context.GetFont(DefaultFontName)
         font.WriteString(0, 0, "Main Menu:", Hue.Blue)
-        _context.Fill(0, _item * 6 + 6, 160, 6, Hue.White)
-        font.WriteString(0, 6, If(_world.IsInPlay, "Continue", "New Game"), If(_item = 0, Hue.Black, Hue.White))
-        font.WriteString(0, 12, If(_world.IsInPlay, "Save Game", "Load Game"), If(_item = 1, Hue.Black, Hue.White))
-        font.WriteString(0, 18, If(_world.IsInPlay, "Abandon Game", "Quit"), If(_item = 2, Hue.Black, Hue.White))
+        _menu.Draw()
     End Sub
 End Class
