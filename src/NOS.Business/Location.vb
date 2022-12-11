@@ -9,6 +9,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property Routes As IEnumerable(Of IRoute) Implements ILocation.Routes
+        Get
+            Return _worldData.Locations(Id).Routes.Select(Function(x) New Route(_worldData, Id, CType(x.Key, Directions)))
+        End Get
+    End Property
+
     Public Sub New(worldData As WorldData, id As Integer)
         _worldData = worldData
         Me.Id = id
