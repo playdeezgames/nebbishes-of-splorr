@@ -39,7 +39,9 @@
 
     Public Sub AttemptMove(direction As Directions) Implements ICharacter.AttemptMove
         DismissMessages()
-        If Location.HasRoute(direction) Then
+        If Energy = 0 Then
+            AddMessage($"{Name} too tired to move.")
+        ElseIf Location.HasRoute(direction) Then
             AddMessage($"{Name} go {direction.Name}.")
             Location = Location.Route(direction).ToLocation
             ApplyEffects()
@@ -109,6 +111,13 @@
     Private Function GetStatistic(statisticType As StatisticTypes) As Integer
         Return _worldData.Characters(Id).Statistics(statisticType)
     End Function
+
+    Public Sub AttemptSleep() Implements ICharacter.AttemptSleep
+        DismissMessages()
+        Dim oldEnergy = Energy
+        Energy += (MaximumEnergy + 5) \ 6
+        AddMessage($"{Name} sleep for 1 hour, +{Energy - oldEnergy} energy.")
+    End Sub
 
     Public ReadOnly Property MaximumEnergy As Integer Implements ICharacter.MaximumEnergy
         Get

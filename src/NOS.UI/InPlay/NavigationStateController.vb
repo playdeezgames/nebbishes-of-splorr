@@ -25,6 +25,9 @@ Friend Class NavigationStateController
                 SetState(UIStates.CharacterStatus)
             Case "H"
                 SetState(UIStates.Help)
+            Case "Z"
+                _world.PlayerCharacter.AttemptSleep()
+                SetState(UIStates.InPlay)
         End Select
     End Sub
 

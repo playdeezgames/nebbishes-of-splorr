@@ -6,6 +6,7 @@
     Sub AddMessage(line As String)
     ReadOnly Property HasMessages As Boolean
     Sub DismissMessages()
+    Sub AttemptSleep()
     ReadOnly Property Messages As String()
     Property Energy As Integer
     ReadOnly Property MaximumEnergy As Integer

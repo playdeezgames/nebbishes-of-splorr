@@ -33,7 +33,7 @@ Public Class World
 
     Private Sub CreatePlayerCharacter()
         Dim candidates = Locations.ToList()
-        Dim character = CreateCharacter("you", candidates(_random.Next(candidates.Count)), New Dictionary(Of StatisticTypes, Integer) From
+        Dim character = CreateCharacter("Tagon", candidates(_random.Next(candidates.Count)), New Dictionary(Of StatisticTypes, Integer) From
                                         {
                                             {StatisticTypes.Fatigue, 0},
                                             {StatisticTypes.MaximumEnergy, 100}
