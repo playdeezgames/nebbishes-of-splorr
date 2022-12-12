@@ -15,7 +15,7 @@
     Sub Write(xy As (Integer, Integer), text As String, hue As Hue)
         Write(xy, (Integer.MaxValue - xy.Item1, 0), text, hue)
     End Sub
-    Sub Write(xy As (Integer, Integer), wh As (Integer, Integer), text As String, hue As Hue)
+    Function Write(xy As (Integer, Integer), wh As (Integer, Integer), text As String, hue As Hue) As Integer
         Dim x As Integer = xy.Item1
         Dim y As Integer = xy.Item2
         For Each character In text
@@ -26,5 +26,6 @@
                 y = y + wh.Item2
             End If
         Next
-    End Sub
+        Return y
+    End Function
 End Class

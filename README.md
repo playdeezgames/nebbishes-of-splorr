@@ -6,10 +6,10 @@ Another fine starvation simulator.
 * 
 
 # Keyboard Commands
-* Up - Move ahead
-* Down - Move back
-* Left - Turn left
-* Right - Turn Right
+* Up - Move north
+* Down - Move south
+* Left - Move west
+* Right - Move east
 * Escape - Game menu
 * A -
 * B -

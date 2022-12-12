@@ -13,6 +13,10 @@
 
     Public Overrides Sub Restart()
         MyBase.Restart()
-        SetState(UIStates.Navigation)
+        If _world.PlayerCharacter.HasMessages Then
+            SetState(UIStates.Message)
+        Else
+            SetState(UIStates.Navigation)
+        End If
     End Sub
 End Class

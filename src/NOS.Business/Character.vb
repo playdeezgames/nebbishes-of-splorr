@@ -48,9 +48,30 @@
         End If
     End Sub
 
+    Public Sub DismissMessage() Implements ICharacter.DismissMessage
+        If IsPlayerCharacter AndAlso _worldData.Messages.Any Then
+            _worldData.Messages.RemoveAt(0)
+        End If
+    End Sub
+
     Private ReadOnly Property IsPlayerCharacter As Boolean
         Get
             Return _worldData.PlayerCharacterId.HasValue AndAlso _worldData.PlayerCharacterId.Value = Id
+        End Get
+    End Property
+
+    Public ReadOnly Property HasMessages As Boolean Implements ICharacter.HasMessages
+        Get
+            Return IsPlayerCharacter AndAlso _worldData.Messages.Any
+        End Get
+    End Property
+
+    Public ReadOnly Property CurrentMessage As String() Implements ICharacter.CurrentMessage
+        Get
+            If IsPlayerCharacter AndAlso _worldData.Messages.Any Then
+                Return _worldData.Messages.First
+            End If
+            Return Array.Empty(Of String)
         End Get
     End Property
 End Class
