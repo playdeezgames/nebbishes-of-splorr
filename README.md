@@ -16,7 +16,7 @@ Another fine starvation simulator.
 * Escape - Game menu
 * A -
 * B -
-* C -
+* C - Character Status
 * D - Down?
 * E - 
 * F -

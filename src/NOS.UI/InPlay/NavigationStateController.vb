@@ -21,6 +21,8 @@ Friend Class NavigationStateController
             Case LeftKeyName
                 _world.PlayerCharacter.AttemptMove(Directions.West)
                 SetState(UIStates.InPlay)
+            Case "C"
+                SetState(UIStates.CharacterStatus)
         End Select
     End Sub
 

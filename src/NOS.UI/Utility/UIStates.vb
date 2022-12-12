@@ -6,4 +6,5 @@
     StartGame
     InPlay
     Navigation
+    CharacterStatus
 End Enum
