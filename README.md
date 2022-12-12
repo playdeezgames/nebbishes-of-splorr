@@ -2,7 +2,6 @@
 Another fine starvation simulator.
 
 # TODOs
-* message state
 * 
 
 # Keyboard Commands

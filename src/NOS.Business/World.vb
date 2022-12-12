@@ -37,8 +37,8 @@ Public Class World
         character.SetAsPlayerCharacter()
     End Sub
 
-    Private Const WorldColumns = 16
-    Private Const WorldRows = 16
+    Private Const WorldColumns = 32
+    Private Const WorldRows = 32
     Private Sub CreateOverworld()
         Dim overworld As New Dictionary(Of (Integer, Integer), ILocation)
         For column = 0 To WorldColumns - 1
