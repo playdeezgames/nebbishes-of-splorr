@@ -33,7 +33,7 @@ Public Class World
 
     Private Sub CreatePlayerCharacter()
         Dim candidates = Locations.ToList()
-        Dim character = CreateCharacter(candidates(_random.Next(candidates.Count)))
+        Dim character = CreateCharacter("you", candidates(_random.Next(candidates.Count)))
         character.SetAsPlayerCharacter()
     End Sub
 
@@ -72,7 +72,7 @@ Public Class World
     Private Function CreateLocation(name As String) As ILocation
         Return Location.Create(_worldData, name)
     End Function
-    Private Function CreateCharacter(location As ILocation) As ICharacter
-        Return Character.Create(_worldData, location)
+    Private Function CreateCharacter(name As String, location As ILocation) As ICharacter
+        Return Character.Create(_worldData, name, location)
     End Function
 End Class

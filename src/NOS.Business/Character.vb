@@ -3,9 +3,18 @@
     Private _worldData As WorldData
     Public ReadOnly Id As Integer
 
-    Public ReadOnly Property Location As ILocation Implements ICharacter.Location
+    Public Property Location As ILocation Implements ICharacter.Location
         Get
             Return New Location(_worldData, _worldData.Characters(Id).LocationId)
+        End Get
+        Set(value As ILocation)
+            _worldData.Characters(Id).LocationId = value.Id
+        End Set
+    End Property
+
+    Public ReadOnly Property Name As String Implements ICharacter.Name
+        Get
+            Return _worldData.Characters(Id).Name
         End Get
     End Property
 
@@ -18,9 +27,30 @@
         _worldData.PlayerCharacterId = Id
     End Sub
 
-    Friend Shared Function Create(worldData As WorldData, location As ILocation) As Character
+    Friend Shared Function Create(worldData As WorldData, name As String, location As ILocation) As Character
         Dim id = If(worldData.Characters.Any, worldData.Characters.Keys.Max + 1, 0)
-        worldData.Characters.Add(id, New CharacterData With {.LocationId = location.Id})
+        worldData.Characters.Add(id, New CharacterData With {.LocationId = location.Id, .Name = name})
         Return New Character(worldData, id)
     End Function
+
+    Public Sub AttemptMove(direction As Directions) Implements ICharacter.AttemptMove
+        If Location.HasRoute(direction) Then
+            AddMessage($"{Name} go {direction.Name}.")
+            Location = Location.Route(direction).ToLocation
+        Else
+            AddMessage($"{Name} cannot go {direction.Name}.")
+        End If
+    End Sub
+
+    Public Sub AddMessage(ParamArray lines() As String) Implements ICharacter.AddMessage
+        If IsPlayerCharacter Then
+            _worldData.Messages.Add(lines)
+        End If
+    End Sub
+
+    Private ReadOnly Property IsPlayerCharacter As Boolean
+        Get
+            Return _worldData.PlayerCharacterId.HasValue AndAlso _worldData.PlayerCharacterId.Value = Id
+        End Get
+    End Property
 End Class

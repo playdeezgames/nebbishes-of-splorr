@@ -3,6 +3,10 @@ Another fine starvation simulator.
 
 # TODOs
 * move about the map
+* character name
+* character messages
+* message state
+* 
 
 # Keyboard Commands
 * Up - Move ahead

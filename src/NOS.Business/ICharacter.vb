@@ -1,4 +1,7 @@
 ﻿Public Interface ICharacter
     Sub SetAsPlayerCharacter()
-    ReadOnly Property Location As ILocation
+    Sub AttemptMove(direction As Directions)
+    Property Location As ILocation
+    ReadOnly Property Name As String
+    Sub AddMessage(ParamArray lines As String())
 End Interface
