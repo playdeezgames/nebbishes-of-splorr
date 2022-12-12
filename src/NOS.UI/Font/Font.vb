@@ -28,4 +28,7 @@
         Next
         Return y
     End Function
+    Function WriteLine(xy As (Integer, Integer), wh As (Integer, Integer), text As String, hue As Hue) As Integer
+        Return Write(xy, wh, text, hue) + wh.Item2
+    End Function
 End Class

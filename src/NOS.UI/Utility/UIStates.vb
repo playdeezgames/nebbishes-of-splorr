@@ -6,5 +6,4 @@
     StartGame
     InPlay
     Navigation
-    Message
 End Enum

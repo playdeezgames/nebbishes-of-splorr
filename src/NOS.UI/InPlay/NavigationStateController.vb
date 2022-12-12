@@ -1,4 +1,6 @@
-﻿Friend Class NavigationStateController
+﻿Imports System.IO
+
+Friend Class NavigationStateController
     Inherits BaseStateController
 
     Public Sub New(context As IUIContext, world As IWorld)
@@ -24,9 +26,20 @@
 
     Protected Overrides Sub Redraw(ticks As Long)
         Dim font = _context.GetFont(DefaultFontName)
+        Dim y = ShowMessage(0, font)
         Dim location = _world.PlayerCharacter.Location
-        font.Write((0, 0), $"Location: { location.Name}", Hue.Blue)
+        y = font.WriteLine((0, y), (160, 6), $"Location: { location.Name}", Hue.Blue)
         Dim routes = location.Routes
-        font.Write((0, 6), (160, 6), $"Exits: {String.Join(", ", routes.Select(Function(x) x.Direction.Letter))}", Hue.White)
+        y = font.Write((0, y), (160, 6), $"Exits: {String.Join(", ", routes.Select(Function(x) x.Direction.Letter))}", Hue.White)
     End Sub
+
+    Private Function ShowMessage(y As Integer, font As Font) As Integer
+        Dim lines = _world.PlayerCharacter.CurrentMessage
+        If lines.Any Then
+            For Each line In lines
+                y = font.WriteLine((0, y), (160, 6), line, Hue.White)
+            Next
+        End If
+        Return y
+    End Function
 End Class

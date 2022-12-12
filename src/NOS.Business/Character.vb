@@ -34,6 +34,7 @@
     End Function
 
     Public Sub AttemptMove(direction As Directions) Implements ICharacter.AttemptMove
+        DismissMessage()
         If Location.HasRoute(direction) Then
             AddMessage($"{Name} go {direction.Name}.")
             Location = Location.Route(direction).ToLocation
