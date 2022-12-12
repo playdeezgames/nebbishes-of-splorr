@@ -44,14 +44,10 @@
         ElseIf Location.HasRoute(direction) Then
             AddMessage($"{Name} go {direction.Name}.")
             Location = Location.Route(direction).ToLocation
-            ApplyEffects()
+            NextRound()
         Else
             AddMessage($"{Name} cannot go {direction.Name}.")
         End If
-    End Sub
-
-    Private Sub ApplyEffects()
-        Energy -= 1
     End Sub
 
     Public Sub AddMessage(line As String) Implements ICharacter.AddMessage
@@ -111,17 +107,46 @@
     Private Function GetStatistic(statisticType As StatisticTypes) As Integer
         Return _worldData.Characters(Id).Statistics(statisticType)
     End Function
-
+    Private ReadOnly Property IsSleeping As Boolean
+        Get
+            Return HasEffect(Effects.Sleeping)
+        End Get
+    End Property
+    Private Function HasEffect(effect As Effects) As Boolean
+        Return _worldData.Characters(Id).Effects.Contains(effect)
+    End Function
+    Private Sub SetEffect(effect As Effects)
+        _worldData.Characters(Id).Effects.Add(effect)
+    End Sub
     Public Sub AttemptSleep() Implements ICharacter.AttemptSleep
         DismissMessages()
         Dim oldEnergy = Energy
-        Energy += (MaximumEnergy + 5) \ 6
-        AddMessage($"{Name} sleep for 1 hour, +{Energy - oldEnergy} energy.")
+        SetEffect(Effects.Sleeping)
+        Dim minutes = World.AdvanceTime(60, Function() Me.IsSleeping)
+        Energy += (minutes * MaximumEnergy) \ 300
+        ClearEffect(Effects.Sleeping)
+        AddMessage($"{Name} sleep for {minutes} minutes, +{Energy - oldEnergy} energy.")
+    End Sub
+
+    Private Sub ClearEffect(effect As Effects)
+        _worldData.Characters(Id).Effects.Remove(effect)
+    End Sub
+
+    Public Sub NextRound() Implements ICharacter.NextRound
+        If Not IsSleeping Then
+            Energy -= 1
+        End If
     End Sub
 
     Public ReadOnly Property MaximumEnergy As Integer Implements ICharacter.MaximumEnergy
         Get
             Return GetStatistic(StatisticTypes.MaximumEnergy)
+        End Get
+    End Property
+
+    Public ReadOnly Property World As IWorld Implements ICharacter.World
+        Get
+            Return New World(_worldData)
         End Get
     End Property
 End Class

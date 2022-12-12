@@ -11,7 +11,7 @@
 
     Protected Overrides Sub Redraw(ticks As Long)
         Dim font = _context.GetFont(DefaultFontName)
-        font.Write((0, 0), "TODO: put prolog here", Hue.White)
+        font.WriteLine((0, 0), (160, 6), "You are Tagon, one of the nebbishes of  SPLORR!! What is a nebbish? It is a     person who is pitifully ineffective. Whywould you want to play a game as a      nebbish? I suppose you don't have to    _STAY_ a nebbish....", Hue.White)
         font.Write((0, 78), "Remember: H is for Help!", Hue.Red)
         font.Write((0, 84), "Press any key.", Hue.White)
     End Sub

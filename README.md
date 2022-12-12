@@ -2,6 +2,7 @@
 Another fine starvation simulator.
 
 # TODOs
+* timekeeping
 * hunger
 * starvation
 * death

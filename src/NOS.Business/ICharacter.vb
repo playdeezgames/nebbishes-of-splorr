@@ -7,7 +7,9 @@
     ReadOnly Property HasMessages As Boolean
     Sub DismissMessages()
     Sub AttemptSleep()
+    Sub NextRound()
     ReadOnly Property Messages As String()
     Property Energy As Integer
     ReadOnly Property MaximumEnergy As Integer
+    ReadOnly Property World As IWorld
 End Interface

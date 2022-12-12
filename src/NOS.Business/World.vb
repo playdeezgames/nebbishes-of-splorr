@@ -2,7 +2,11 @@ Public Class World
     Implements IWorld
     Private _worldData As WorldData
     Private _random As New Random
-
+    Sub New()
+    End Sub
+    Sub New(worldData As WorldData)
+        _worldData = worldData
+    End Sub
     Public ReadOnly Property IsInPlay As Boolean Implements IWorld.IsInPlay
         Get
             Return _worldData IsNot Nothing
@@ -79,4 +83,25 @@ Public Class World
     Private Function CreateCharacter(name As String, location As ILocation, statistics As IReadOnlyDictionary(Of StatisticTypes, Integer)) As ICharacter
         Return Character.Create(_worldData, name, location, statistics)
     End Function
+
+    Public Function AdvanceTime(minutes As Integer, conditionCheck As Func(Of Boolean)) As Integer Implements IWorld.AdvanceTime
+        Dim counter = 0
+        While minutes > 0 AndAlso conditionCheck()
+            minutes -= 1
+            counter += 1
+            NextRound()
+        End While
+        Return counter
+    End Function
+    Private ReadOnly Property Characters As IEnumerable(Of ICharacter)
+        Get
+            Return _worldData.Characters.Keys.Select(Function(x) New Character(_worldData, x))
+        End Get
+    End Property
+
+    Private Sub NextRound()
+        For Each character In Characters
+            character.NextRound()
+        Next
+    End Sub
 End Class
