@@ -23,6 +23,8 @@ Friend Class NavigationStateController
                 SetState(UIStates.InPlay)
             Case "C"
                 SetState(UIStates.CharacterStatus)
+            Case "H"
+                SetState(UIStates.Help)
         End Select
     End Sub
 

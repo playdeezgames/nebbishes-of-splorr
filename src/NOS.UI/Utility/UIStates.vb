@@ -7,4 +7,5 @@
     InPlay
     Navigation
     CharacterStatus
+    Help
 End Enum

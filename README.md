@@ -2,7 +2,7 @@
 Another fine starvation simulator.
 
 # TODOs
-* fatigue
+* help screen
 * sleeping
 * hunger
 * starvation
