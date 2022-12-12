@@ -123,7 +123,6 @@
         Dim oldEnergy = Energy
         SetEffect(Effects.Sleeping)
         Dim minutes = World.AdvanceTime(60, Function() Me.IsSleeping)
-        Energy += (minutes * MaximumEnergy) \ 300
         ClearEffect(Effects.Sleeping)
         AddMessage($"{Name} sleep for {minutes} minutes, +{Energy - oldEnergy} energy.")
     End Sub
@@ -133,7 +132,9 @@
     End Sub
 
     Public Sub NextRound() Implements ICharacter.NextRound
-        If Not IsSleeping Then
+        If IsSleeping Then
+            Energy += 3
+        Else
             Energy -= 1
         End If
     End Sub
