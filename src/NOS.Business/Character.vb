@@ -34,7 +34,7 @@
     End Function
 
     Public Sub AttemptMove(direction As Directions) Implements ICharacter.AttemptMove
-        DismissMessage()
+        DismissMessages()
         If Location.HasRoute(direction) Then
             AddMessage($"{Name} go {direction.Name}.")
             Location = Location.Route(direction).ToLocation
@@ -43,15 +43,15 @@
         End If
     End Sub
 
-    Public Sub AddMessage(ParamArray lines() As String) Implements ICharacter.AddMessage
+    Public Sub AddMessage(line As String) Implements ICharacter.AddMessage
         If IsPlayerCharacter Then
-            _worldData.Messages.Add(lines)
+            _worldData.Messages.Add(line)
         End If
     End Sub
 
-    Public Sub DismissMessage() Implements ICharacter.DismissMessage
+    Public Sub DismissMessages() Implements ICharacter.DismissMessages
         If IsPlayerCharacter AndAlso _worldData.Messages.Any Then
-            _worldData.Messages.RemoveAt(0)
+            _worldData.Messages.Clear()
         End If
     End Sub
 
@@ -67,10 +67,10 @@
         End Get
     End Property
 
-    Public ReadOnly Property CurrentMessage As String() Implements ICharacter.CurrentMessage
+    Public ReadOnly Property Messages As String() Implements ICharacter.Messages
         Get
             If IsPlayerCharacter AndAlso _worldData.Messages.Any Then
-                Return _worldData.Messages.First
+                Return _worldData.Messages.ToArray
             End If
             Return Array.Empty(Of String)
         End Get

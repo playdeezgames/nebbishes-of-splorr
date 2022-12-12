@@ -34,7 +34,7 @@ Friend Class NavigationStateController
     End Sub
 
     Private Function ShowMessage(y As Integer, font As Font) As Integer
-        Dim lines = _world.PlayerCharacter.CurrentMessage
+        Dim lines = _world.PlayerCharacter.Messages
         If lines.Any Then
             For Each line In lines
                 y = font.WriteLine((0, y), (160, 6), line, Hue.White)
