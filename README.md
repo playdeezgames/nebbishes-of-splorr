@@ -2,8 +2,6 @@
 Another fine starvation simulator.
 
 # TODOs
-* help screen
-* sleeping
 * hunger
 * starvation
 * death
