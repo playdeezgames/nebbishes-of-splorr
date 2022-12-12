@@ -27,10 +27,10 @@
             Dim y = _y + _lineHeight * index
             If index = _item Then
                 _uiContext.Fill(_x, y, _width, _lineHeight, _foreground)
-                font.WriteString(_x, y, _items(index), _background)
+                font.WriteString((_x, y), _items(index), _background)
             Else
                 _uiContext.Fill(_x, y, _width, _lineHeight, _background)
-                font.WriteString(_x, y, _items(index), _foreground)
+                font.WriteString((_x, y), _items(index), _foreground)
             End If
         Next
     End Sub

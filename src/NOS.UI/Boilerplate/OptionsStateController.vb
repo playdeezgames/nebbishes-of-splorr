@@ -22,7 +22,7 @@
 
     Protected Overrides Sub Redraw(ticks As Long)
         Dim font = _context.GetFont(DefaultFontName)
-        font.WriteString(0, 0, "Screen Size:", Hue.Blue)
+        font.WriteString((0, 0), "Screen Size:", Hue.Blue)
         _menu.Draw()
     End Sub
 End Class

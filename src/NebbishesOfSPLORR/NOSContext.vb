@@ -119,9 +119,9 @@
         RaiseEvent OnUIScale()
     End Sub
 
-    Public Sub DrawGlyph(x As Integer, y As Integer, hue As Hue, glyph As IEnumerable(Of (Integer, Integer))) Implements IUIContext.DrawGlyph
+    Public Sub DrawGlyph(xy As (Integer, Integer), hue As Hue, glyph As IEnumerable(Of (Integer, Integer))) Implements IUIContext.DrawGlyph
         For Each pixel In glyph
-            SetPixel(x + pixel.Item1, y + pixel.Item2, hue)
+            SetPixel(xy.Item1 + pixel.Item1, xy.Item2 + pixel.Item2, hue)
         Next
     End Sub
     Private ReadOnly _fonts As New Dictionary(Of String, Font)
