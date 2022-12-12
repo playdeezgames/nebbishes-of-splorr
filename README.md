@@ -2,7 +2,7 @@
 Another fine starvation simulator.
 
 # TODOs
-* make font writing take line lengths and line heights?
+* move about the map
 
 # Keyboard Commands
 * Up - Move ahead
