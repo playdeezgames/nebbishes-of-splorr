@@ -7,15 +7,24 @@
         _glyphs = glyphs
         _glyphWidth = glyphWidth
     End Sub
-    Sub WriteCharacter(xy As (Integer, Integer), character As Char, hue As Hue)
+    Sub Write(xy As (Integer, Integer), character As Char, hue As Hue)
         If _glyphs.ContainsKey(character) Then
             _context.DrawGlyph(xy, hue, _glyphs(character))
         End If
     End Sub
-    Sub WriteString(xy As (Integer, Integer), text As String, hue As Hue)
+    Sub Write(xy As (Integer, Integer), text As String, hue As Hue)
+        Write(xy, (Integer.MaxValue - xy.Item1, 0), text, hue)
+    End Sub
+    Sub Write(xy As (Integer, Integer), wh As (Integer, Integer), text As String, hue As Hue)
+        Dim x As Integer = xy.Item1
+        Dim y As Integer = xy.Item2
         For Each character In text
-            WriteCharacter(xy, character, hue)
-            xy = (xy.Item1 + _glyphWidth, xy.Item2)
+            Write((x, y), character, hue)
+            x += _glyphWidth
+            If x >= xy.Item1 + wh.Item1 Then
+                x = xy.Item1
+                y = y + wh.Item2
+            End If
         Next
     End Sub
 End Class

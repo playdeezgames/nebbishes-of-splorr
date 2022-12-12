@@ -23,7 +23,7 @@
 
     Protected Overrides Sub Redraw(ticks As Long)
         Dim font = _context.GetFont(DefaultFontName)
-        font.WriteString((0, 0), "Are you sure you want to quit?", Hue.Red)
+        font.Write((0, 0), "Are you sure you want to quit?", Hue.Red)
         _menu.Draw()
     End Sub
 End Class

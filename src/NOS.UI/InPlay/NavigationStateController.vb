@@ -11,8 +11,8 @@
     Protected Overrides Sub Redraw(ticks As Long)
         Dim font = _context.GetFont(DefaultFontName)
         Dim location = _world.PlayerCharacter.Location
-        font.WriteString((0, 0), $"Location: { location.Name}", Hue.Blue)
+        font.Write((0, 0), $"Location: { location.Name}", Hue.Blue)
         Dim routes = location.Routes
-        font.WriteString((0, 6), $"Exits: {String.Join(", ", routes.Select(Function(x) x.Direction.Letter))}", Hue.White)
+        font.Write((0, 6), $"Exits: {String.Join(", ", routes.Select(Function(x) x.Direction.Letter))}", Hue.White)
     End Sub
 End Class
