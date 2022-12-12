@@ -33,7 +33,11 @@ Public Class World
 
     Private Sub CreatePlayerCharacter()
         Dim candidates = Locations.ToList()
-        Dim character = CreateCharacter("you", candidates(_random.Next(candidates.Count)))
+        Dim character = CreateCharacter("you", candidates(_random.Next(candidates.Count)), New Dictionary(Of StatisticTypes, Integer) From
+                                        {
+                                            {StatisticTypes.Fatigue, 0},
+                                            {StatisticTypes.MaximumEnergy, 100}
+                                        })
         character.SetAsPlayerCharacter()
     End Sub
 
@@ -72,7 +76,7 @@ Public Class World
     Private Function CreateLocation(name As String) As ILocation
         Return Location.Create(_worldData, name)
     End Function
-    Private Function CreateCharacter(name As String, location As ILocation) As ICharacter
-        Return Character.Create(_worldData, name, location)
+    Private Function CreateCharacter(name As String, location As ILocation, statistics As IReadOnlyDictionary(Of StatisticTypes, Integer)) As ICharacter
+        Return Character.Create(_worldData, name, location, statistics)
     End Function
 End Class

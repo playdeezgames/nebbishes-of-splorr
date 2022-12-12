@@ -2,7 +2,11 @@
 Another fine starvation simulator.
 
 # TODOs
-* 
+* fatigue
+* sleeping
+* hunger
+* starvation
+* death
 
 # Keyboard Commands
 * Up - Move north
@@ -34,4 +38,4 @@ Another fine starvation simulator.
 * W -
 * X -
 * Y -
-* Z -
+* Z - Zleep

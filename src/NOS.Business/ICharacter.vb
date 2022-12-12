@@ -7,4 +7,6 @@
     ReadOnly Property HasMessages As Boolean
     Sub DismissMessages()
     ReadOnly Property Messages As String()
+    Property Energy As Integer
+    ReadOnly Property MaximumEnergy As Integer
 End Interface

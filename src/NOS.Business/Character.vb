@@ -27,9 +27,13 @@
         _worldData.PlayerCharacterId = Id
     End Sub
 
-    Friend Shared Function Create(worldData As WorldData, name As String, location As ILocation) As Character
+    Friend Shared Function Create(worldData As WorldData, name As String, location As ILocation, statistics As IReadOnlyDictionary(Of StatisticTypes, Integer)) As Character
         Dim id = If(worldData.Characters.Any, worldData.Characters.Keys.Max + 1, 0)
-        worldData.Characters.Add(id, New CharacterData With {.LocationId = location.Id, .Name = name})
+        Dim characterData = New CharacterData With {.LocationId = location.Id, .Name = name}
+        For Each statistic In statistics
+            characterData.Statistics(statistic.Key) = statistic.Value
+        Next
+        worldData.Characters.Add(id, characterData)
         Return New Character(worldData, id)
     End Function
 
@@ -38,9 +42,14 @@
         If Location.HasRoute(direction) Then
             AddMessage($"{Name} go {direction.Name}.")
             Location = Location.Route(direction).ToLocation
+            ApplyEffects()
         Else
             AddMessage($"{Name} cannot go {direction.Name}.")
         End If
+    End Sub
+
+    Private Sub ApplyEffects()
+        Energy -= 1
     End Sub
 
     Public Sub AddMessage(line As String) Implements ICharacter.AddMessage
@@ -73,6 +82,37 @@
                 Return _worldData.Messages.ToArray
             End If
             Return Array.Empty(Of String)
+        End Get
+    End Property
+
+    Public Property Energy As Integer Implements ICharacter.Energy
+        Get
+            Return MaximumEnergy - Fatigue
+        End Get
+        Set(value As Integer)
+            Fatigue = MaximumEnergy - value
+        End Set
+    End Property
+    Private Property Fatigue As Integer
+        Get
+            Return GetStatistic(StatisticTypes.Fatigue)
+        End Get
+        Set(value As Integer)
+            SetStatistic(StatisticTypes.Fatigue, Math.Clamp(value, 0, MaximumEnergy))
+        End Set
+    End Property
+
+    Private Sub SetStatistic(statisticType As StatisticTypes, value As Integer)
+        _worldData.Characters(Id).Statistics(statisticType) = value
+    End Sub
+
+    Private Function GetStatistic(statisticType As StatisticTypes) As Integer
+        Return _worldData.Characters(Id).Statistics(statisticType)
+    End Function
+
+    Public ReadOnly Property MaximumEnergy As Integer Implements ICharacter.MaximumEnergy
+        Get
+            Return GetStatistic(StatisticTypes.MaximumEnergy)
         End Get
     End Property
 End Class
