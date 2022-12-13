@@ -132,6 +132,13 @@
     End Sub
 
     Public Sub NextRound() Implements ICharacter.NextRound
+        If IsDead Then
+            Return
+        End If
+        If Health = 0 Then
+            SetEffect(Effects.Dead)
+            Return
+        End If
         If IsSleeping Then
             Energy += 3
         Else
@@ -203,6 +210,12 @@
     Public ReadOnly Property MaximumHealth As Integer Implements ICharacter.MaximumHealth
         Get
             Return GetStatistic(StatisticTypes.MaximumHealth)
+        End Get
+    End Property
+
+    Public ReadOnly Property IsDead As Boolean Implements ICharacter.IsDead
+        Get
+            Return HasEffect(Effects.Dead)
         End Get
     End Property
 End Class

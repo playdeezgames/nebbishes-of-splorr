@@ -16,4 +16,5 @@
     ReadOnly Property MaximumSatiety As Integer
     Property Health As Integer
     ReadOnly Property MaximumHealth As Integer
+    ReadOnly Property IsDead As Boolean
 End Interface
