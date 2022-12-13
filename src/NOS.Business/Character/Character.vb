@@ -137,6 +137,14 @@
         Else
             Fatigue += 1
         End If
+        If HasEffect(Effects.Starving) Then
+            Wounds += 1
+        End If
+        If Satiety = 0 Then
+            SetEffect(Effects.Starving)
+        Else
+            ClearEffect(Effects.Starving)
+        End If
         Hunger += 1
     End Sub
 
