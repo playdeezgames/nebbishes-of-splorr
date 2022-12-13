@@ -14,7 +14,11 @@
             Case DownKeyName
                 _menu.NextItem()
             Case EscapeKeyName
-                SetState(UIStates.MainMenu)
+                If _world.IsInPlay Then
+                    SetState(UIStates.GameMenu)
+                Else
+                    SetState(UIStates.MainMenu)
+                End If
             Case EnterKeyName, SpaceKeyName
                 _context.SignalUIScale(_menu.CurrentItem * 4 + 4)
         End Select

@@ -18,6 +18,7 @@ Public Class UIController
         _states.Add(UIStates.CharacterStatus, New CharacterStatusStateController(_context, _world))
         _states.Add(UIStates.Help, New HelpStateController(_context, _world))
         _states.Add(UIStates.Dead, New DeadStateController(_context, _world))
+        _states.Add(UIStates.GameMenu, New GameMenuStateController(_context, _world))
         For Each state In _states
             AddHandler state.Value.ChangeState, AddressOf OnChangeState
         Next

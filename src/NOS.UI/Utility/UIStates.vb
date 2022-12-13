@@ -9,4 +9,5 @@
     CharacterStatus
     Help
     Dead
+    GameMenu
 End Enum

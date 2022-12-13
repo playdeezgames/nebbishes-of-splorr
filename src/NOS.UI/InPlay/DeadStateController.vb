@@ -7,6 +7,8 @@
 
     Protected Overrides Sub HandleKey(keyName As String)
         Select Case keyName
+            Case EscapeKeyName
+                SetState(UIStates.GameMenu)
             Case "C"
                 SetState(UIStates.CharacterStatus)
             Case "H"

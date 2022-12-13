@@ -9,6 +9,8 @@ Friend Class NavigationStateController
 
     Protected Overrides Sub HandleKey(keyName As String)
         Select Case keyName
+            Case EscapeKeyName
+                SetState(UIStates.GameMenu)
             Case UpKeyName
                 _world.PlayerCharacter.AttemptMove(Directions.North)
                 SetState(UIStates.InPlay)
