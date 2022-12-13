@@ -40,7 +40,9 @@ Public Class World
         Dim character = CreateCharacter("Tagon", candidates(_random.Next(candidates.Count)), New Dictionary(Of StatisticTypes, Integer) From
                                         {
                                             {StatisticTypes.Fatigue, 0},
-                                            {StatisticTypes.MaximumEnergy, 1000}
+                                            {StatisticTypes.MaximumEnergy, 1000},
+                                            {StatisticTypes.Hunger, 0},
+                                            {StatisticTypes.MaximumSatiety, 1000}
                                         })
         character.SetAsPlayerCharacter()
     End Sub

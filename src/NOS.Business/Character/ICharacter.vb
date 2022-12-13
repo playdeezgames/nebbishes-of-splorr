@@ -12,4 +12,6 @@
     Property Energy As Integer
     ReadOnly Property MaximumEnergy As Integer
     ReadOnly Property World As IWorld
+    Property Satiety As Integer
+    ReadOnly Property MaximumSatiety As Integer
 End Interface

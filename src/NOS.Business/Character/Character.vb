@@ -135,8 +135,9 @@
         If IsSleeping Then
             Energy += 3
         Else
-            Energy -= 1
+            Fatigue += 1
         End If
+        Hunger += 1
     End Sub
 
     Public ReadOnly Property MaximumEnergy As Integer Implements ICharacter.MaximumEnergy
@@ -148,6 +149,29 @@
     Public ReadOnly Property World As IWorld Implements ICharacter.World
         Get
             Return New World(_worldData)
+        End Get
+    End Property
+
+    Public Property Satiety As Integer Implements ICharacter.Satiety
+        Get
+            Return MaximumSatiety - Hunger
+        End Get
+        Set(value As Integer)
+            Hunger = MaximumSatiety - value
+        End Set
+    End Property
+    Private Property Hunger As Integer
+        Get
+            Return GetStatistic(StatisticTypes.Hunger)
+        End Get
+        Set(value As Integer)
+            SetStatistic(StatisticTypes.Hunger, Math.Clamp(value, 0, MaximumSatiety))
+        End Set
+    End Property
+
+    Public ReadOnly Property MaximumSatiety As Integer Implements ICharacter.MaximumSatiety
+        Get
+            Return GetStatistic(StatisticTypes.MaximumSatiety)
         End Get
     End Property
 End Class

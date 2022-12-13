@@ -1,12 +1,6 @@
 # Nebbishes of SPLORR!!
 Another fine starvation simulator.
 
-# TODOs
-* timekeeping
-* hunger
-* starvation
-* death
-
 # Keyboard Commands
 * Up - Move north
 * Down - Move south
