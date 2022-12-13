@@ -4,7 +4,12 @@ Public Enum LocationTypes
     Grass
     Trees
     Village
-    Lair
+    Cave
+    Town
+    Dungeon
+    Tower
+    City
+    Farm
 End Enum
 Module LocationTypesExtensions
     Friend ReadOnly OverworldLocationTypeGenerator As IReadOnlyDictionary(Of LocationTypes, Integer) =
@@ -13,7 +18,7 @@ Module LocationTypesExtensions
             {LocationTypes.Grass, 1000},
             {LocationTypes.Trees, 500},
             {LocationTypes.Village, 25},
-            {LocationTypes.Lair, 50}
+            {LocationTypes.Cave, 50}
         }
     Friend ReadOnly ForageGenerators As IReadOnlyDictionary(Of LocationTypes, IReadOnlyDictionary(Of ItemTypes, Integer)) =
         New Dictionary(Of LocationTypes, IReadOnlyDictionary(Of ItemTypes, Integer)) From
@@ -37,14 +42,14 @@ Module LocationTypesExtensions
     <Extension>
     Function Name(locationType As LocationTypes) As String
         Select Case locationType
+            Case LocationTypes.Cave
+                Return "cave"
             Case LocationTypes.Grass
                 Return "grass"
             Case LocationTypes.Trees
                 Return "trees"
             Case LocationTypes.Village
                 Return "village"
-            Case LocationTypes.Lair
-                Return "lair"
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -67,7 +72,7 @@ Module LocationTypesExtensions
                 }
             },
             {
-                LocationTypes.Lair,
+                LocationTypes.Cave,
                 New Dictionary(Of StatisticTypes, Integer)
             },
             {

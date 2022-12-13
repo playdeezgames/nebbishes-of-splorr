@@ -2,4 +2,5 @@
     Sleeping
     Starving
     Dead
+    Foraging
 End Enum

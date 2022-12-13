@@ -157,11 +157,36 @@
             ClearEffect(Effects.Starving)
         End If
         Hunger += 1
+        If HasEffect(Effects.Foraging) Then
+            ForagingXP += 1
+            If ForagingXP >= ForagingXPGoal Then
+                ForagingXP -= ForagingXPGoal
+                ForagingLevel += 1
+                AddMessage($"{Name} leveled up foraging!")
+            End If
+        End If
     End Sub
-    Private ReadOnly Property ForagingLevel As Integer
+    Private Property ForagingXP As Integer
+        Get
+            Return GetStatistic(StatisticTypes.ForagingXP)
+        End Get
+        Set(value As Integer)
+            SetStatistic(StatisticTypes.ForagingXP, value)
+        End Set
+    End Property
+    Private ReadOnly Property ForagingXPGoal As Integer
+        Get
+            'TODO: magic number
+            Return (ForagingLevel + 1) * 10
+        End Get
+    End Property
+    Private Property ForagingLevel As Integer
         Get
             Return GetStatistic(StatisticTypes.ForagingLevel)
         End Get
+        Set(value As Integer)
+            SetStatistic(StatisticTypes.ForagingLevel, value)
+        End Set
     End Property
     Public Sub AttemptForage() Implements ICharacter.AttemptForage
         DismissMessages()
@@ -173,7 +198,9 @@
             AddMessage($"{Name} cannot forage here.")
             Return
         End If
+        SetEffect(Effects.Foraging)
         NextRound()
+        ClearEffect(Effects.Foraging)
         If RNG.FromRange(0, ForagingLevel + Location.ForagingLevel) > ForagingLevel Then
             AddMessage($"{Name} finds nothing.")
             Return
