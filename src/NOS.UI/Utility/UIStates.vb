@@ -10,4 +10,5 @@
     Help
     Dead
     GameMenu
+    ConfirmAbandon
 End Enum

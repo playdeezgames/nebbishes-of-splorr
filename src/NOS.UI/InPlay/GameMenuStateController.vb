@@ -20,9 +20,11 @@
                     Case 0
                         SetState(UIStates.InPlay)
                     Case 1
+                        'TODO: save
                     Case 2
                         SetState(UIStates.Options)
                     Case 3
+                        SetState(UIStates.ConfirmAbandon)
                 End Select
         End Select
     End Sub

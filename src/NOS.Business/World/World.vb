@@ -108,4 +108,8 @@ Public Class World
             character.NextRound()
         Next
     End Sub
+
+    Public Sub Abandon() Implements IWorld.Abandon
+        _worldData = Nothing
+    End Sub
 End Class
