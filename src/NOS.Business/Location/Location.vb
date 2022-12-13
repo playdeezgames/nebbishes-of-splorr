@@ -56,9 +56,6 @@
 
     Public Function Forage() As IItem Implements ILocation.Forage
         Dim itemType = RNG.FromGenerator(ForageGenerators(LocationType))
-        If itemType = ItemTypes.None Then
-            Return Nothing
-        End If
         Return Item.Create(_worldData, itemType)
     End Function
 End Class

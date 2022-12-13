@@ -22,7 +22,6 @@ Module LocationTypesExtensions
                 LocationTypes.Grass,
                 New Dictionary(Of ItemTypes, Integer) From
                 {
-                    {ItemTypes.None, 100},
                     {ItemTypes.PlantFiber, 100}
                 }
             },
@@ -30,7 +29,6 @@ Module LocationTypesExtensions
                 LocationTypes.Trees,
                 New Dictionary(Of ItemTypes, Integer) From
                 {
-                    {ItemTypes.None, 100},
                     {ItemTypes.Stick, 100},
                     {ItemTypes.PlantFiber, 100}
                 }
