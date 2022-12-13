@@ -176,6 +176,29 @@
         Hunger += 1
     End Sub
 
+    Public Sub AttemptForage() Implements ICharacter.AttemptForage
+        DismissMessages()
+        If IsDead Then
+            AddMessage($"{Name} too dead to forage.")
+            Return
+        End If
+        If Not Location.CanForage Then
+            AddMessage($"{Name} cannot forage here.")
+            Return
+        End If
+        Dim item As IItem = Location.Forage()
+        If item Is Nothing Then
+            AddMessage($"{Name} finds nothing.")
+            Return
+        End If
+        AddMessage($"{Name} finds {item.Name}.")
+        AddItem(item)
+    End Sub
+
+    Private Sub AddItem(item As IItem)
+        _worldData.Characters(Id).ItemIds.Add(item.Id)
+    End Sub
+
     Public ReadOnly Property MaximumEnergy As Integer Implements ICharacter.MaximumEnergy
         Get
             Return GetStatistic(StatisticTypes.MaximumEnergy)

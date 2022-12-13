@@ -26,4 +26,8 @@
     <Import Include="SPLORR.Game" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Enum\" />
+  </ItemGroup>
+
 </Project>

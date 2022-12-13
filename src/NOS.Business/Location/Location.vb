@@ -24,6 +24,17 @@
         End Get
     End Property
 
+    Public ReadOnly Property CanForage As Boolean Implements ILocation.CanForage
+        Get
+            Return LocationType.CanForage
+        End Get
+    End Property
+    Private ReadOnly Property LocationType As LocationTypes
+        Get
+            Return CType(_worldData.Locations(Id).LocationType, LocationTypes)
+        End Get
+    End Property
+
     Public Sub New(worldData As WorldData, id As Integer)
         _worldData = worldData
         Me.Id = id
@@ -41,5 +52,13 @@
 
     Public Function HasRoute(direction As Directions) As Boolean Implements ILocation.HasRoute
         Return _worldData.Locations(Id).Routes.ContainsKey(direction)
+    End Function
+
+    Public Function Forage() As IItem Implements ILocation.Forage
+        Dim itemType = RNG.FromGenerator(ForageGenerators(LocationType))
+        If itemType = ItemTypes.None Then
+            Return Nothing
+        End If
+        Return Item.Create(_worldData, itemType)
     End Function
 End Class

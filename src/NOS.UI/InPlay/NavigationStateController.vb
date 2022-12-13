@@ -25,6 +25,9 @@ Friend Class NavigationStateController
                 SetState(UIStates.InPlay)
             Case "C"
                 SetState(UIStates.CharacterStatus)
+            Case "F"
+                _world.PlayerCharacter.AttemptForage()
+                SetState(UIStates.InPlay)
             Case "H"
                 SetState(UIStates.Help)
             Case "Z"

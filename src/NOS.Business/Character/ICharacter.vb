@@ -8,6 +8,7 @@
     Sub DismissMessages()
     Sub AttemptSleep()
     Sub NextRound()
+    Sub AttemptForage()
     ReadOnly Property Messages As String()
     Property Energy As Integer
     ReadOnly Property MaximumEnergy As Integer
