@@ -3,4 +3,6 @@
     Fatigue
     MaximumSatiety
     Hunger
+    MaximumHealth
+    Wounds
 End Enum

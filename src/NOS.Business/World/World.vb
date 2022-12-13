@@ -42,7 +42,9 @@ Public Class World
                                             {StatisticTypes.Fatigue, 0},
                                             {StatisticTypes.MaximumEnergy, 1000},
                                             {StatisticTypes.Hunger, 0},
-                                            {StatisticTypes.MaximumSatiety, 1000}
+                                            {StatisticTypes.MaximumSatiety, 1000},
+                                            {StatisticTypes.Wounds, 0},
+                                            {StatisticTypes.MaximumHealth, 1000}
                                         })
         character.SetAsPlayerCharacter()
     End Sub

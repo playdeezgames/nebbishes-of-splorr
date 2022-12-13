@@ -15,5 +15,6 @@
         Dim y = font.WriteLine((0, 0), (160, 6), $"{character.Name} Status:", Hue.White)
         y = font.WriteLine((0, y), (160, 6), $"Energy: {character.Energy}/{character.MaximumEnergy}", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"Satiety: {character.Satiety}/{character.MaximumSatiety}", Hue.Blue)
+        y = font.WriteLine((0, y), (160, 6), $"Health: {character.Health}/{character.MaximumHealth}", Hue.Blue)
     End Sub
 End Class

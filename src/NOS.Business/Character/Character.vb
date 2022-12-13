@@ -174,4 +174,27 @@
             Return GetStatistic(StatisticTypes.MaximumSatiety)
         End Get
     End Property
+
+    Public Property Health As Integer Implements ICharacter.Health
+        Get
+            Return MaximumHealth - Wounds
+        End Get
+        Set(value As Integer)
+            Wounds = MaximumHealth - value
+        End Set
+    End Property
+    Private Property Wounds As Integer
+        Get
+            Return GetStatistic(StatisticTypes.Wounds)
+        End Get
+        Set(value As Integer)
+            SetStatistic(StatisticTypes.Wounds, Math.Clamp(value, 0, MaximumHealth))
+        End Set
+    End Property
+
+    Public ReadOnly Property MaximumHealth As Integer Implements ICharacter.MaximumHealth
+        Get
+            Return GetStatistic(StatisticTypes.MaximumHealth)
+        End Get
+    End Property
 End Class

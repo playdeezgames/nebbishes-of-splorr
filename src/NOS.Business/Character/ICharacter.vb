@@ -14,4 +14,6 @@
     ReadOnly Property World As IWorld
     Property Satiety As Integer
     ReadOnly Property MaximumSatiety As Integer
+    Property Health As Integer
+    ReadOnly Property MaximumHealth As Integer
 End Interface
