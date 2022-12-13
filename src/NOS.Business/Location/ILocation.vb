@@ -6,4 +6,5 @@
     Function Forage() As IItem
     ReadOnly Property Route(direction As Directions) As IRoute
     ReadOnly Property CanForage As Boolean
+    ReadOnly Property ForagingLevel As Integer
 End Interface

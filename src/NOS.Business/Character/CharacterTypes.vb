@@ -16,7 +16,9 @@ Module CharacterTypesExtensions
                     {StatisticTypes.Hunger, 0},
                     {StatisticTypes.MaximumSatiety, 1000},
                     {StatisticTypes.Wounds, 0},
-                    {StatisticTypes.MaximumHealth, 1000}
+                    {StatisticTypes.MaximumHealth, 1000},
+                    {StatisticTypes.ForagingXP, 0},
+                    {StatisticTypes.ForagingLevel, 10}
                 }
             }
         }

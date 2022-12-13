@@ -49,15 +49,34 @@ Module LocationTypesExtensions
                 Throw New NotImplementedException
         End Select
     End Function
+    Private ReadOnly _startingStatistics As IReadOnlyDictionary(Of LocationTypes, IReadOnlyDictionary(Of StatisticTypes, Integer)) =
+        New Dictionary(Of LocationTypes, IReadOnlyDictionary(Of StatisticTypes, Integer)) From
+        {
+            {
+                LocationTypes.Grass,
+                New Dictionary(Of StatisticTypes, Integer) From
+                {
+                    {StatisticTypes.ForagingLevel, 10}
+                }
+            },
+            {
+                LocationTypes.Trees,
+                New Dictionary(Of StatisticTypes, Integer) From
+                {
+                    {StatisticTypes.ForagingLevel, 10}
+                }
+            },
+            {
+                LocationTypes.Lair,
+                New Dictionary(Of StatisticTypes, Integer)
+            },
+            {
+                LocationTypes.Village,
+                New Dictionary(Of StatisticTypes, Integer)
+            }
+        }
     <Extension>
-    Function CanForage(locationType As LocationTypes) As Boolean
-        Select Case locationType
-            Case LocationTypes.Grass, LocationTypes.Trees
-                Return True
-            Case LocationTypes.Village, LocationTypes.Lair
-                Return False
-            Case Else
-                Throw New NotImplementedException
-        End Select
+    Function StartingStatistics(locationType As LocationTypes) As IReadOnlyDictionary(Of StatisticTypes, Integer)
+        Return _startingStatistics(locationType)
     End Function
 End Module

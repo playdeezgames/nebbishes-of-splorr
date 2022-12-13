@@ -158,6 +158,11 @@
         End If
         Hunger += 1
     End Sub
+    Private ReadOnly Property ForagingLevel As Integer
+        Get
+            Return GetStatistic(StatisticTypes.ForagingLevel)
+        End Get
+    End Property
     Public Sub AttemptForage() Implements ICharacter.AttemptForage
         DismissMessages()
         If IsDead Then
@@ -169,6 +174,10 @@
             Return
         End If
         NextRound()
+        If RNG.FromRange(0, ForagingLevel + Location.ForagingLevel) > ForagingLevel Then
+            AddMessage($"{Name} finds nothing.")
+            Return
+        End If
         Dim item As IItem = Location.Forage()
         If item Is Nothing Then
             AddMessage($"{Name} finds nothing.")

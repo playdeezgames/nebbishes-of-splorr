@@ -5,4 +5,6 @@
     Hunger
     MaximumHealth
     Wounds
+    ForagingLevel
+    ForagingXP
 End Enum
