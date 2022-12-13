@@ -8,7 +8,6 @@
     Navigation
     CharacterStatus
     Help
-    Dead
     GameMenu
     ConfirmAbandon
 End Enum

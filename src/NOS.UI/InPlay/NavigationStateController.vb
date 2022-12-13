@@ -23,14 +23,14 @@ Friend Class NavigationStateController
             Case LeftKeyName
                 _world.PlayerCharacter.AttemptMove(Directions.West)
                 SetState(UIStates.InPlay)
-            Case "C"
+            Case CharacterStatusKeyName
                 SetState(UIStates.CharacterStatus)
-            Case "F"
+            Case ForageKeyName
                 _world.PlayerCharacter.AttemptForage()
                 SetState(UIStates.InPlay)
-            Case "H"
+            Case HelpKeyName
                 SetState(UIStates.Help)
-            Case "Z"
+            Case ZleepKeyName
                 _world.PlayerCharacter.AttemptSleep()
                 SetState(UIStates.InPlay)
         End Select
@@ -39,10 +39,15 @@ Friend Class NavigationStateController
     Protected Overrides Sub Redraw(ticks As Long)
         Dim font = _context.GetFont(DefaultFontName)
         Dim y = ShowMessage(0, font)
-        Dim location = _world.PlayerCharacter.Location
-        y = font.WriteLine((0, y), (160, 6), $"Location: { location.Name}", Hue.Blue)
-        Dim routes = location.Routes
-        y = font.Write((0, y), (160, 6), $"Exits: {String.Join(", ", routes.Select(Function(x) x.Direction.Letter))}", Hue.White)
+        Dim character = _world.PlayerCharacter
+        If character.IsDead Then
+            y = font.WriteLine((0, y), (160, 6), $"{character.Name} dead.", Hue.Red)
+        Else
+            Dim location = character.Location
+            y = font.WriteLine((0, y), (160, 6), $"Location: { location.Name}", Hue.Blue)
+            Dim routes = location.Routes
+            y = font.Write((0, y), (160, 6), $"Exits: {String.Join(", ", routes.Select(Function(x) x.Direction.Letter))}", Hue.White)
+        End If
     End Sub
 
     Private Function ShowMessage(y As Integer, font As Font) As Integer

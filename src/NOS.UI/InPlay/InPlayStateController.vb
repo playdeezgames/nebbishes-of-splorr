@@ -13,10 +13,6 @@
 
     Public Overrides Sub Restart()
         MyBase.Restart()
-        If _world.PlayerCharacter.IsDead Then
-            SetState(UIStates.Dead)
-            Return
-        End If
         SetState(UIStates.Navigation)
     End Sub
 End Class
