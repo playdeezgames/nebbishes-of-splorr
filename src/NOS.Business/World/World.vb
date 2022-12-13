@@ -47,7 +47,7 @@ Public Class World
         Dim overworld As New Dictionary(Of (Integer, Integer), ILocation)
         For column = 0 To WorldColumns - 1
             For row = 0 To WorldRows - 1
-                overworld.Add((column, row), CreateLocation(RNG.FromGenerator(LocationTypeGenerator)))
+                overworld.Add((column, row), CreateLocation(RNG.FromGenerator(OverworldLocationTypeGenerator)))
             Next
         Next
         For column = 0 To WorldColumns - 1

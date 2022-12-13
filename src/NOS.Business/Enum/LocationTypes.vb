@@ -5,7 +5,7 @@ Public Enum LocationTypes
     Trees
 End Enum
 Module LocationTypesExtensions
-    Friend ReadOnly LocationTypeGenerator As IReadOnlyDictionary(Of LocationTypes, Integer) =
+    Friend ReadOnly OverworldLocationTypeGenerator As IReadOnlyDictionary(Of LocationTypes, Integer) =
         New Dictionary(Of LocationTypes, Integer) From
         {
             {LocationTypes.Grass, 1000},
