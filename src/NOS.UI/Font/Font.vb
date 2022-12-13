@@ -19,12 +19,12 @@
         Dim x As Integer = xy.Item1
         Dim y As Integer = xy.Item2
         For Each character In text
-            Write((x, y), character, hue)
-            x += _glyphWidth
             If x >= xy.Item1 + wh.Item1 Then
                 x = xy.Item1
                 y = y + wh.Item2
             End If
+            Write((x, y), character, hue)
+            x += _glyphWidth
         Next
         Return y
     End Function

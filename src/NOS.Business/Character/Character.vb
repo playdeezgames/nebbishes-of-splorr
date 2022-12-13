@@ -186,6 +186,7 @@
             AddMessage($"{Name} cannot forage here.")
             Return
         End If
+        NextRound()
         Dim item As IItem = Location.Forage()
         If item Is Nothing Then
             AddMessage($"{Name} finds nothing.")
@@ -193,7 +194,6 @@
         End If
         AddItem(item)
         AddMessage($"{Name} finds {item.Name}, and now has {ItemTypeCount(item.ItemType)}.")
-
     End Sub
     ReadOnly Property Items As IEnumerable(Of IItem)
         Get
