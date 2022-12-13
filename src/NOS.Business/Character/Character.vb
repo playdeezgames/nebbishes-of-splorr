@@ -191,9 +191,20 @@
             AddMessage($"{Name} finds nothing.")
             Return
         End If
-        AddMessage($"{Name} finds {item.Name}.")
         AddItem(item)
+        AddMessage($"{Name} finds {item.Name}, and now has {ItemTypeCount(item.ItemType)}.")
+
     End Sub
+    ReadOnly Property Items As IEnumerable(Of IItem)
+        Get
+            Return _worldData.Characters(Id).ItemIds.Select(Function(x) New Item(_worldData, x))
+        End Get
+    End Property
+    ReadOnly Property ItemTypeCount(itemType As ItemTypes) As Integer
+        Get
+            Return Items.Where(Function(x) x.ItemType = itemType).Count
+        End Get
+    End Property
 
     Private Sub AddItem(item As IItem)
         _worldData.Characters(Id).ItemIds.Add(item.Id)
