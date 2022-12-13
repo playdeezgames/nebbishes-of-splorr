@@ -4,7 +4,7 @@
 
     Public Sub New(context As IUIContext, world As IWorld)
         MyBase.New(context, world)
-        _menu = New Menu(context, DefaultFontName, (0, 6), (160, 6), (Hue.White, Hue.Black), "Continue Game", "Save Game", "Options", "Abandon Game")
+        _menu = New Menu(context, DefaultFontName, (0, 6), (160, 6), (Hue.White, Hue.Black), "Continue Game", "Save Game(COMING SOON!)", "Options", "Abandon Game")
     End Sub
 
     Protected Overrides Sub HandleKey(keyName As String)
