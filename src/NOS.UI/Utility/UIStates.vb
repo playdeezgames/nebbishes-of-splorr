@@ -8,4 +8,5 @@
     Navigation
     CharacterStatus
     Help
+    Dead
 End Enum
