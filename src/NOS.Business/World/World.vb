@@ -37,15 +37,7 @@ Public Class World
 
     Private Sub CreatePlayerCharacter()
         Dim candidates = Locations.ToList()
-        Dim character = CreateCharacter("Tagon", candidates(_random.Next(candidates.Count)), New Dictionary(Of StatisticTypes, Integer) From
-                                        {
-                                            {StatisticTypes.Fatigue, 0},
-                                            {StatisticTypes.MaximumEnergy, 1000},
-                                            {StatisticTypes.Hunger, 0},
-                                            {StatisticTypes.MaximumSatiety, 1000},
-                                            {StatisticTypes.Wounds, 0},
-                                            {StatisticTypes.MaximumHealth, 1000}
-                                        })
+        Dim character = CreateCharacter("Tagon", candidates(_random.Next(candidates.Count)), CharacterTypes.Nebbish)
         character.SetAsPlayerCharacter()
     End Sub
 
@@ -55,7 +47,7 @@ Public Class World
         Dim overworld As New Dictionary(Of (Integer, Integer), ILocation)
         For column = 0 To WorldColumns - 1
             For row = 0 To WorldRows - 1
-                overworld.Add((column, row), CreateLocation($"({column}, {row})"))
+                overworld.Add((column, row), CreateLocation(RNG.FromGenerator(LocationTypeGenerator)))
             Next
         Next
         For column = 0 To WorldColumns - 1
@@ -81,11 +73,11 @@ Public Class World
         Return Route.Create(_worldData, start, direction, finish)
     End Function
 
-    Private Function CreateLocation(name As String) As ILocation
-        Return Location.Create(_worldData, name)
+    Private Function CreateLocation(locationType As LocationTypes) As ILocation
+        Return Location.Create(_worldData, locationType.Name, locationType)
     End Function
-    Private Function CreateCharacter(name As String, location As ILocation, statistics As IReadOnlyDictionary(Of StatisticTypes, Integer)) As ICharacter
-        Return Character.Create(_worldData, name, location, statistics)
+    Private Function CreateCharacter(name As String, location As ILocation, characterType As CharacterTypes) As ICharacter
+        Return Character.Create(_worldData, name, location, characterType)
     End Function
 
     Public Function AdvanceTime(minutes As Integer, conditionCheck As Func(Of Boolean)) As Integer Implements IWorld.AdvanceTime

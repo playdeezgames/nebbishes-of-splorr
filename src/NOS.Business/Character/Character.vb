@@ -27,10 +27,15 @@
         _worldData.PlayerCharacterId = Id
     End Sub
 
-    Friend Shared Function Create(worldData As WorldData, name As String, location As ILocation, statistics As IReadOnlyDictionary(Of StatisticTypes, Integer)) As Character
+    Friend Shared Function Create(worldData As WorldData, name As String, location As ILocation, characterType As CharacterTypes) As Character
         Dim id = If(worldData.Characters.Any, worldData.Characters.Keys.Max + 1, 0)
-        Dim characterData = New CharacterData With {.LocationId = location.Id, .Name = name}
-        For Each statistic In statistics
+        Dim characterData = New CharacterData With
+            {
+                .LocationId = location.Id,
+                .Name = name,
+                .CharacterType = characterType
+            }
+        For Each statistic In characterType.StartingStatistics
             characterData.Statistics(statistic.Key) = statistic.Value
         Next
         worldData.Characters.Add(id, characterData)
@@ -39,15 +44,25 @@
 
     Public Sub AttemptMove(direction As Directions) Implements ICharacter.AttemptMove
         DismissMessages()
+
+        If IsDead Then
+            AddMessage($"{Name} too dead to move.")
+            Return
+        End If
+
         If Energy = 0 Then
             AddMessage($"{Name} too tired to move.")
-        ElseIf Location.HasRoute(direction) Then
-            AddMessage($"{Name} go {direction.Name}.")
-            Location = Location.Route(direction).ToLocation
-            NextRound()
-        Else
-            AddMessage($"{Name} cannot go {direction.Name}.")
+            Return
         End If
+
+        If Not Location.HasRoute(direction) Then
+            AddMessage($"{Name} cannot go {direction.Name}.")
+            Return
+        End If
+
+        AddMessage($"{Name} go {direction.Name}.")
+        Location = Location.Route(direction).ToLocation
+        NextRound()
     End Sub
 
     Public Sub AddMessage(line As String) Implements ICharacter.AddMessage
@@ -120,6 +135,12 @@
     End Sub
     Public Sub AttemptSleep() Implements ICharacter.AttemptSleep
         DismissMessages()
+
+        If IsDead Then
+            AddMessage($"Despite claims to the contrary, {Name} cannot sleep while dead.")
+            Return
+        End If
+
         Dim oldEnergy = Energy
         SetEffect(Effects.Sleeping)
         Dim minutes = World.AdvanceTime(60, Function() Me.IsSleeping)

@@ -29,9 +29,13 @@
         Me.Id = id
     End Sub
 
-    Friend Shared Function Create(worldData As WorldData, name As String) As Location
+    Friend Shared Function Create(worldData As WorldData, name As String, locationType As LocationTypes) As Location
         Dim id = If(worldData.Locations.Any, worldData.Locations.Keys.Max + 1, 0)
-        worldData.Locations.Add(id, New LocationData With {.Name = name})
+        worldData.Locations.Add(id, New LocationData With
+                                {
+                                    .Name = name,
+                                    .LocationType = locationType
+                                })
         Return New Location(worldData, id)
     End Function
 
