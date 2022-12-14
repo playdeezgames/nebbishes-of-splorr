@@ -10,6 +10,8 @@
     Private ReadOnly _uiContext As IUIContext
     Private ReadOnly _fontName As String
     Private ReadOnly _lineCount As Integer
+    Private _lineIndex As Integer
+    Private ReadOnly _maximumLineIndex As Integer
     Sub New(uiContext As IUIContext, fontName As String, xy As (Integer, Integer), itemSize As (Integer, Integer), colors As (Hue, Hue), lineCount As Integer, ParamArray items As String())
         _uiContext = uiContext
         _fontName = fontName
@@ -21,12 +23,15 @@
         _items = items
         _foreground = colors.Item1
         _background = colors.Item2
-        _lineCount = lineCount
+        _lineCount = Math.Min(lineCount, items.Length)
+        _lineIndex = 0
+        _maximumLineIndex = If(items.Length > _lineCount, items.Length - _lineCount, 0)
     End Sub
     Friend Sub Draw()
         Dim font = _uiContext.GetFont(_fontName)
-        For index = 0 To _items.Length - 1
-            Dim y = _y + _lineHeight * index
+        For line = 0 To _lineCount - 1
+            Dim index = line + _lineIndex
+            Dim y = _y + _lineHeight * line
             If index = _item Then
                 _uiContext.Fill(_x, y, _width, _lineHeight, _foreground)
                 font.Write((_x, y), _items(index), _background)
@@ -39,10 +44,22 @@
 
     Friend Sub PreviousItem()
         _item = (_item + _items.Length - 1) Mod _items.Length
+        AdjustLineIndex()
     End Sub
 
     Friend Sub NextItem()
         _item = (_item + 1) Mod _items.Length
+        AdjustLineIndex()
+    End Sub
+
+    Private Sub AdjustLineIndex()
+        If _item < _lineIndex Then
+            _lineIndex = _item
+            Return
+        End If
+        If _item >= _lineIndex + _lineCount Then
+            _lineIndex = _item - (_lineCount - 1)
+        End If
     End Sub
 
     Friend ReadOnly Property CurrentItem As Integer
