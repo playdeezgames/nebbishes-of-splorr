@@ -81,7 +81,6 @@
         End Get
         Set(value As IEnumerable(Of String))
             _items = value.ToArray
-            _item = 0
         End Set
     End Property
 End Class

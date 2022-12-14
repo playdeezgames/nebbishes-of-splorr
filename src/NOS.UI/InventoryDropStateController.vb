@@ -1,7 +1,7 @@
 ﻿Friend Class InventoryDropStateController
     Inherits BaseStateController
     Private ReadOnly _menu As Menu
-    'Private _menuTable As New Dictionary(Of Integer, ItemTypes)
+    Private _menuItems As New List(Of (ItemTypes, Integer, Integer))
 
     Public Sub New(context As IUIContext, world As IWorld)
         MyBase.New(context, world)
@@ -14,7 +14,29 @@
                 SetState(UIStates.Inventory)
             Case HelpKeyName
                 SetState(UIStates.InventoryHelp)
+            Case UpKeyName
+                _menu.PreviousItem()
+            Case DownKeyName
+                _menu.NextItem()
+            Case RightKeyName
+                DropOneMore()
+            Case LeftKeyName
+                KeepOneMore()
         End Select
+    End Sub
+
+    Private Sub KeepOneMore()
+        If _menuItems(_menu.CurrentItem).Item3 > 0 Then
+            _menuItems(_menu.CurrentItem) = (_menuItems(_menu.CurrentItem).Item1, _menuItems(_menu.CurrentItem).Item2 + 1, _menuItems(_menu.CurrentItem).Item3 - 1)
+            UpdateMenu()
+        End If
+    End Sub
+
+    Private Sub DropOneMore()
+        If _menuItems(_menu.CurrentItem).Item2 > 0 Then
+            _menuItems(_menu.CurrentItem) = (_menuItems(_menu.CurrentItem).Item1, _menuItems(_menu.CurrentItem).Item2 - 1, _menuItems(_menu.CurrentItem).Item3 + 1)
+            UpdateMenu()
+        End If
     End Sub
 
     Protected Overrides Sub Redraw(ticks As Long)
@@ -23,6 +45,11 @@
     End Sub
     Public Overrides Sub Restart()
         MyBase.Restart()
-        _menu.Items = _world.PlayerCharacter.Items.GroupBy(Function(x) x.ItemType).Select(Function(x) $"{x.Key.Name}(x{x.Count})")
+        _menuItems = _world.PlayerCharacter.Items.GroupBy(Function(x) x.ItemType).Select(Function(x) (x.Key, x.Count, 0)).ToList
+        UpdateMenu()
+    End Sub
+
+    Private Sub UpdateMenu()
+        _menu.Items = _menuItems.Select(Function(x) $"{x.Item1.Name}(keep {x.Item2}, drop {x.Item3})")
     End Sub
 End Class
