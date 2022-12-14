@@ -14,12 +14,13 @@ Public Class UIController
         _states.Add(UIStates.Options, New OptionsStateController(_context, _world))
         _states.Add(UIStates.StartGame, New StartGameStateController(_context, _world))
         _states.Add(UIStates.InPlay, New InPlayStateController(_context, _world))
-        _states.Add(UIStates.Navigation, New NavigationStateController(_context, _world))
+        _states.Add(UIStates.Navigation, New GeneralStateController(_context, _world))
         _states.Add(UIStates.CharacterStatus, New CharacterStatusStateController(_context, _world))
-        _states.Add(UIStates.Help, New HelpStateController(_context, _world))
+        _states.Add(UIStates.GeneralHelp, New GeneralHelpStateController(_context, _world))
         _states.Add(UIStates.GameMenu, New GameMenuStateController(_context, _world))
         _states.Add(UIStates.ConfirmAbandon, New AbandonGameStateController(_context, _world))
         _states.Add(UIStates.Inventory, New InventoryStateController(_context, _world))
+        _states.Add(UIStates.InventoryHelp, New InventoryHelpStateController(_context, _world))
         For Each state In _states
             AddHandler state.Value.ChangeState, AddressOf OnChangeState
         Next

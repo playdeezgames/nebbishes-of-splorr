@@ -1,6 +1,4 @@
-﻿Imports System.IO
-
-Friend Class NavigationStateController
+﻿Friend Class GeneralStateController
     Inherits BaseStateController
 
     Public Sub New(context As IUIContext, world As IWorld)
@@ -29,7 +27,7 @@ Friend Class NavigationStateController
                 _world.PlayerCharacter.AttemptForage()
                 SetState(UIStates.InPlay)
             Case HelpKeyName
-                SetState(UIStates.Help)
+                SetState(UIStates.GeneralHelp)
             Case InventoryKeyName
                 SetState(UIStates.Inventory)
             Case ZleepKeyName

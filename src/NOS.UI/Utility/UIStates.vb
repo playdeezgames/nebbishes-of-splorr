@@ -7,8 +7,9 @@
     InPlay
     Navigation
     CharacterStatus
-    Help
+    GeneralHelp
     GameMenu
     ConfirmAbandon
     Inventory
+    InventoryHelp
 End Enum

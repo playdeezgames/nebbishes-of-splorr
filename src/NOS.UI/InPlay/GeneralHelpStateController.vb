@@ -1,4 +1,4 @@
-﻿Friend Class HelpStateController
+﻿Friend Class GeneralHelpStateController
     Inherits BaseStateController
 
     Public Sub New(context As IUIContext, world As IWorld)
