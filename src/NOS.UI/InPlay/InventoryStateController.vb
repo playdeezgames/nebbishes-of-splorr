@@ -9,6 +9,8 @@
         Select Case keyName
             Case EscapeKeyName
                 SetState(UIStates.InPlay)
+            Case InventoryDropKeyName
+                SetState(UIStates.InventoryDrop)
             Case HelpKeyName
                 SetState(UIStates.InventoryHelp)
         End Select

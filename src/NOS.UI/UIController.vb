@@ -8,6 +8,18 @@ Public Class UIController
         _world = New World
         _context.SetFont(DefaultFontName, New DefaultFont(_context))
         AddHandler context.OnUpdate, AddressOf OnUpdate
+        AddStates()
+        BootstrapStates()
+    End Sub
+
+    Private Sub BootstrapStates()
+        For Each state In _states
+            AddHandler state.Value.ChangeState, AddressOf OnChangeState
+        Next
+        OnChangeState(UIStates.Title)
+    End Sub
+
+    Private Sub AddStates()
         _states.Add(UIStates.Title, New TitleStateController(_context, _world))
         _states.Add(UIStates.MainMenu, New MainMenuStateController(_context, _world))
         _states.Add(UIStates.ConfirmQuit, New ConfirmQuitStateController(_context, _world))
@@ -21,10 +33,7 @@ Public Class UIController
         _states.Add(UIStates.ConfirmAbandon, New AbandonGameStateController(_context, _world))
         _states.Add(UIStates.Inventory, New InventoryStateController(_context, _world))
         _states.Add(UIStates.InventoryHelp, New InventoryHelpStateController(_context, _world))
-        For Each state In _states
-            AddHandler state.Value.ChangeState, AddressOf OnChangeState
-        Next
-        OnChangeState(UIStates.Title)
+        _states.Add(UIStates.InventoryDrop, New InventoryDropStateController(_context, _world))
     End Sub
 
     Private Sub OnChangeState(uiState As UIStates)

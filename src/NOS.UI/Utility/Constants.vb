@@ -7,9 +7,12 @@
     Friend Const RightKeyName = "Right"
     Friend Const SpaceKeyName = "Space"
     Friend Const UpKeyName = "Up"
+    'General Keys
     Friend Const CharacterStatusKeyName = "C"
     Friend Const ForageKeyName = "F"
     Friend Const HelpKeyName = "H"
     Friend Const InventoryKeyName = "I"
     Friend Const ZleepKeyName = "Z"
+    'Inventory Keys
+    Friend Const InventoryDropKeyName = "D"
 End Module

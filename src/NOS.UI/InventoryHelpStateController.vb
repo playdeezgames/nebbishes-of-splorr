@@ -15,6 +15,7 @@
     Protected Overrides Sub Redraw(ticks As Long)
         Dim font = _context.GetFont(DefaultFontName)
         Dim y = font.WriteLine((0, 0), (160, 6), "Inventory Help:", Hue.White)
+        y = font.WriteLine((0, y), (160, 9), $"{InventoryDropKeyName} - Drop Items", Hue.Blue)
         y = font.WriteLine((0, y), (160, 9), $"{HelpKeyName} - Help", Hue.Blue)
     End Sub
 End Class

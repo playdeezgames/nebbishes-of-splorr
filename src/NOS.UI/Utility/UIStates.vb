@@ -12,4 +12,5 @@
     ConfirmAbandon
     Inventory
     InventoryHelp
+    InventoryDrop
 End Enum
