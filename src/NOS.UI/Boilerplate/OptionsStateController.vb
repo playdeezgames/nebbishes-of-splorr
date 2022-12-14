@@ -4,7 +4,7 @@
 
     Public Sub New(context As IUIContext, world As IWorld)
         MyBase.New(context, world)
-        _menu = New Menu(context, DefaultFontName, (0, 6), (160, 6), (Hue.White, Hue.Black), " 640 x  360", "1280 x  720", "1920 x 1080", "2560 x 1440", "3200 x 1800", "3840 x 1960")
+        _menu = New Menu(context, DefaultFontName, (0, 6), (160, 6), (Hue.White, Hue.Black), 6, " 640 x  360", "1280 x  720", "1920 x 1080", "2560 x 1440", "3200 x 1800", "3840 x 1960")
     End Sub
 
     Protected Overrides Sub HandleKey(keyName As String)

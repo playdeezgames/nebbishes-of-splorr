@@ -9,7 +9,8 @@
     Private ReadOnly _background As Hue
     Private ReadOnly _uiContext As IUIContext
     Private ReadOnly _fontName As String
-    Sub New(uiContext As IUIContext, fontName As String, xy As (Integer, Integer), itemSize As (Integer, Integer), colors As (Hue, Hue), ParamArray items As String())
+    Private ReadOnly _lineCount As Integer
+    Sub New(uiContext As IUIContext, fontName As String, xy As (Integer, Integer), itemSize As (Integer, Integer), colors As (Hue, Hue), lineCount As Integer, ParamArray items As String())
         _uiContext = uiContext
         _fontName = fontName
         _x = xy.Item1
@@ -20,6 +21,7 @@
         _items = items
         _foreground = colors.Item1
         _background = colors.Item2
+        _lineCount = lineCount
     End Sub
     Friend Sub Draw()
         Dim font = _uiContext.GetFont(_fontName)

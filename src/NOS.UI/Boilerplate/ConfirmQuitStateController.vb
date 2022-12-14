@@ -4,7 +4,7 @@
 
     Public Sub New(context As IUIContext, world As IWorld)
         MyBase.New(context, world)
-        _menu = New Menu(context, DefaultFontName, (0, 6), (160, 6), (Hue.White, Hue.Black), "No", "Yes")
+        _menu = New Menu(context, DefaultFontName, (0, 6), (160, 6), (Hue.White, Hue.Black), 2, "No", "Yes")
     End Sub
 
     Protected Overrides Sub HandleKey(keyName As String)
