@@ -11,7 +11,6 @@
     Private ReadOnly _fontName As String
     Private ReadOnly _lineCount As Integer
     Private _lineIndex As Integer
-    Private ReadOnly _maximumLineIndex As Integer
     Sub New(uiContext As IUIContext, fontName As String, xy As (Integer, Integer), itemSize As (Integer, Integer), colors As (Hue, Hue), lineCount As Integer, ParamArray items As String())
         _uiContext = uiContext
         _fontName = fontName
@@ -23,9 +22,8 @@
         _items = items
         _foreground = colors.Item1
         _background = colors.Item2
-        _lineCount = Math.Min(lineCount, items.Length)
+        _lineCount = lineCount
         _lineIndex = 0
-        _maximumLineIndex = If(items.Length > _lineCount, items.Length - _lineCount, 0)
     End Sub
     Friend Sub Draw()
         Dim font = _uiContext.GetFont(_fontName)
