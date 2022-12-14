@@ -213,7 +213,7 @@
         AddItem(item)
         AddMessage($"{Name} finds {item.Name}, and now has {ItemTypeCount(item.ItemType)}.")
     End Sub
-    ReadOnly Property Items As IEnumerable(Of IItem)
+    Public ReadOnly Property Items As IEnumerable(Of IItem) Implements ICharacter.Items
         Get
             Return _worldData.Characters(Id).ItemIds.Select(Function(x) New Item(_worldData, x))
         End Get

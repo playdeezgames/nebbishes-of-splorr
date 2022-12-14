@@ -18,4 +18,5 @@
     Property Health As Integer
     ReadOnly Property MaximumHealth As Integer
     ReadOnly Property IsDead As Boolean
+    ReadOnly Property Items As IEnumerable(Of IItem)
 End Interface

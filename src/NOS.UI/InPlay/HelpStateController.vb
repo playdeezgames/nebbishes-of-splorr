@@ -16,6 +16,7 @@
         y = font.WriteLine((0, y), (160, 6), $"{CharacterStatusKeyName} - Character Status", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{ForageKeyName} - Forage", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{HelpKeyName} - Help", Hue.Blue)
+        y = font.WriteLine((0, y), (160, 6), $"{InventoryKeyName} - Inventory", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{ZleepKeyName} - Zleep", Hue.Blue)
     End Sub
 End Class

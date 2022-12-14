@@ -10,4 +10,5 @@
     Help
     GameMenu
     ConfirmAbandon
+    Inventory
 End Enum

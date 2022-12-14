@@ -4,9 +4,9 @@ Public Enum ItemTypes
     PlantFiber
     Stick
 End Enum
-Module ItemTypesExtensions
+Public Module ItemTypesExtensions
     <Extension>
-    Function Name(itemType As ItemTypes) As String
+    Public Function Name(itemType As ItemTypes) As String
         Select Case itemType
             Case ItemTypes.PlantFiber
                 Return "plant fiber"

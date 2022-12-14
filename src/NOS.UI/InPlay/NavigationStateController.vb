@@ -30,6 +30,8 @@ Friend Class NavigationStateController
                 SetState(UIStates.InPlay)
             Case HelpKeyName
                 SetState(UIStates.Help)
+            Case InventoryKeyName
+                SetState(UIStates.Inventory)
             Case ZleepKeyName
                 _world.PlayerCharacter.AttemptSleep()
                 SetState(UIStates.InPlay)
