@@ -1,5 +1,5 @@
 ﻿Public Class Menu
-    Private ReadOnly _items As String()
+    Private _items As String()
     Private _item As Integer
     Private ReadOnly _x As Integer
     Private ReadOnly _y As Integer
@@ -26,11 +26,16 @@
         _lineIndex = 0
     End Sub
     Friend Sub Draw()
+        If Not _items.Any Then
+            Return
+        End If
         Dim font = _uiContext.GetFont(_fontName)
         For line = 0 To _lineCount - 1
             Dim index = line + _lineIndex
             Dim y = _y + _lineHeight * line
-            If index = _item Then
+            If index >= _items.Length Then
+                'nothing!
+            ElseIf index = _item Then
                 _uiContext.Fill(_x, y, _width, _lineHeight, _foreground)
                 font.Write((_x, y), _items(index), _background)
             Else
@@ -41,11 +46,17 @@
     End Sub
 
     Friend Sub PreviousItem()
+        If Not _items.Any Then
+            Return
+        End If
         _item = (_item + _items.Length - 1) Mod _items.Length
         AdjustLineIndex()
     End Sub
 
     Friend Sub NextItem()
+        If Not _items.Any Then
+            Return
+        End If
         _item = (_item + 1) Mod _items.Length
         AdjustLineIndex()
     End Sub
@@ -59,10 +70,18 @@
             _lineIndex = _item - (_lineCount - 1)
         End If
     End Sub
-
     Friend ReadOnly Property CurrentItem As Integer
         Get
             Return _item
         End Get
+    End Property
+    Friend Property Items As IEnumerable(Of String)
+        Get
+            Return _items
+        End Get
+        Set(value As IEnumerable(Of String))
+            _items = value.ToArray
+            _item = 0
+        End Set
     End Property
 End Class
