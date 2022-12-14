@@ -6,7 +6,12 @@
     End Sub
 
     Protected Overrides Sub HandleKey(keyName As String)
-        SetState(UIStates.InPlay)
+        Select Case keyName
+            Case EscapeKeyName
+                SetState(UIStates.InPlay)
+            Case HelpKeyName
+                SetState(UIStates.GeneralHelp)
+        End Select
     End Sub
 
     Protected Overrides Sub Redraw(ticks As Long)
