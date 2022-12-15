@@ -53,15 +53,37 @@ Friend Class GeneralStateController
         If character.IsDead Then
             y = font.WriteLine((0, y), LineSize, $"{character.Name} dead.", Hue.Red)
         Else
-            Dim location = character.Location
-            y = font.WriteLine((0, y), LineSize, $"Location: { location.Name}", Hue.Blue)
-            Dim routes = location.Routes
-            y = font.WriteLine((0, y), LineSize, $"Exits: {String.Join(", ", routes.Select(Function(x) x.Direction.Letter))}", Hue.White)
-            If location.HasItems Then
-                y = font.WriteLine((0, y), LineSize, $"There's stuff on the ground.", Hue.White)
-            End If
+            Dim location As ILocation = character.Location
+            y = ShowLocation(font, y, location)
+            y = ShowFeatures(font, y, location)
+            y = ShowRoutes(font, y, location)
+            y = ShowGround(font, y, location)
         End If
     End Sub
+
+    Private Function ShowFeatures(font As Font, y As Integer, location As ILocation) As Integer
+        Dim features = location.Features
+        If features.Any Then
+            y = font.WriteLine((0, y), LineSize, $"Features: {String.Join(", ", features.Select(Function(x) x.Name))}", Hue.Blue)
+        End If
+        Return y
+    End Function
+
+    Private Shared Function ShowGround(font As Font, y As Integer, location As ILocation) As Integer
+        If location.HasItems Then
+            y = font.WriteLine((0, y), LineSize, $"There's stuff on the ground.", Hue.White)
+        End If
+        Return y
+    End Function
+
+    Private Shared Function ShowLocation(font As Font, ByRef y As Integer, ByRef location As ILocation) As Integer
+        Return font.WriteLine((0, y), LineSize, $"Location: { location.Name}", Hue.Blue)
+    End Function
+
+    Private Shared Function ShowRoutes(font As Font, y As Integer, location As ILocation) As Integer
+        Dim routes = location.Routes
+        Return font.WriteLine((0, y), LineSize, $"Exits: {String.Join(", ", routes.Select(Function(x) x.Direction.Letter))}", Hue.White)
+    End Function
 
     Private Function ShowMessage(y As Integer, font As Font) As Integer
         Dim lines = _world.PlayerCharacter.Messages

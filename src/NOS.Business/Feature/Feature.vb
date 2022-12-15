@@ -1,7 +1,20 @@
 ﻿Public Class Feature
     Implements IFeature
     Private ReadOnly _worldData As WorldData
-    ReadOnly Property Id As Integer
+    ReadOnly Property Id As Integer Implements IFeature.Id
+
+    Public ReadOnly Property Name As String Implements IFeature.Name
+        Get
+            Return FeatureType.Name
+        End Get
+    End Property
+
+    Public ReadOnly Property FeatureType As FeatureTypes Implements IFeature.FeatureType
+        Get
+            Return CType(_worldData.Features(Id).FeatureType, FeatureTypes)
+        End Get
+    End Property
+
     Sub New(worldData As WorldData, id As Integer)
         _worldData = worldData
         Me.Id = id

@@ -12,4 +12,5 @@
     ReadOnly Property ForagingLevel As Integer
     ReadOnly Property Items As IEnumerable(Of IItem)
     ReadOnly Property LocationType As LocationTypes
+    ReadOnly Property Features As IEnumerable(Of IFeature)
 End Interface

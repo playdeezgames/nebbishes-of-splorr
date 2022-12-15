@@ -48,6 +48,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property Features As IEnumerable(Of IFeature) Implements ILocation.Features
+        Get
+            Return _worldData.Locations(Id).FeatureIds.Select(Function(x) New Feature(_worldData, x))
+        End Get
+    End Property
+
     Private Function GetStatistic(statisticType As StatisticTypes) As Integer
         Return _worldData.Locations(Id).Statistics(statisticType)
     End Function
