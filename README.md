@@ -10,10 +10,10 @@ Another fine starvation simulator.
 * A -
 * B -
 * C - Character Status
-* D - Down?
+* D - (go) Down?
 * E - 
 * F - Forage
-* G -
+* G - Ground
 * H - Help
 * I - Inventory
 * K -
@@ -25,8 +25,8 @@ Another fine starvation simulator.
 * Q -
 * R -
 * S -
-* T -
-* U - Up?
+* T - Talk?
+* U - (go) Up?
 * V - 
 * W -
 * X -

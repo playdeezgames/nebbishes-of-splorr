@@ -13,4 +13,5 @@
     Inventory
     InventoryHelp
     InventoryDrop
+    Ground
 End Enum

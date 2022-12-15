@@ -20,7 +20,7 @@
                 DropOneMore()
             Case LeftKeyName
                 KeepOneMore()
-            Case InventoryDropKeyName
+            Case EnterKeyName
                 DropItems()
                 SetState(UIStates.InPlay)
         End Select

@@ -1,4 +1,6 @@
-﻿Friend Class GeneralStateController
+﻿Imports System.ComponentModel
+
+Friend Class GeneralStateController
     Inherits BaseStateController
 
     Public Sub New(context As IUIContext, world As IWorld)
@@ -33,6 +35,8 @@
             Case ZleepKeyName
                 _world.PlayerCharacter.AttemptSleep()
                 SetState(UIStates.InPlay)
+            Case GroundKeyName
+                SetState(UIStates.Ground)
         End Select
     End Sub
 
@@ -41,12 +45,15 @@
         Dim y = ShowMessage(0, font)
         Dim character = _world.PlayerCharacter
         If character.IsDead Then
-            y = font.WriteLine((0, y), (160, 6), $"{character.Name} dead.", Hue.Red)
+            y = font.WriteLine((0, y), LineSize, $"{character.Name} dead.", Hue.Red)
         Else
             Dim location = character.Location
-            y = font.WriteLine((0, y), (160, 6), $"Location: { location.Name}", Hue.Blue)
+            y = font.WriteLine((0, y), LineSize, $"Location: { location.Name}", Hue.Blue)
             Dim routes = location.Routes
-            y = font.Write((0, y), (160, 6), $"Exits: {String.Join(", ", routes.Select(Function(x) x.Direction.Letter))}", Hue.White)
+            y = font.WriteLine((0, y), LineSize, $"Exits: {String.Join(", ", routes.Select(Function(x) x.Direction.Letter))}", Hue.White)
+            If location.HasItems Then
+                y = font.WriteLine((0, y), LineSize, $"There's stuff on the ground.", Hue.White)
+            End If
         End If
     End Sub
 

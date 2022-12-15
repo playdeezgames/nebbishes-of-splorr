@@ -10,6 +10,7 @@
     'General Keys
     Friend Const CharacterStatusKeyName = "C"
     Friend Const ForageKeyName = "F"
+    Friend Const GroundKeyName = "G"
     Friend Const HelpKeyName = "H"
     Friend Const InventoryKeyName = "I"
     Friend Const ZleepKeyName = "Z"

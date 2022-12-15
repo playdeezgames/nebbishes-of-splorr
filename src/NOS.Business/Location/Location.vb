@@ -35,6 +35,19 @@
             Return GetStatistic(StatisticTypes.ForagingLevel)
         End Get
     End Property
+
+    Public ReadOnly Property HasItems As Boolean Implements ILocation.HasItems
+        Get
+            Return _worldData.Locations(Id).ItemIds.Any
+        End Get
+    End Property
+
+    Public ReadOnly Property Items As IEnumerable(Of IItem) Implements ILocation.Items
+        Get
+            Return _worldData.Locations(Id).ItemIds.Select(Function(x) New Item(_worldData, x))
+        End Get
+    End Property
+
     Private Function GetStatistic(statisticType As StatisticTypes) As Integer
         Return _worldData.Locations(Id).Statistics(statisticType)
     End Function
