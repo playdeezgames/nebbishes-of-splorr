@@ -10,9 +10,7 @@
     Protected Overrides Sub HandleKey(keyName As String)
         Select Case keyName
             Case EscapeKeyName
-                SetState(UIStates.Ground)
-            Case HelpKeyName
-                SetState(UIStates.GroundHelp)
+                SetState(UIStates.InPlay)
             Case UpKeyName
                 _menu.PreviousItem()
             Case DownKeyName

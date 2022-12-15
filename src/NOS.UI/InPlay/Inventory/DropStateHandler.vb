@@ -1,4 +1,4 @@
-﻿Friend Class InventoryDropStateController
+﻿Friend Class DropStateHandler
     Inherits BaseStateController
     Private ReadOnly _menu As Menu
     Private _menuItems As New List(Of (ItemTypes, Integer, Integer))
@@ -9,9 +9,7 @@
     Protected Overrides Sub HandleKey(keyName As String)
         Select Case keyName
             Case EscapeKeyName
-                SetState(UIStates.Inventory)
-            Case HelpKeyName
-                SetState(UIStates.InventoryHelp)
+                SetState(UIStates.InPlay)
             Case UpKeyName
                 _menu.PreviousItem()
             Case DownKeyName
