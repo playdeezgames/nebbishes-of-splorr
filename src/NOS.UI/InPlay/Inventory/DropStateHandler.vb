@@ -18,10 +18,34 @@
                 DropOneMore()
             Case LeftKeyName
                 KeepOneMore()
+            Case AllKeyName
+                DropAll()
+            Case HalfKeyName
+                DropHalf()
+            Case NoneKeyName
+                DropNone()
             Case EnterKeyName
                 DropItems()
                 SetState(UIStates.InPlay)
         End Select
+    End Sub
+
+    Private Sub DropNone()
+        Dim total = _menuItems(_menu.CurrentItem).Item2 + _menuItems(_menu.CurrentItem).Item3
+        _menuItems(_menu.CurrentItem) = (_menuItems(_menu.CurrentItem).Item1, total, 0)
+        UpdateMenu()
+    End Sub
+
+    Private Sub DropHalf()
+        Dim total = _menuItems(_menu.CurrentItem).Item2 + _menuItems(_menu.CurrentItem).Item3
+        _menuItems(_menu.CurrentItem) = (_menuItems(_menu.CurrentItem).Item1, total - total \ 2, total \ 2)
+        UpdateMenu()
+    End Sub
+
+    Private Sub DropAll()
+        Dim total = _menuItems(_menu.CurrentItem).Item2 + _menuItems(_menu.CurrentItem).Item3
+        _menuItems(_menu.CurrentItem) = (_menuItems(_menu.CurrentItem).Item1, 0, total)
+        UpdateMenu()
     End Sub
 
     Private Sub DropItems()

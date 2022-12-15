@@ -22,7 +22,31 @@
             Case EnterKeyName
                 TakeItems()
                 SetState(UIStates.InPlay)
+            Case AllKeyName
+                TakeAll()
+            Case HalfKeyName
+                TakeHalf()
+            Case NoneKeyName
+                TakeNone()
         End Select
+    End Sub
+
+    Private Sub TakeNone()
+        Dim total = _menuItems(_menu.CurrentItem).Item2 + _menuItems(_menu.CurrentItem).Item3
+        _menuItems(_menu.CurrentItem) = (_menuItems(_menu.CurrentItem).Item1, total, 0)
+        UpdateMenu()
+    End Sub
+
+    Private Sub TakeHalf()
+        Dim total = _menuItems(_menu.CurrentItem).Item2 + _menuItems(_menu.CurrentItem).Item3
+        _menuItems(_menu.CurrentItem) = (_menuItems(_menu.CurrentItem).Item1, total - total \ 2, total \ 2)
+        UpdateMenu()
+    End Sub
+
+    Private Sub TakeAll()
+        Dim total = _menuItems(_menu.CurrentItem).Item2 + _menuItems(_menu.CurrentItem).Item3
+        _menuItems(_menu.CurrentItem) = (_menuItems(_menu.CurrentItem).Item1, 0, total)
+        UpdateMenu()
     End Sub
 
     Private Sub TakeItems()

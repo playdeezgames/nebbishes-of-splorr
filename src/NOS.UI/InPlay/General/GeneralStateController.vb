@@ -30,12 +30,12 @@ Friend Class GeneralStateController
                 SetState(UIStates.InPlay)
             Case HelpKeyName
                 SetState(UIStates.GeneralHelp)
-            Case InventoryDropKeyName
+            Case DropKeyName
                 SetState(UIStates.InventoryDrop)
             Case ZleepKeyName
                 _world.PlayerCharacter.AttemptSleep()
                 SetState(UIStates.InPlay)
-            Case GroundTakeKeyName
+            Case TakeKeyName
                 SetState(UIStates.Take)
         End Select
     End Sub

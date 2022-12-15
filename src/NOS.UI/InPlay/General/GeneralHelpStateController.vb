@@ -14,10 +14,10 @@
         Dim y = font.WriteLine((0, 0), (160, 6), "Help:", Hue.White)
         y = font.WriteLine((0, y), (160, 6), "Arrows - Move", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{CharacterStatusKeyName} - Character Status", Hue.Blue)
-        y = font.WriteLine((0, y), (160, 6), $"{InventoryDropKeyName} - Drop", Hue.Blue)
+        y = font.WriteLine((0, y), (160, 6), $"{DropKeyName} - Drop", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{ForageKeyName} - Forage", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{HelpKeyName} - Help", Hue.Blue)
-        y = font.WriteLine((0, y), (160, 6), $"{GroundTakeKeyName} - Take", Hue.Blue)
+        y = font.WriteLine((0, y), (160, 6), $"{TakeKeyName} - Take", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{ZleepKeyName} - Zleep", Hue.Blue)
     End Sub
 End Class

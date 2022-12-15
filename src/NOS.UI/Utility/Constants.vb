@@ -9,9 +9,13 @@
     Friend Const UpKeyName = "Up"
     'General Keys
     Friend Const CharacterStatusKeyName = "C"
-    Friend Const InventoryDropKeyName = "D"
+    Friend Const DropKeyName = "D"
     Friend Const ForageKeyName = "F"
     Friend Const HelpKeyName = "H"
-    Friend Const GroundTakeKeyName = "T"
+    Friend Const TakeKeyName = "T"
     Friend Const ZleepKeyName = "Z"
+    'Item Quantities
+    Friend Const AllKeyName = "A"
+    Friend Const HalfKeyName = "H"
+    Friend Const NoneKeyName = "N"
 End Module
