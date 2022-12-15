@@ -35,6 +35,8 @@ Public Class UIController
         _states.Add(UIStates.InventoryHelp, New InventoryHelpStateController(_context, _world))
         _states.Add(UIStates.InventoryDrop, New InventoryDropStateController(_context, _world))
         _states.Add(UIStates.Ground, New GroundStateController(_context, _world))
+        _states.Add(UIStates.Take, New TakeStateController(_context, _world))
+        _states.Add(UIStates.GroundHelp, New GroundHelpStateController(_context, _world))
     End Sub
 
     Private Sub OnChangeState(uiState As UIStates)

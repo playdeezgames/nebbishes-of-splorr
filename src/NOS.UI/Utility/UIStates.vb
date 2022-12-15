@@ -14,4 +14,6 @@
     InventoryHelp
     InventoryDrop
     Ground
+    GroundHelp
+    Take
 End Enum

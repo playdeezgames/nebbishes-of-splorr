@@ -82,4 +82,8 @@
     Public Sub AddItem(item As IItem) Implements ILocation.AddItem
         _worldData.Locations(Id).ItemIds.Add(item.Id)
     End Sub
+
+    Public Sub RemoveItem(item As IItem) Implements ILocation.RemoveItem
+        _worldData.Locations(Id).ItemIds.Remove(item.Id)
+    End Sub
 End Class

@@ -5,6 +5,7 @@
     Function HasRoute(direction As Directions) As Boolean
     Function Forage() As IItem
     Sub AddItem(item As IItem)
+    Sub RemoveItem(item As IItem)
     ReadOnly Property HasItems As Boolean
     ReadOnly Property Route(direction As Directions) As IRoute
     ReadOnly Property CanForage As Boolean

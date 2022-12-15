@@ -245,6 +245,24 @@
         Location.AddItem(itemToDrop)
     End Sub
 
+    Public Sub AttemptTakeItems(itemQuantities As IEnumerable(Of (ItemTypes, Integer))) Implements ICharacter.AttemptTakeItems
+        DismissMessages()
+        Dim total = 0
+        For Each itemQuantity In itemQuantities
+            Dim itemsToTake = Location.Items.Where(Function(x) x.ItemType = itemQuantity.Item1).Take(itemQuantity.Item2)
+            For Each itemToTake In itemsToTake
+                TakeItem(itemToTake)
+                total += 1
+            Next
+        Next
+        AddMessage($"{Name} takes {total} items.")
+    End Sub
+
+    Private Sub TakeItem(itemToTake As IItem)
+        _worldData.Characters(Id).ItemIds.Add(itemToTake.Id)
+        Location.RemoveItem(itemToTake)
+    End Sub
+
     Public ReadOnly Property MaximumEnergy As Integer Implements ICharacter.MaximumEnergy
         Get
             Return GetStatistic(StatisticTypes.MaximumEnergy)

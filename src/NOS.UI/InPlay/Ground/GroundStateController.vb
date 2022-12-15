@@ -9,6 +9,10 @@
         Select Case keyName
             Case EscapeKeyName
                 SetState(UIStates.InPlay)
+            Case GroundTakeKeyName
+                SetState(UIStates.Take)
+            Case HelpKeyName
+                SetState(UIStates.GroundHelp)
         End Select
     End Sub
 
