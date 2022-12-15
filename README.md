@@ -26,9 +26,9 @@ Another fine starvation simulator.
 * R -
 * S -
 * T - Take
-* U - Up?
+* U - Up
 * V - 
-* W - Down?
+* W - Down
 * X -
 * Y -
 * Z - Zleep

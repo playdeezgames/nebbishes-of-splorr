@@ -101,7 +101,11 @@
                 {"|"c, New List(Of (Integer, Integer)) From {(1, 0), (1, 1), (1, 3), (1, 4)}},
                 {"}"c, New List(Of (Integer, Integer)) From {(0, 0), (1, 0), (1, 1), (2, 2), (1, 3), (0, 4), (1, 4)}},
                 {"~"c, New List(Of (Integer, Integer)) From {(0, 1), (1, 1), (1, 2), (2, 2)}},
-                {ChrW(127), New List(Of (Integer, Integer)) From {(1, 2), (0, 3), (2, 3), (0, 4), (1, 4), (2, 4)}}
+                {ChrW(127), New List(Of (Integer, Integer)) From {(1, 2), (0, 3), (2, 3), (0, 4), (1, 4), (2, 4)}},
+                {"←"c, New List(Of (Integer, Integer)) From {(1, 1), (0, 2), (1, 2), (1, 3)}},
+                {"↑"c, New List(Of (Integer, Integer)) From {(1, 0), (0, 1), (1, 1), (2, 1)}},
+                {"→"c, New List(Of (Integer, Integer)) From {(1, 1), (1, 2), (2, 2), (1, 3)}},
+                {"↓"c, New List(Of (Integer, Integer)) From {(0, 3), (1, 3), (2, 3), (1, 4)}}
             },
             4)
     End Sub

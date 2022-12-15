@@ -9,7 +9,7 @@
 
     Protected Overrides Sub HandleKey(keyName As String)
         Select Case keyName
-            Case UpKeyName, DownKeyName
+            Case NorthKeyName, SouthKeyName
                 _menu.NextItem()
             Case EnterKeyName, SpaceKeyName
                 Select Case _menu.CurrentItem

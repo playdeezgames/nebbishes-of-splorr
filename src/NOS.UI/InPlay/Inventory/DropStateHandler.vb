@@ -10,13 +10,13 @@
         Select Case keyName
             Case EscapeKeyName
                 SetState(UIStates.InPlay)
-            Case UpKeyName
+            Case NorthKeyName
                 _menu.PreviousItem()
-            Case DownKeyName
+            Case SouthKeyName
                 _menu.NextItem()
-            Case RightKeyName
+            Case EastKeyName
                 DropOneMore()
-            Case LeftKeyName
+            Case WestKeyName
                 KeepOneMore()
             Case AllKeyName
                 DropAll()

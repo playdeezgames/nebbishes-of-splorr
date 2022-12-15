@@ -11,16 +11,16 @@ Friend Class GeneralStateController
         Select Case keyName
             Case EscapeKeyName
                 SetState(UIStates.GameMenu)
-            Case UpKeyName
+            Case NorthKeyName
                 _world.PlayerCharacter.AttemptMove(Directions.North)
                 SetState(UIStates.InPlay)
-            Case RightKeyName
+            Case EastKeyName
                 _world.PlayerCharacter.AttemptMove(Directions.East)
                 SetState(UIStates.InPlay)
-            Case DownKeyName
+            Case SouthKeyName
                 _world.PlayerCharacter.AttemptMove(Directions.South)
                 SetState(UIStates.InPlay)
-            Case LeftKeyName
+            Case WestKeyName
                 _world.PlayerCharacter.AttemptMove(Directions.West)
                 SetState(UIStates.InPlay)
             Case CharacterStatusKeyName
@@ -37,6 +37,12 @@ Friend Class GeneralStateController
                 SetState(UIStates.InPlay)
             Case TakeKeyName
                 SetState(UIStates.Take)
+            Case UpKeyName
+                _world.PlayerCharacter.AttemptMove(Directions.Up)
+                SetState(UIStates.InPlay)
+            Case DownKeyName
+                _world.PlayerCharacter.AttemptMove(Directions.Down)
+                SetState(UIStates.InPlay)
         End Select
     End Sub
 

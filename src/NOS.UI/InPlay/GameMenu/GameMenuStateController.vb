@@ -11,9 +11,9 @@
         Select Case keyName
             Case EscapeKeyName
                 SetState(UIStates.InPlay)
-            Case UpKeyName
+            Case NorthKeyName
                 _menu.PreviousItem()
-            Case DownKeyName
+            Case SouthKeyName
                 _menu.NextItem()
             Case EnterKeyName, SpaceKeyName
                 Select Case _menu.CurrentItem

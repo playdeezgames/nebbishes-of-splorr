@@ -9,9 +9,9 @@
 
     Protected Overrides Sub HandleKey(keyName As String)
         Select Case keyName
-            Case UpKeyName
+            Case NorthKeyName
                 _menu.PreviousItem()
-            Case DownKeyName
+            Case SouthKeyName
                 _menu.NextItem()
             Case EscapeKeyName
                 If _world.IsInPlay Then
