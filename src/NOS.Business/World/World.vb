@@ -32,8 +32,8 @@ Public Class World
     Public Sub Start() Implements IWorld.Start
         _worldData = New WorldData
         CreateOverworld()
-        CreateCaves()
         CreatePlayerCharacter()
+        CreateCaves()
     End Sub
 
     Private Sub CreateCaves()
@@ -65,7 +65,7 @@ Public Class World
             For row = 0 To CaveRows - 1
                 For Each mazeDirection In mazeDirections
                     Dim door = maze.GetCell(column, row).GetDoor(mazeDirection.Key)
-                    If door IsNot Nothing Then
+                    If door IsNot Nothing AndAlso door.Open Then
                         CreateRoute(tunnels(column, row), mazeDirection.Key, tunnels(column + CInt(mazeDirection.Value.DeltaX), row + CInt(mazeDirection.Value.DeltaY)))
                     End If
                 Next
