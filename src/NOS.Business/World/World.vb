@@ -34,7 +34,21 @@ Public Class World
         CreateOverworld()
         CreatePlayerCharacter()
         CreateCaves()
+        CreateFeatures()
     End Sub
+
+    Private Sub CreateFeatures()
+        For Each location In Locations
+            Dim featureTypes = location.LocationType.GenerateFeatures()
+            For Each featureType In featureTypes
+                CreateFeature(featureType, location)
+            Next
+        Next
+    End Sub
+
+    Private Function CreateFeature(featureType As FeatureTypes, location As ILocation) As IFeature
+        Return Feature.Create(_worldData, featureType, location)
+    End Function
 
     Private Sub CreateCaves()
         Dim caveLocations = Locations.Where(Function(x) x.LocationType = LocationTypes.Cave)

@@ -84,6 +84,41 @@ Module LocationTypesExtensions
         }
     <Extension>
     Function StartingStatistics(locationType As LocationTypes) As IReadOnlyDictionary(Of StatisticTypes, Integer)
+        If Not _startingStatistics.ContainsKey(locationType) Then
+            Return New Dictionary(Of StatisticTypes, Integer)
+        End If
         Return _startingStatistics(locationType)
+    End Function
+    Private ReadOnly _featureGenerators As IReadOnlyDictionary(Of LocationTypes, IReadOnlyDictionary(Of FeatureTypes, Double)) =
+        New Dictionary(Of LocationTypes, IReadOnlyDictionary(Of FeatureTypes, Double)) From
+        {
+            {
+                LocationTypes.Grass,
+                New Dictionary(Of FeatureTypes, Double) From
+                {
+                    {FeatureTypes.BerryBush, 0.1}
+                }
+            },
+            {
+                LocationTypes.Trees,
+                New Dictionary(Of FeatureTypes, Double) From
+                {
+                    {FeatureTypes.FallenLog, 0.1},
+                    {FeatureTypes.SmallPond, 0.1}
+                }
+            }
+        }
+    <Extension>
+    Function GenerateFeatures(locationType As LocationTypes) As IEnumerable(Of FeatureTypes)
+        If Not _featureGenerators.ContainsKey(locationType) Then
+            Return Array.Empty(Of FeatureTypes)
+        End If
+        Dim result As New List(Of FeatureTypes)
+        For Each generator In _featureGenerators(locationType)
+            If RNG.NextDouble < generator.Value Then
+                result.Add(generator.Key)
+            End If
+        Next
+        Return result
     End Function
 End Module

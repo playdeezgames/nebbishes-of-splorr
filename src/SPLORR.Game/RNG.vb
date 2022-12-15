@@ -2,6 +2,11 @@
 
 Public Module RNG
     Private ReadOnly random As New Random
+    ReadOnly Property NextDouble As Double
+        Get
+            Return random.NextDouble
+        End Get
+    End Property
     Function FromGenerator(Of TGenerated)(table As IReadOnlyDictionary(Of TGenerated, Integer)) As TGenerated
         Dim generated = random.Next(table.Values.Sum)
         For Each entry In table
