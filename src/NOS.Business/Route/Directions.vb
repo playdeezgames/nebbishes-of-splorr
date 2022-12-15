@@ -5,6 +5,8 @@ Public Enum Directions
     East
     South
     West
+    Up
+    Down
 End Enum
 Public Module DirectionsExtensions
     <Extension>
@@ -18,6 +20,10 @@ Public Module DirectionsExtensions
                 Return "S"
             Case Directions.West
                 Return "W"
+            Case Directions.Up
+                Return "U"
+            Case Directions.Down
+                Return "D"
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -33,6 +39,10 @@ Public Module DirectionsExtensions
                 Return "south"
             Case Directions.West
                 Return "west"
+            Case Directions.Up
+                Return "up"
+            Case Directions.Down
+                Return "down"
             Case Else
                 Throw New NotImplementedException
         End Select

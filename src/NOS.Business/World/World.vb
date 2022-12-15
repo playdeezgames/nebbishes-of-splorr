@@ -32,7 +32,49 @@ Public Class World
     Public Sub Start() Implements IWorld.Start
         _worldData = New WorldData
         CreateOverworld()
+        CreateCaves()
         CreatePlayerCharacter()
+    End Sub
+
+    Private Sub CreateCaves()
+        Dim caveLocations = Locations.Where(Function(x) x.LocationType = LocationTypes.Cave)
+        For Each caveLocation In caveLocations
+            CreateCave(caveLocation)
+        Next
+    End Sub
+    Private Const CaveColumns = 4
+    Private Const CaveRows = 4
+    Private Shared ReadOnly mazeDirections As IReadOnlyDictionary(Of Directions, MazeDirection(Of Directions)) =
+        New Dictionary(Of Directions, MazeDirection(Of Directions)) From
+        {
+            {Directions.North, New MazeDirection(Of Directions)(Directions.South, 0, -1)},
+            {Directions.East, New MazeDirection(Of Directions)(Directions.West, 1, 0)},
+            {Directions.South, New MazeDirection(Of Directions)(Directions.North, 0, 1)},
+            {Directions.West, New MazeDirection(Of Directions)(Directions.East, -1, 0)}
+        }
+    Private Sub CreateCave(caveLocation As ILocation)
+        Dim maze = New Maze(Of Directions)(CaveColumns, CaveRows, mazeDirections)
+        maze.Generate()
+        Dim tunnels(CaveColumns - 1, CaveRows - 1) As ILocation
+        For column = 0 To CaveColumns - 1
+            For row = 0 To CaveRows - 1
+                tunnels(column, row) = CreateLocation(LocationTypes.Tunnel)
+            Next
+        Next
+        For column = 0 To CaveColumns - 1
+            For row = 0 To CaveRows - 1
+                For Each mazeDirection In mazeDirections
+                    Dim door = maze.GetCell(column, row).GetDoor(mazeDirection.Key)
+                    If door IsNot Nothing Then
+                        CreateRoute(tunnels(column, row), mazeDirection.Key, tunnels(column + CInt(mazeDirection.Value.DeltaX), row + CInt(mazeDirection.Value.DeltaY)))
+                    End If
+                Next
+            Next
+        Next
+        Dim x = RNG.FromRange(0, CaveColumns - 1)
+        Dim y = RNG.FromRange(0, CaveRows - 1)
+        CreateRoute(caveLocation, Directions.Down, tunnels(x, y))
+        CreateRoute(tunnels(x, y), Directions.up, caveLocation)
     End Sub
 
     Private Sub CreatePlayerCharacter()

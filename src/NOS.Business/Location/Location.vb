@@ -25,7 +25,7 @@
             Return _worldData.Locations(Id).Statistics.ContainsKey(StatisticTypes.ForagingLevel)
         End Get
     End Property
-    Private ReadOnly Property LocationType As LocationTypes
+    Public ReadOnly Property LocationType As LocationTypes Implements ILocation.LocationType
         Get
             Return CType(_worldData.Locations(Id).LocationType, LocationTypes)
         End Get

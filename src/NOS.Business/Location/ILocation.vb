@@ -11,4 +11,5 @@
     ReadOnly Property CanForage As Boolean
     ReadOnly Property ForagingLevel As Integer
     ReadOnly Property Items As IEnumerable(Of IItem)
+    ReadOnly Property LocationType As LocationTypes
 End Interface

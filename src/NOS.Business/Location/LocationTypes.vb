@@ -5,11 +5,7 @@ Public Enum LocationTypes
     Trees
     Village
     Cave
-    Town
-    Dungeon
-    Tower
-    City
-    Farm
+    Tunnel
 End Enum
 Module LocationTypesExtensions
     Friend ReadOnly OverworldLocationTypeGenerator As IReadOnlyDictionary(Of LocationTypes, Integer) =
@@ -50,6 +46,8 @@ Module LocationTypesExtensions
                 Return "trees"
             Case LocationTypes.Village
                 Return "village"
+            Case LocationTypes.Tunnel
+                Return "tunnel"
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -77,6 +75,10 @@ Module LocationTypesExtensions
             },
             {
                 LocationTypes.Village,
+                New Dictionary(Of StatisticTypes, Integer)
+            },
+            {
+                LocationTypes.Tunnel,
                 New Dictionary(Of StatisticTypes, Integer)
             }
         }
