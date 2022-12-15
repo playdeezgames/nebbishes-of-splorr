@@ -16,4 +16,6 @@
     Friend Const ZleepKeyName = "Z"
     'Inventory Keys
     Friend Const InventoryDropKeyName = "D"
+    'Ground Keys
+    Friend Const GroundTakeKeyName = "T"
 End Module
