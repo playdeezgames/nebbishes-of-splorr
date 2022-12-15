@@ -226,6 +226,25 @@
     Private Sub AddItem(item As IItem)
         _worldData.Characters(Id).ItemIds.Add(item.Id)
     End Sub
+
+    Public Sub AttemptDropItems(itemQuantities As IEnumerable(Of (ItemTypes, Integer))) Implements ICharacter.AttemptDropItems
+        DismissMessages()
+        Dim total = 0
+        For Each itemQuantity In itemQuantities
+            Dim itemsToDrop = Items.Where(Function(x) x.ItemType = itemQuantity.Item1).Take(itemQuantity.Item2)
+            For Each itemToDrop In itemsToDrop
+                DropItem(itemToDrop)
+                total += 1
+            Next
+        Next
+        AddMessage($"{Name} drops {total} items.")
+    End Sub
+
+    Private Sub DropItem(itemToDrop As IItem)
+        _worldData.Characters(Id).ItemIds.Remove(itemToDrop.Id)
+        Location.AddItem(itemToDrop)
+    End Sub
+
     Public ReadOnly Property MaximumEnergy As Integer Implements ICharacter.MaximumEnergy
         Get
             Return GetStatistic(StatisticTypes.MaximumEnergy)

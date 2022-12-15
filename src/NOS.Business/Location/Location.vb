@@ -65,4 +65,8 @@
         Dim itemType = RNG.FromGenerator(ForageGenerators(LocationType))
         Return Item.Create(_worldData, itemType)
     End Function
+
+    Public Sub AddItem(item As IItem) Implements ILocation.AddItem
+        _worldData.Locations(Id).ItemIds.Add(item.Id)
+    End Sub
 End Class

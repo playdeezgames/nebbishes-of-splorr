@@ -9,6 +9,7 @@
     Sub AttemptSleep()
     Sub NextRound()
     Sub AttemptForage()
+    Sub AttemptDropItems(itemQuantities As IEnumerable(Of (ItemTypes, Integer)))
     ReadOnly Property Messages As String()
     Property Energy As Integer
     ReadOnly Property MaximumEnergy As Integer
