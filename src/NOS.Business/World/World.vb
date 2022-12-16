@@ -164,4 +164,8 @@ Public Class World
     Public Sub Save(slot As Integer) Implements IWorld.Save
         File.WriteAllText($"Slot{slot}.json", JsonSerializer.Serialize(_worldData))
     End Sub
+
+    Public Sub Load(slot As Integer) Implements IWorld.Load
+        _worldData = JsonSerializer.Deserialize(Of WorldData)(File.ReadAllText($"Slot{slot}.json"))
+    End Sub
 End Class

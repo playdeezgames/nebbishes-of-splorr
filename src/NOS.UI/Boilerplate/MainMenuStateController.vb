@@ -4,7 +4,7 @@
 
     Public Sub New(context As IUIContext, world As IWorld)
         MyBase.New(context, world)
-        _menu = New Menu(context, DefaultFontName, (0, 6), (160, 6), (Hue.White, Hue.Black), 4, "New Game", "Load Game(COMING SOON!)", "Options", "Quit")
+        _menu = New Menu(context, DefaultFontName, (0, 6), (160, 6), (Hue.White, Hue.Black), 4, "New Game", "Load Game", "Options", "Quit")
     End Sub
 
     Protected Overrides Sub HandleKey(keyName As String)
@@ -18,7 +18,7 @@
                     Case 0
                         SetState(UIStates.StartGame)
                     Case 1
-                        'TODO: load
+                        SetState(UIStates.Load)
                     Case 2
                         SetState(UIStates.Options)
                     Case 3

@@ -13,4 +13,5 @@
     InventoryDrop
     Take
     Save
+    Load
 End Enum

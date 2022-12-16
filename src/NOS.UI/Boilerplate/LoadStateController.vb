@@ -1,4 +1,4 @@
-﻿Friend Class SaveStateController
+﻿Friend Class LoadStateController
     Inherits BaseStateController
     Private _menu As Menu
 
@@ -10,19 +10,19 @@
     Protected Overrides Sub HandleKey(keyName As String)
         Select Case keyName
             Case EscapeKeyName
-                SetState(UIStates.GameMenu)
+                SetState(UIStates.MainMenu)
             Case NorthKeyName
                 _menu.PreviousItem()
             Case SouthKeyName
                 _menu.NextItem()
             Case EnterKeyName, SpaceKeyName
-                _world.Save(_menu.CurrentItem + 1)
-                SetState(UIStates.GameMenu)
+                _world.Load(_menu.CurrentItem + 1)
+                SetState(UIStates.InPlay)
         End Select
     End Sub
 
     Protected Overrides Sub Redraw(ticks As Long)
-        DefaultFont.Write((0, 0), "Save To...", Hue.Blue)
+        DefaultFont.Write((0, 0), "Load From...", Hue.Blue)
         _menu.Draw()
     End Sub
 End Class

@@ -19,7 +19,7 @@
         y = font.WriteLine((0, y), (160, 6), $"{HelpKeyName} - Help", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{TakeKeyName} - Take", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{UpKeyName} - Up", Hue.Blue)
-        y = font.WriteLine((0, y), (160, 6), $"{DownKeyName} - Down", Hue.Blue)
+        y = font.WriteLine((0, y), (160, 6), $"{DownKeyName} - doWn", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{ZleepKeyName} - Zleep", Hue.Blue)
     End Sub
 End Class
