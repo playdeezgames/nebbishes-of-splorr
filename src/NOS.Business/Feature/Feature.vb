@@ -1,6 +1,7 @@
 ﻿Public Class Feature
     Implements IFeature
     Private ReadOnly _worldData As WorldData
+    Private ReadOnly _world As World
     ReadOnly Property Id As Integer Implements IFeature.Id
 
     Public ReadOnly Property Name As String Implements IFeature.Name
@@ -17,7 +18,7 @@
 
     Public ReadOnly Property World As IWorld Implements IFeature.World
         Get
-            Return New World(_worldData)
+            Return _world
         End Get
     End Property
 
@@ -27,18 +28,19 @@
         End Get
     End Property
 
-    Sub New(worldData As WorldData, id As Integer)
+    Sub New(worldData As WorldData, world As World, id As Integer)
         _worldData = worldData
+        _world = world
         Me.Id = id
     End Sub
 
-    Friend Shared Function Create(worldData As WorldData, featureType As FeatureTypes, location As ILocation) As IFeature
+    Friend Shared Function Create(worldData As WorldData, world As World, featureType As FeatureTypes, location As ILocation) As IFeature
         Dim id = If(worldData.Features.Any, worldData.Features.Keys.Max + 1, 0)
         worldData.Features.Add(id, New FeatureData With
                                 {
                                     .FeatureType = featureType
                                 })
-        Dim result = New Feature(worldData, id)
+        Dim result = New Feature(worldData, world, id)
         worldData.Locations(location.Id).FeatureIds.Add(id)
         featureType.Populate(result)
         Return result

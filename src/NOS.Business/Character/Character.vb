@@ -1,10 +1,11 @@
 ﻿Friend Class Character
     Implements ICharacter
     Private _worldData As WorldData
+    Private _world As World
     Public ReadOnly Id As Integer
     Public Property Location As ILocation Implements ICharacter.Location
         Get
-            Return New Location(_worldData, _worldData.Characters(Id).LocationId)
+            Return New Location(_worldData, _world, _worldData.Characters(Id).LocationId)
         End Get
         Set(value As ILocation)
             _worldData.Characters(Id).LocationId = value.Id
@@ -15,14 +16,15 @@
             Return _worldData.Characters(Id).Name
         End Get
     End Property
-    Public Sub New(worldData As WorldData, id As Integer)
+    Public Sub New(worldData As WorldData, world As World, id As Integer)
         _worldData = worldData
+        _world = world
         Me.Id = id
     End Sub
     Friend Sub SetAsPlayerCharacter() Implements ICharacter.SetAsPlayerCharacter
         _worldData.PlayerCharacterId = Id
     End Sub
-    Friend Shared Function Create(worldData As WorldData, name As String, location As ILocation, characterType As CharacterTypes) As Character
+    Friend Shared Function Create(worldData As WorldData, world As World, name As String, location As ILocation, characterType As CharacterTypes) As Character
         Dim id = If(worldData.Characters.Any, worldData.Characters.Keys.Max + 1, 0)
         Dim characterData = New CharacterData With
             {
@@ -34,7 +36,7 @@
             characterData.Statistics(statistic.Key) = statistic.Value
         Next
         worldData.Characters.Add(id, characterData)
-        Return New Character(worldData, id)
+        Return New Character(worldData, world, id)
     End Function
     Public Sub AttemptMove(direction As Directions) Implements ICharacter.AttemptMove
         DismissMessages()
@@ -317,7 +319,7 @@
     End Property
     Public ReadOnly Property World As IWorld Implements ICharacter.World
         Get
-            Return New World(_worldData)
+            Return _world
         End Get
     End Property
     Public Property Satiety As Integer Implements ICharacter.Satiety

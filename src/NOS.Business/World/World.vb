@@ -14,14 +14,14 @@ Public Class World
     End Property
     Public ReadOnly Property PlayerCharacter As ICharacter Implements IWorld.PlayerCharacter
         Get
-            Return New Character(_worldData, _worldData.PlayerCharacterId.Value)
+            Return New Character(_worldData, Me, _worldData.PlayerCharacterId.Value)
         End Get
     End Property
     Public ReadOnly Property Locations As IEnumerable(Of ILocation) Implements IWorld.Locations
         Get
             Dim result As New List(Of ILocation)
             For index = 0 To _worldData.Locations.Count - 1
-                result.Add(New Location(_worldData, index))
+                result.Add(New Location(_worldData, Me, index))
             Next
             Return result
         End Get
@@ -42,7 +42,7 @@ Public Class World
         Next
     End Sub
     Private Function CreateFeature(featureType As FeatureTypes, location As ILocation) As IFeature
-        Return Feature.Create(_worldData, featureType, location)
+        Return Feature.Create(_worldData, Me, featureType, location)
     End Function
     Private Sub CreateCaves()
         Dim caveLocations = Locations.Where(Function(x) x.LocationType = LocationTypes.Cave)
@@ -117,13 +117,13 @@ Public Class World
         Next
     End Sub
     Private Function CreateRoute(start As ILocation, direction As Directions, finish As ILocation) As IRoute
-        Return Route.Create(_worldData, start, direction, finish)
+        Return Route.Create(_worldData, Me, start, direction, finish)
     End Function
     Private Function CreateLocation(locationType As LocationTypes) As ILocation
-        Return Location.Create(_worldData, locationType.Name, locationType)
+        Return Location.Create(_worldData, Me, locationType.Name, locationType)
     End Function
     Private Function CreateCharacter(name As String, location As ILocation, characterType As CharacterTypes) As ICharacter
-        Return Character.Create(_worldData, name, location, characterType)
+        Return Character.Create(_worldData, Me, name, location, characterType)
     End Function
     Public Function AdvanceTime(minutes As Integer, conditionCheck As Func(Of Boolean)) As Integer Implements IWorld.AdvanceTime
         Dim counter = 0
@@ -136,13 +136,13 @@ Public Class World
     End Function
     Private ReadOnly Property Characters As IEnumerable(Of ICharacter)
         Get
-            Return _worldData.Characters.Keys.Select(Function(x) New Character(_worldData, x))
+            Return _worldData.Characters.Keys.Select(Function(x) New Character(_worldData, Me, x))
         End Get
     End Property
     Private _interactionFeatureId As Integer?
     Public Property InteractionFeature As IFeature Implements IWorld.InteractionFeature
         Get
-            Return If(_interactionFeatureId.HasValue, New Feature(_worldData, _interactionFeatureId.Value), Nothing)
+            Return If(_interactionFeatureId.HasValue, New Feature(_worldData, Me, _interactionFeatureId.Value), Nothing)
         End Get
         Set(value As IFeature)
             If value Is Nothing Then

@@ -1,9 +1,11 @@
 ﻿Friend Class Route
     Implements IRoute
-    Private _worldData As WorldData
+    Private ReadOnly _worldData As WorldData
+    Private ReadOnly _world As World
 
-    Public Sub New(worldData As WorldData, locationId As Integer, direction As Directions)
+    Public Sub New(worldData As WorldData, world As World, locationId As Integer, direction As Directions)
         _worldData = worldData
+        _world = world
         Me.LocationId = locationId
         Me.Direction = direction
     End Sub
@@ -13,18 +15,18 @@
 
     Public ReadOnly Property FromLocation As ILocation Implements IRoute.FromLocation
         Get
-            Return New Location(_worldData, LocationId)
+            Return New Location(_worldData, _world, LocationId)
         End Get
     End Property
 
     Public ReadOnly Property ToLocation As ILocation Implements IRoute.ToLocation
         Get
-            Return New Location(_worldData, _worldData.Locations(LocationId).Routes(Direction).ToLocationId)
+            Return New Location(_worldData, _world, _worldData.Locations(LocationId).Routes(Direction).ToLocationId)
         End Get
     End Property
 
-    Friend Shared Function Create(worldData As WorldData, start As ILocation, direction As Directions, finish As ILocation) As IRoute
+    Friend Shared Function Create(worldData As WorldData, world As World, start As ILocation, direction As Directions, finish As ILocation) As IRoute
         worldData.Locations(start.Id).Routes(direction) = New RouteData With {.ToLocationId = finish.Id}
-        Return New Route(worldData, start.Id, direction)
+        Return New Route(worldData, world, start.Id, direction)
     End Function
 End Class
