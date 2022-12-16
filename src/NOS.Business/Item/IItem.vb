@@ -1,5 +1,5 @@
 ﻿Public Interface IItem
-    ReadOnly Property Id As Integer
+    Inherits IThingie
     ReadOnly Property Name As String
     ReadOnly Property ItemType As ItemTypes
     ReadOnly Property CanEat As Boolean

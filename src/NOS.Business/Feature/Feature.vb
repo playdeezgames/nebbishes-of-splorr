@@ -17,7 +17,7 @@
 
     Public ReadOnly Property Items As IEnumerable(Of IItem) Implements IFeature.Items
         Get
-            Return _worldData.Features(Id).ItemIds.Select(Function(x) New Item(_worldData, x))
+            Return _worldData.Features(Id).ItemIds.Select(Function(x) New Item(_worldData, World, x))
         End Get
     End Property
 

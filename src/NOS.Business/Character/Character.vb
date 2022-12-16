@@ -213,7 +213,7 @@
     End Sub
     Public ReadOnly Property Items As IEnumerable(Of IItem) Implements ICharacter.Items
         Get
-            Return _worldData.Characters(Id).ItemIds.Select(Function(x) New Item(_worldData, x))
+            Return _worldData.Characters(Id).ItemIds.Select(Function(x) New Item(_worldData, World, x))
         End Get
     End Property
     ReadOnly Property ItemTypeCount(itemType As ItemTypes) As Integer

@@ -43,7 +43,7 @@
 
     Public ReadOnly Property Items As IEnumerable(Of IItem) Implements ILocation.Items
         Get
-            Return _worldData.Locations(Id).ItemIds.Select(Function(x) New Item(_worldData, x))
+            Return _worldData.Locations(Id).ItemIds.Select(Function(x) New Item(_worldData, World, x))
         End Get
     End Property
 
@@ -86,7 +86,7 @@
     End Function
     Public Function Forage() As IItem Implements ILocation.Forage
         Dim itemType = RNG.FromGenerator(ForageGenerators(LocationType))
-        Return Item.Create(_worldData, itemType)
+        Return Item.Create(_worldData, World, itemType)
     End Function
 
     Public Sub AddItem(item As IItem) Implements ILocation.AddItem

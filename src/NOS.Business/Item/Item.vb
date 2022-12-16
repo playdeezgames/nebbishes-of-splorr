@@ -1,19 +1,17 @@
 ﻿Public Class Item
+    Inherits Thingie
     Implements IItem
-    Private ReadOnly _worldData As WorldData
-    Public ReadOnly Property Id As Integer Implements IItem.Id
-    Sub New(worldData As WorldData, id As Integer)
-        _worldData = worldData
-        Me.Id = id
+    Sub New(worldData As WorldData, world As IWorld, id As Integer)
+        MyBase.New(worldData, world, id)
     End Sub
 
-    Friend Shared Function Create(worldData As WorldData, itemType As ItemTypes) As IItem
+    Friend Shared Function Create(worldData As WorldData, world As IWorld, itemType As ItemTypes) As IItem
         Dim id = If(worldData.Items.Any, worldData.Items.Keys.Max + 1, 0)
         worldData.Items.Add(id, New ItemData With
                                 {
                                     .ItemType = itemType
                                 })
-        Return New Item(worldData, id)
+        Return New Item(worldData, world, id)
     End Function
 
     Public Sub Destroy() Implements IItem.Destroy

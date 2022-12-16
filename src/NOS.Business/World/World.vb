@@ -170,6 +170,6 @@ Public Class World
         _worldData = JsonSerializer.Deserialize(Of WorldData)(File.ReadAllText($"Slot{slot}.json"))
     End Sub
     Public Function CreateItem(itemType As ItemTypes) As IItem Implements IWorld.CreateItem
-        Return Item.Create(_worldData, itemType)
+        Return Item.Create(_worldData, Me, itemType)
     End Function
 End Class
