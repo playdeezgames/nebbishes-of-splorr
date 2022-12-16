@@ -283,6 +283,10 @@
 
     Public Sub AttemptEat(itemQuantities As IEnumerable(Of (ItemTypes, Integer))) Implements ICharacter.AttemptEat
         DismissMessages()
+        If IsDead Then
+            AddMessage($"{Name} has no further need of food.")
+            Return
+        End If
         Dim total = 0
         For Each itemQuantity In itemQuantities
             Dim itemsToEat = Items.Where(Function(x) x.ItemType = itemQuantity.Item1).Take(itemQuantity.Item2)

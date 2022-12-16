@@ -12,13 +12,11 @@ Public Class World
             Return _worldData IsNot Nothing
         End Get
     End Property
-
     Public ReadOnly Property PlayerCharacter As ICharacter Implements IWorld.PlayerCharacter
         Get
             Return New Character(_worldData, _worldData.PlayerCharacterId.Value)
         End Get
     End Property
-
     Public ReadOnly Property Locations As IEnumerable(Of ILocation) Implements IWorld.Locations
         Get
             Dim result As New List(Of ILocation)
@@ -28,7 +26,6 @@ Public Class World
             Return result
         End Get
     End Property
-
     Public Sub Start() Implements IWorld.Start
         _worldData = New WorldData
         CreateOverworld()
@@ -36,7 +33,6 @@ Public Class World
         CreateCaves()
         CreateFeatures()
     End Sub
-
     Private Sub CreateFeatures()
         For Each location In Locations
             Dim featureTypes = location.LocationType.GenerateFeatures()
@@ -45,11 +41,9 @@ Public Class World
             Next
         Next
     End Sub
-
     Private Function CreateFeature(featureType As FeatureTypes, location As ILocation) As IFeature
         Return Feature.Create(_worldData, featureType, location)
     End Function
-
     Private Sub CreateCaves()
         Dim caveLocations = Locations.Where(Function(x) x.LocationType = LocationTypes.Cave)
         For Each caveLocation In caveLocations
@@ -90,13 +84,11 @@ Public Class World
         CreateRoute(caveLocation, Directions.Down, tunnels(x, y))
         CreateRoute(tunnels(x, y), Directions.up, caveLocation)
     End Sub
-
     Private Sub CreatePlayerCharacter()
         Dim candidates = Locations.Where(Function(x) x.CanSpawn(CharacterTypes.Nebbish)).ToList()
         Dim character = CreateCharacter("Tagon", candidates(_random.Next(candidates.Count)), CharacterTypes.Nebbish)
         character.SetAsPlayerCharacter()
     End Sub
-
     Private Const WorldColumns = 32
     Private Const WorldRows = 32
     Private Sub CreateOverworld()
@@ -124,18 +116,15 @@ Public Class World
             Next
         Next
     End Sub
-
     Private Function CreateRoute(start As ILocation, direction As Directions, finish As ILocation) As IRoute
         Return Route.Create(_worldData, start, direction, finish)
     End Function
-
     Private Function CreateLocation(locationType As LocationTypes) As ILocation
         Return Location.Create(_worldData, locationType.Name, locationType)
     End Function
     Private Function CreateCharacter(name As String, location As ILocation, characterType As CharacterTypes) As ICharacter
         Return Character.Create(_worldData, name, location, characterType)
     End Function
-
     Public Function AdvanceTime(minutes As Integer, conditionCheck As Func(Of Boolean)) As Integer Implements IWorld.AdvanceTime
         Dim counter = 0
         While minutes > 0 AndAlso conditionCheck()
@@ -163,7 +152,6 @@ Public Class World
             _interactionFeatureId = value.Id
         End Set
     End Property
-
     Private Sub NextRound()
         For Each character In Characters
             character.NextRound()
@@ -172,19 +160,15 @@ Public Class World
             location.NextRound()
         Next
     End Sub
-
     Public Sub Abandon() Implements IWorld.Abandon
         _worldData = Nothing
     End Sub
-
     Public Sub Save(slot As Integer) Implements IWorld.Save
         File.WriteAllText($"Slot{slot}.json", JsonSerializer.Serialize(_worldData))
     End Sub
-
     Public Sub Load(slot As Integer) Implements IWorld.Load
         _worldData = JsonSerializer.Deserialize(Of WorldData)(File.ReadAllText($"Slot{slot}.json"))
     End Sub
-
     Public Function CreateItem(itemType As ItemTypes) As IItem Implements IWorld.CreateItem
         Return Item.Create(_worldData, itemType)
     End Function
