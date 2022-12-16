@@ -15,6 +15,18 @@
         End Get
     End Property
 
+    Public ReadOnly Property World As IWorld Implements IFeature.World
+        Get
+            Return New World(_worldData)
+        End Get
+    End Property
+
+    Public ReadOnly Property Items As IEnumerable(Of IItem) Implements IFeature.Items
+        Get
+            Return _worldData.Features(Id).ItemIds.Select(Function(x) New Item(_worldData, x))
+        End Get
+    End Property
+
     Sub New(worldData As WorldData, id As Integer)
         _worldData = worldData
         Me.Id = id
@@ -28,6 +40,15 @@
                                 })
         Dim result = New Feature(worldData, id)
         worldData.Locations(location.Id).FeatureIds.Add(id)
+        featureType.Populate(result)
         Return result
     End Function
+
+    Public Sub NextRound() Implements IFeature.NextRound
+        'TODO: whatever the feature does, prolly based on the feature type
+    End Sub
+
+    Public Sub AddItem(item As IItem) Implements IFeature.AddItem
+        _worldData.Features(Id).ItemIds.Add(item.Id)
+    End Sub
 End Class

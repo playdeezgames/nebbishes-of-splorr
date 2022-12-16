@@ -92,4 +92,10 @@
     Public Sub RemoveItem(item As IItem) Implements ILocation.RemoveItem
         _worldData.Locations(Id).ItemIds.Remove(item.Id)
     End Sub
+
+    Public Sub NextRound() Implements ILocation.NextRound
+        For Each feature In Features
+            feature.NextRound()
+        Next
+    End Sub
 End Class

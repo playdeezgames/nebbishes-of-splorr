@@ -19,4 +19,31 @@ Module FeatureTypesExtensions
                 Throw New NotImplementedException
         End Select
     End Function
+    <Extension>
+    Sub Populate(featureType As FeatureTypes, feature As IFeature)
+        Select Case featureType
+            Case FeatureTypes.BerryBush
+                PopulateBerryBush(feature)
+            Case FeatureTypes.FallenLog
+                PopulateFallenLog(feature)
+            Case FeatureTypes.SmallPond
+                PopulateSmallPond(feature)
+        End Select
+    End Sub
+
+    Private Sub PopulateSmallPond(feature As IFeature)
+        'TODO: add fish
+    End Sub
+
+    Private Sub PopulateFallenLog(feature As IFeature)
+        'TODO: add grubs
+    End Sub
+
+    Private Sub PopulateBerryBush(feature As IFeature)
+        Dim berryCount = RNG.RollDice("2d4")
+        While berryCount > 0
+            berryCount -= 1
+            feature.AddItem(feature.World.CreateItem(ItemTypes.Berry))
+        End While
+    End Sub
 End Module

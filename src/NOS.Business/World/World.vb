@@ -168,6 +168,9 @@ Public Class World
         For Each character In Characters
             character.NextRound()
         Next
+        For Each location In Locations
+            location.NextRound()
+        Next
     End Sub
 
     Public Sub Abandon() Implements IWorld.Abandon
@@ -181,4 +184,8 @@ Public Class World
     Public Sub Load(slot As Integer) Implements IWorld.Load
         _worldData = JsonSerializer.Deserialize(Of WorldData)(File.ReadAllText($"Slot{slot}.json"))
     End Sub
+
+    Public Function CreateItem(itemType As ItemTypes) As IItem Implements IWorld.CreateItem
+        Return Item.Create(_worldData, itemType)
+    End Function
 End Class

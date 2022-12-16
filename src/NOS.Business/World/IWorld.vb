@@ -8,4 +8,5 @@
     Sub Save(slot As Integer)
     Sub Load(slot As Integer)
     Property InteractionFeature As IFeature
+    Function CreateItem(itemType As ItemTypes) As IItem
 End Interface
