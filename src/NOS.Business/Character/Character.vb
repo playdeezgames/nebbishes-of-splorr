@@ -1,11 +1,9 @@
 ﻿Friend Class Character
+    Inherits Thingie
     Implements ICharacter
-    Private _worldData As WorldData
-    Private _world As World
-    Public ReadOnly Id As Integer
     Public Property Location As ILocation Implements ICharacter.Location
         Get
-            Return New Location(_worldData, _world, _worldData.Characters(Id).LocationId)
+            Return New Location(_worldData, Me.World, _worldData.Characters(Id).LocationId)
         End Get
         Set(value As ILocation)
             _worldData.Characters(Id).LocationId = value.Id
@@ -17,9 +15,7 @@
         End Get
     End Property
     Public Sub New(worldData As WorldData, world As World, id As Integer)
-        _worldData = worldData
-        _world = world
-        Me.Id = id
+        MyBase.New(worldData, world, id)
     End Sub
     Friend Sub SetAsPlayerCharacter() Implements ICharacter.SetAsPlayerCharacter
         _worldData.PlayerCharacterId = Id
@@ -315,11 +311,6 @@
     Public ReadOnly Property MaximumEnergy As Integer Implements ICharacter.MaximumEnergy
         Get
             Return GetStatistic(StatisticTypes.MaximumEnergy)
-        End Get
-    End Property
-    Public ReadOnly Property World As IWorld Implements ICharacter.World
-        Get
-            Return _world
         End Get
     End Property
     Public Property Satiety As Integer Implements ICharacter.Satiety

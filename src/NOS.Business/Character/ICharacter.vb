@@ -1,4 +1,5 @@
 ﻿Public Interface ICharacter
+    Inherits IThingie
     Sub SetAsPlayerCharacter()
     Sub AttemptMove(direction As Directions)
     Property Location As ILocation
@@ -16,7 +17,6 @@
     ReadOnly Property Messages As String()
     Property Energy As Integer
     ReadOnly Property MaximumEnergy As Integer
-    ReadOnly Property World As IWorld
     Property Satiety As Integer
     ReadOnly Property MaximumSatiety As Integer
     Property Health As Integer

@@ -1,8 +1,6 @@
 ﻿Friend Class Location
+    Inherits Thingie
     Implements ILocation
-    Private ReadOnly _worldData As WorldData
-    Private ReadOnly _world As World
-    Public ReadOnly Property Id As Integer Implements ILocation.Id
     Public ReadOnly Property Name As String Implements ILocation.Name
         Get
             Return _worldData.Locations(Id).Name
@@ -10,7 +8,7 @@
     End Property
     Public ReadOnly Property Routes As IEnumerable(Of IRoute) Implements ILocation.Routes
         Get
-            Return _worldData.Locations(Id).Routes.Select(Function(x) New Route(_worldData, _world, Id, CType(x.Key, Directions)))
+            Return _worldData.Locations(Id).Routes.Select(Function(x) New Route(_worldData, World, Id, CType(x.Key, Directions)))
         End Get
     End Property
     Public ReadOnly Property Route(direction As Directions) As IRoute Implements ILocation.Route
@@ -18,7 +16,7 @@
             If Not HasRoute(direction) Then
                 Return Nothing
             End If
-            Return New Route(_worldData, _world, Id, direction)
+            Return New Route(_worldData, World, Id, direction)
         End Get
     End Property
     Public ReadOnly Property CanForage As Boolean Implements ILocation.CanForage
@@ -51,7 +49,7 @@
 
     Public ReadOnly Property Features As IEnumerable(Of IFeature) Implements ILocation.Features
         Get
-            Return _worldData.Locations(Id).FeatureIds.Select(Function(x) New Feature(_worldData, _world, x))
+            Return _worldData.Locations(Id).FeatureIds.Select(Function(x) New Feature(_worldData, World, x))
         End Get
     End Property
 
@@ -64,10 +62,8 @@
     Private Function GetStatistic(statisticType As StatisticTypes) As Integer
         Return _worldData.Locations(Id).Statistics(statisticType)
     End Function
-    Public Sub New(worldData As WorldData, world As World, id As Integer)
-        _worldData = worldData
-        _world = world
-        Me.Id = id
+    Public Sub New(worldData As WorldData, world As IWorld, id As Integer)
+        MyBase.New(worldData, world, id)
     End Sub
     Friend Shared Function Create(worldData As WorldData, world As World, name As String, locationType As LocationTypes) As Location
         Dim id = If(worldData.Locations.Any, worldData.Locations.Keys.Max + 1, 0)

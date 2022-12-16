@@ -1,11 +1,8 @@
 ﻿Friend Class Route
+    Inherits BaseThingie
     Implements IRoute
-    Private ReadOnly _worldData As WorldData
-    Private ReadOnly _world As World
-
-    Public Sub New(worldData As WorldData, world As World, locationId As Integer, direction As Directions)
-        _worldData = worldData
-        _world = world
+    Public Sub New(worldData As WorldData, world As IWorld, locationId As Integer, direction As Directions)
+        MyBase.New(worldData, world)
         Me.LocationId = locationId
         Me.Direction = direction
     End Sub
@@ -15,13 +12,13 @@
 
     Public ReadOnly Property FromLocation As ILocation Implements IRoute.FromLocation
         Get
-            Return New Location(_worldData, _world, LocationId)
+            Return New Location(_worldData, World, LocationId)
         End Get
     End Property
 
     Public ReadOnly Property ToLocation As ILocation Implements IRoute.ToLocation
         Get
-            Return New Location(_worldData, _world, _worldData.Locations(LocationId).Routes(Direction).ToLocationId)
+            Return New Location(_worldData, World, _worldData.Locations(LocationId).Routes(Direction).ToLocationId)
         End Get
     End Property
 

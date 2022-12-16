@@ -1,8 +1,6 @@
 ﻿Public Class Feature
+    Inherits Thingie
     Implements IFeature
-    Private ReadOnly _worldData As WorldData
-    Private ReadOnly _world As World
-    ReadOnly Property Id As Integer Implements IFeature.Id
 
     Public ReadOnly Property Name As String Implements IFeature.Name
         Get
@@ -16,11 +14,6 @@
         End Get
     End Property
 
-    Public ReadOnly Property World As IWorld Implements IFeature.World
-        Get
-            Return _world
-        End Get
-    End Property
 
     Public ReadOnly Property Items As IEnumerable(Of IItem) Implements IFeature.Items
         Get
@@ -28,10 +21,8 @@
         End Get
     End Property
 
-    Sub New(worldData As WorldData, world As World, id As Integer)
-        _worldData = worldData
-        _world = world
-        Me.Id = id
+    Sub New(worldData As WorldData, world As IWorld, id As Integer)
+        MyBase.New(worldData, world, id)
     End Sub
 
     Friend Shared Function Create(worldData As WorldData, world As World, featureType As FeatureTypes, location As ILocation) As IFeature
