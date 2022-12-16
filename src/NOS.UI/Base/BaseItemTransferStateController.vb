@@ -12,7 +12,16 @@
         _postCommitState = postCommitState
         _headerHue = headerHue
     End Sub
-
+    Protected ReadOnly Property TransferTotal As Integer
+        Get
+            Return _menuItems.Sum(Function(x) x.Item3)
+        End Get
+    End Property
+    Protected ReadOnly Property TransferQuantities As IEnumerable(Of (ItemTypes, Integer))
+        Get
+            Return _menuItems.Select(Function(x) (x.Item1, x.Item3))
+        End Get
+    End Property
     Protected Overrides Sub HandleKey(keyName As String)
         Select Case keyName
             Case EscapeKeyName
