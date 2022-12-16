@@ -54,6 +54,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property CanSpawn(characterType As CharacterTypes) As Boolean Implements ILocation.CanSpawn
+        Get
+            Return LocationType.CanSpawn(characterType)
+        End Get
+    End Property
+
     Private Function GetStatistic(statisticType As StatisticTypes) As Integer
         Return _worldData.Locations(Id).Statistics(statisticType)
     End Function

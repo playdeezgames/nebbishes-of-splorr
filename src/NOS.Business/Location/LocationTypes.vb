@@ -1,5 +1,4 @@
 ﻿Imports System.Runtime.CompilerServices
-
 Public Enum LocationTypes
     Grass
     Trees
@@ -120,5 +119,14 @@ Module LocationTypesExtensions
             End If
         Next
         Return result
+    End Function
+    Private ReadOnly _spawnLocationTypeCharacterTypes As New HashSet(Of (LocationTypes, CharacterTypes)) From
+        {
+            (LocationTypes.Trees, CharacterTypes.Nebbish),
+            (LocationTypes.Grass, CharacterTypes.Nebbish)
+        }
+    <Extension>
+    Function CanSpawn(locationType As LocationTypes, characterType As CharacterTypes) As Boolean
+        Return _spawnLocationTypeCharacterTypes.Contains((locationType, characterType))
     End Function
 End Module

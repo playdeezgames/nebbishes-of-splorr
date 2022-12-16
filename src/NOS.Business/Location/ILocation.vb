@@ -14,4 +14,5 @@
     ReadOnly Property Items As IEnumerable(Of IItem)
     ReadOnly Property LocationType As LocationTypes
     ReadOnly Property Features As IEnumerable(Of IFeature)
+    ReadOnly Property CanSpawn(characterType As CharacterTypes) As Boolean
 End Interface

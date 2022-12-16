@@ -92,7 +92,7 @@ Public Class World
     End Sub
 
     Private Sub CreatePlayerCharacter()
-        Dim candidates = Locations.ToList()
+        Dim candidates = Locations.Where(Function(x) x.CanSpawn(CharacterTypes.Nebbish)).ToList()
         Dim character = CreateCharacter("Tagon", candidates(_random.Next(candidates.Count)), CharacterTypes.Nebbish)
         character.SetAsPlayerCharacter()
     End Sub
