@@ -16,4 +16,5 @@
     Load
     Interact
     ChooseFeature
+    RemoveFeatureItems
 End Enum

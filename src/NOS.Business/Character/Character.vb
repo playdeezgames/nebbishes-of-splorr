@@ -263,6 +263,24 @@
         Location.RemoveItem(itemToTake)
     End Sub
 
+    Public Sub AttemptTakeFeatureItems(feature As IFeature, itemQuantities As IEnumerable(Of (ItemTypes, Integer))) Implements ICharacter.AttemptTakeFeatureItems
+        DismissMessages()
+        Dim total = 0
+        For Each itemQuantity In itemQuantities
+            Dim itemsToTake = feature.Items.Where(Function(x) x.ItemType = itemQuantity.Item1).Take(itemQuantity.Item2)
+            For Each itemToTake In itemsToTake
+                TakeFeatureItem(feature, itemToTake)
+                total += 1
+            Next
+        Next
+        AddMessage($"{Name} takes {total} items.")
+    End Sub
+
+    Private Sub TakeFeatureItem(feature As IFeature, itemToTake As IItem)
+        _worldData.Characters(Id).ItemIds.Add(itemToTake.Id)
+        feature.RemoveItem(itemToTake)
+    End Sub
+
     Public ReadOnly Property MaximumEnergy As Integer Implements ICharacter.MaximumEnergy
         Get
             Return GetStatistic(StatisticTypes.MaximumEnergy)

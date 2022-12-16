@@ -51,4 +51,8 @@
     Public Sub AddItem(item As IItem) Implements IFeature.AddItem
         _worldData.Features(Id).ItemIds.Add(item.Id)
     End Sub
+
+    Public Sub RemoveItem(item As IItem) Implements IFeature.RemoveItem
+        _worldData.Features(Id).ItemIds.Remove(item.Id)
+    End Sub
 End Class

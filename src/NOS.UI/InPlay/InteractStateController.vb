@@ -16,6 +16,13 @@
                 _menu.PreviousItem()
             Case SouthKeyName
                 _menu.NextItem()
+            Case EnterKeyName, SpaceKeyName
+                Select Case _menu.CurrentItem
+                    Case 0
+                        If _world.InteractionFeature.Items.Any Then
+                            SetState(UIStates.RemoveFeatureItems)
+                        End If
+                End Select
         End Select
     End Sub
 
@@ -32,6 +39,6 @@
     End Sub
 
     Private Sub UpdateMenu()
-        _menu.Items = New List(Of String) From {$"Items(x{_world.InteractionFeature.Items.Count})"}
+        _menu.Items = New List(Of String) From {$"Remove Items(x{_world.InteractionFeature.Items.Count})"}
     End Sub
 End Class

@@ -1,4 +1,4 @@
-﻿Friend Class TakeStateController
+﻿Friend Class RemoveFeatureItemsStateController
     Inherits BaseStateController
     Private ReadOnly _menu As Menu
     Private _menuItems As New List(Of (ItemTypes, Integer, Integer))
@@ -6,11 +6,10 @@
         MyBase.New(context, world)
         _menu = New Menu(_context, DefaultFontName, (0, 6), LineSize, (Hue.White, Hue.Black), 14, Array.Empty(Of String))
     End Sub
-
     Protected Overrides Sub HandleKey(keyName As String)
         Select Case keyName
             Case EscapeKeyName
-                SetState(UIStates.InPlay)
+                SetState(UIStates.Interact)
             Case NorthKeyName
                 _menu.PreviousItem()
             Case SouthKeyName
@@ -21,6 +20,7 @@
                 LeaveOneMore()
             Case EnterKeyName
                 TakeItems()
+                _world.InteractionFeature = Nothing
                 SetState(UIStates.InPlay)
             Case AllKeyName
                 TakeAll()
@@ -49,7 +49,7 @@
     End Sub
 
     Private Sub TakeItems()
-        _world.PlayerCharacter.AttemptTakeItems(_menuItems.Select(Function(x) (x.Item1, x.Item3)))
+        _world.PlayerCharacter.AttemptTakeFeatureItems(_world.InteractionFeature, _menuItems.Select(Function(x) (x.Item1, x.Item3)))
     End Sub
 
     Private Sub LeaveOneMore()
@@ -66,13 +66,15 @@
         End If
     End Sub
     Protected Overrides Sub Redraw(ticks As Long)
-        Dim total = _menuItems.Sum(Function(x) x.Item3)
-        DefaultFont.WriteLine((0, 0), LineSize, $"Take Items(x{total}):", Hue.Red)
+        If _world.InteractionFeature Is Nothing Then
+            Return
+        End If
+        DefaultFont.Write((0, 0), $"Take {_world.InteractionFeature.Name} Items(x{_menuItems.Sum(Function(x) x.Item3)}):", Hue.Blue)
         _menu.Draw()
     End Sub
     Public Overrides Sub Restart()
         MyBase.Restart()
-        _menuItems = _world.PlayerCharacter.Location.Items.GroupBy(Function(x) x.ItemType).Select(Function(x) (x.Key, x.Count, 0)).ToList
+        _menuItems = _world.InteractionFeature.Items.GroupBy(Function(x) x.ItemType).Select(Function(x) (x.Key, x.Count, 0)).ToList
         UpdateMenu()
     End Sub
     Private Sub UpdateMenu()
