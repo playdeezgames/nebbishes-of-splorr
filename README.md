@@ -11,7 +11,7 @@ Another fine starvation simulator.
 * B -
 * C - Character Status
 * D - Drop
-* E - 
+* E - Eat
 * F - Forage
 * G - 
 * H - Help

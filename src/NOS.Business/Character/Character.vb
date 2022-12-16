@@ -281,6 +281,31 @@
         feature.RemoveItem(itemToTake)
     End Sub
 
+    Public Sub AttemptEat(itemQuantities As IEnumerable(Of (ItemTypes, Integer))) Implements ICharacter.AttemptEat
+        DismissMessages()
+        Dim total = 0
+        For Each itemQuantity In itemQuantities
+            Dim itemsToEat = Items.Where(Function(x) x.ItemType = itemQuantity.Item1).Take(itemQuantity.Item2)
+            For Each itemToEat In itemsToEat
+                EatItem(itemToEat)
+                total += 1
+            Next
+        Next
+        AddMessage($"{Name} eats {total} items.")
+    End Sub
+
+    Private Sub EatItem(itemToEat As IItem)
+        _worldData.Characters(Id).ItemIds.Remove(itemToEat.Id)
+        Select Case itemToEat.ItemType
+            Case ItemTypes.Berry
+                EatBerry(itemToEat)
+        End Select
+        itemToEat.Destroy()
+    End Sub
+    Private Sub EatBerry(itemToEat As IItem)
+        Hunger -= itemToEat.Satiety
+    End Sub
+
     Public ReadOnly Property MaximumEnergy As Integer Implements ICharacter.MaximumEnergy
         Get
             Return GetStatistic(StatisticTypes.MaximumEnergy)

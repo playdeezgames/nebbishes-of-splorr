@@ -16,6 +16,10 @@
         Return New Item(worldData, id)
     End Function
 
+    Public Sub Destroy() Implements IItem.Destroy
+        _worldData.Items.Remove(Id)
+    End Sub
+
     Public ReadOnly Property Name As String Implements IItem.Name
         Get
             Return ItemType.Name
@@ -25,6 +29,18 @@
     Public ReadOnly Property ItemType As ItemTypes Implements IItem.ItemType
         Get
             Return CType(_worldData.Items(Id).ItemType, ItemTypes)
+        End Get
+    End Property
+
+    Public ReadOnly Property CanEat As Boolean Implements IItem.CanEat
+        Get
+            Return ItemType.CanEat
+        End Get
+    End Property
+
+    Public ReadOnly Property Satiety As Integer Implements IItem.Satiety
+        Get
+            Return ItemType.Satiety
         End Get
     End Property
 End Class

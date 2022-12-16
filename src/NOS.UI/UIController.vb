@@ -38,6 +38,7 @@ Public Class UIController
         _states.Add(UIStates.Interact, New FeatureStateController(_context, _world))
         _states.Add(UIStates.ChooseFeature, New ChooseFeatureStateController(_context, _world))
         _states.Add(UIStates.RemoveFeatureItems, New RemoveFeatureItemsStateController(_context, _world))
+        _states.Add(UIStates.Eat, New EatStateController(_context, _world))
     End Sub
 
     Private Sub OnChangeState(uiState As UIStates)

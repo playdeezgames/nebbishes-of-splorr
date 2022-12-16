@@ -12,6 +12,7 @@
     Sub AttemptDropItems(itemQuantities As IEnumerable(Of (ItemTypes, Integer)))
     Sub AttemptTakeItems(itemQuantities As IEnumerable(Of (ItemTypes, Integer)))
     Sub AttemptTakeFeatureItems(feature As IFeature, itemQuantities As IEnumerable(Of (ItemTypes, Integer)))
+    Sub AttemptEat(transferQuantities As IEnumerable(Of (ItemTypes, Integer)))
     ReadOnly Property Messages As String()
     Property Energy As Integer
     ReadOnly Property MaximumEnergy As Integer

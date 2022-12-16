@@ -45,6 +45,8 @@ Friend Class GeneralStateController
             Case DownKeyName
                 _world.PlayerCharacter.AttemptMove(Directions.Down)
                 SetState(UIStates.InPlay)
+            Case EatKeyName
+                SetState(UIStates.Eat)
         End Select
     End Sub
 

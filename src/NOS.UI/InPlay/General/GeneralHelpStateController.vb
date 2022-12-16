@@ -15,6 +15,7 @@
         y = font.WriteLine((0, y), (160, 6), "↑↓←→ - Move", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{CharacterStatusKeyName} - Character Status", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{DropKeyName} - Drop", Hue.Blue)
+        y = font.WriteLine((0, y), (160, 6), $"{EatKeyName} - Eat", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{ForageKeyName} - Forage", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{HelpKeyName} - Help", Hue.Blue)
         y = font.WriteLine((0, y), (160, 6), $"{TakeKeyName} - Take", Hue.Blue)

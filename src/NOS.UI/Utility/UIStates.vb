@@ -17,4 +17,5 @@
     Interact
     ChooseFeature
     RemoveFeatureItems
+    Eat
 End Enum

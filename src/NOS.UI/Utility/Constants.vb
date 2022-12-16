@@ -10,6 +10,7 @@
     'General Keys
     Friend Const CharacterStatusKeyName = "C"
     Friend Const DropKeyName = "D"
+    Friend Const EatKeyName = "E"
     Friend Const ForageKeyName = "F"
     Friend Const HelpKeyName = "H"
     Friend Const InteractKeyName = "I"
