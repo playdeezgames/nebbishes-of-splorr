@@ -14,6 +14,9 @@
     End Sub
 
     Protected Overrides Sub Redraw(ticks As Long)
+        If _world.InteractionFeature Is Nothing Then
+            Return
+        End If
         DefaultFont.Write((0, 0), _world.InteractionFeature.Name, Hue.Blue)
     End Sub
 End Class

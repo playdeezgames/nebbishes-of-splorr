@@ -156,7 +156,11 @@ Public Class World
             Return If(_interactionFeatureId.HasValue, New Feature(_worldData, _interactionFeatureId.Value), Nothing)
         End Get
         Set(value As IFeature)
-            _interactionFeatureId = If(value Is Nothing, Nothing, value.Id)
+            If value Is Nothing Then
+                _interactionFeatureId = Nothing
+                Return
+            End If
+            _interactionFeatureId = value.Id
         End Set
     End Property
 

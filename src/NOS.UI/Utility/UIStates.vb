@@ -15,4 +15,5 @@
     Save
     Load
     Interact
+    ChooseFeature
 End Enum

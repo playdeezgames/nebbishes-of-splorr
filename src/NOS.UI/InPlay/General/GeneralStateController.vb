@@ -50,13 +50,16 @@ Friend Class GeneralStateController
 
     Private Sub Interact()
         Dim character = _world.PlayerCharacter
-        If Not character.Location.Features.Any Then
-            character.DismissMessages()
-            character.AddMessage($"{character.Name} sees nothing to interact with.")
-            Return
-        End If
-        _world.InteractionFeature = character.Location.Features.First
-        SetState(UIStates.InPlay)
+        Select Case character.Location.Features.Count
+            Case 0
+                character.DismissMessages()
+                character.AddMessage($"{character.Name} sees nothing to interact with.")
+            Case 1
+                _world.InteractionFeature = character.Location.Features.Single
+                SetState(UIStates.InPlay)
+            Case Else
+                SetState(UIStates.ChooseFeature)
+        End Select
     End Sub
 
     Protected Overrides Sub Redraw(ticks As Long)
