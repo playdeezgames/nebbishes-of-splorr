@@ -12,4 +12,5 @@
     ConfirmAbandon
     InventoryDrop
     Take
+    Save
 End Enum

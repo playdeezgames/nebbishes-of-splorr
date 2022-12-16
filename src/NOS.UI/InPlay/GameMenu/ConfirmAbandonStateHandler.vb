@@ -1,4 +1,4 @@
-﻿Friend Class AbandonGameStateController
+﻿Friend Class ConfirmAbandonStateHandler
     Inherits BaseStateController
     Private _menu As Menu
 

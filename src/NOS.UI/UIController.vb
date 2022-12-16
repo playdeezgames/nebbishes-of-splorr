@@ -30,9 +30,10 @@ Public Class UIController
         _states.Add(UIStates.CharacterStatus, New CharacterStatusStateController(_context, _world))
         _states.Add(UIStates.GeneralHelp, New GeneralHelpStateController(_context, _world))
         _states.Add(UIStates.GameMenu, New GameMenuStateController(_context, _world))
-        _states.Add(UIStates.ConfirmAbandon, New AbandonGameStateController(_context, _world))
+        _states.Add(UIStates.ConfirmAbandon, New ConfirmAbandonStateHandler(_context, _world))
         _states.Add(UIStates.InventoryDrop, New DropStateHandler(_context, _world))
         _states.Add(UIStates.Take, New TakeStateController(_context, _world))
+        _states.Add(UIStates.Save, New SaveStateController(_context, _world))
     End Sub
 
     Private Sub OnChangeState(uiState As UIStates)

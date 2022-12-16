@@ -4,7 +4,7 @@
 
     Public Sub New(context As IUIContext, world As IWorld)
         MyBase.New(context, world)
-        _menu = New Menu(context, DefaultFontName, (0, 6), (160, 6), (Hue.White, Hue.Black), 4, "Continue Game", "Save Game(COMING SOON!)", "Options", "Abandon Game")
+        _menu = New Menu(context, DefaultFontName, (0, 6), (160, 6), (Hue.White, Hue.Black), 4, "Continue Game", "Save Game", "Options", "Abandon Game")
     End Sub
 
     Protected Overrides Sub HandleKey(keyName As String)
@@ -20,7 +20,7 @@
                     Case 0
                         SetState(UIStates.InPlay)
                     Case 1
-                        'TODO: save
+                        SetState(UIStates.Save)
                     Case 2
                         SetState(UIStates.Options)
                     Case 3

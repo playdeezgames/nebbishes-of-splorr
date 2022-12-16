@@ -160,4 +160,8 @@ Public Class World
     Public Sub Abandon() Implements IWorld.Abandon
         _worldData = Nothing
     End Sub
+
+    Public Sub Save(slot As Integer) Implements IWorld.Save
+        File.WriteAllText($"Slot{slot}.json", JsonSerializer.Serialize(_worldData))
+    End Sub
 End Class

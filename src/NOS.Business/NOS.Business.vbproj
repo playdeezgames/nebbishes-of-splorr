@@ -4,6 +4,7 @@
     <RootNamespace>NOS.Business</RootNamespace>
     <TargetFramework>netstandard2.1</TargetFramework>
     <OptionStrict>On</OptionStrict>
+    <ImportedNamespaces>Microsoft.Win32.SafeHandles=False,NOS.Business.My=False,NOS.Data=False,SPLORR.Game=False,System.IO=False,System.Text.Json=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,NOS.Business=True</ImportedNamespaces>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -24,6 +25,12 @@
     <Import Include="NOS.Business.My" />
     <Import Include="NOS.Data" />
     <Import Include="SPLORR.Game" />
+    <Import Include="System.IO" />
+    <Import Include="System.Text.Json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="7.0.1" />
   </ItemGroup>
 
 </Project>

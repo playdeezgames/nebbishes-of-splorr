@@ -5,4 +5,5 @@
     Sub Abandon()
     ReadOnly Property PlayerCharacter As ICharacter
     ReadOnly Property Locations As IEnumerable(Of ILocation)
+    Sub Save(slot As Integer)
 End Interface
