@@ -30,6 +30,8 @@ Friend Class GeneralStateController
                 SetState(UIStates.InPlay)
             Case HelpKeyName
                 SetState(UIStates.GeneralHelp)
+            Case InteractKeyName
+                Interact()
             Case DropKeyName
                 SetState(UIStates.InventoryDrop)
             Case ZleepKeyName
@@ -44,6 +46,17 @@ Friend Class GeneralStateController
                 _world.PlayerCharacter.AttemptMove(Directions.Down)
                 SetState(UIStates.InPlay)
         End Select
+    End Sub
+
+    Private Sub Interact()
+        Dim character = _world.PlayerCharacter
+        If Not character.Location.Features.Any Then
+            character.DismissMessages()
+            character.AddMessage($"{character.Name} sees nothing to interact with.")
+            Return
+        End If
+        _world.InteractionFeature = character.Location.Features.First
+        SetState(UIStates.InPlay)
     End Sub
 
     Protected Overrides Sub Redraw(ticks As Long)

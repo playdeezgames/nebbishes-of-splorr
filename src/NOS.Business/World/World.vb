@@ -150,6 +150,15 @@ Public Class World
             Return _worldData.Characters.Keys.Select(Function(x) New Character(_worldData, x))
         End Get
     End Property
+    Private _interactionFeatureId As Integer?
+    Public Property InteractionFeature As IFeature Implements IWorld.InteractionFeature
+        Get
+            Return If(_interactionFeatureId.HasValue, New Feature(_worldData, _interactionFeatureId.Value), Nothing)
+        End Get
+        Set(value As IFeature)
+            _interactionFeatureId = If(value Is Nothing, Nothing, value.Id)
+        End Set
+    End Property
 
     Private Sub NextRound()
         For Each character In Characters

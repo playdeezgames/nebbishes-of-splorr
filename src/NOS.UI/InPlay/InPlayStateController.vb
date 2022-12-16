@@ -13,6 +13,10 @@
 
     Public Overrides Sub Restart()
         MyBase.Restart()
-        SetState(UIStates.Navigation)
+        If _world.InteractionFeature Is Nothing Then
+            SetState(UIStates.Navigation)
+            Return
+        End If
+        SetState(UIStates.Interact)
     End Sub
 End Class

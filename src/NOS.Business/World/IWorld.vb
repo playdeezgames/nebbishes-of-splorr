@@ -7,4 +7,5 @@
     ReadOnly Property Locations As IEnumerable(Of ILocation)
     Sub Save(slot As Integer)
     Sub Load(slot As Integer)
+    Property InteractionFeature As IFeature
 End Interface

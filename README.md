@@ -15,7 +15,7 @@ Another fine starvation simulator.
 * F - Forage
 * G - 
 * H - Help
-* I - 
+* I - Interact
 * K -
 * L - 
 * M -

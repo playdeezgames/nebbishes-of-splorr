@@ -14,4 +14,5 @@
     Take
     Save
     Load
+    Interact
 End Enum

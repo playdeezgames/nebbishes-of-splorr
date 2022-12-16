@@ -12,6 +12,7 @@
     Friend Const DropKeyName = "D"
     Friend Const ForageKeyName = "F"
     Friend Const HelpKeyName = "H"
+    Friend Const InteractKeyName = "I"
     Friend Const TakeKeyName = "T"
     Friend Const UpKeyName = "U"
     Friend Const DownKeyName = "W"
