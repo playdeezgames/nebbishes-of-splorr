@@ -38,8 +38,20 @@
     End Function
 
     Public Sub NextRound() Implements IFeature.NextRound
-        'TODO: whatever the feature does, prolly based on the feature type
+        AdvanceTimers()
     End Sub
+
+    Private Sub AdvanceTimers()
+        For Each timer In Timers
+
+        Next
+    End Sub
+    Private ReadOnly Property Timers As IEnumerable(Of ITimer)
+        Get
+            Return _worldData.Features(Id).Timers.Keys.Select(Function(x) New FeatureTimer(_worldData, World, Id, CType(x, TimerTypes)))
+        End Get
+    End Property
+
 
     Public Sub AddItem(item As IItem) Implements IFeature.AddItem
         _worldData.Features(Id).ItemIds.Add(item.Id)
