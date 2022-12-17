@@ -18,4 +18,17 @@
         End If
         Return False
     End Function
+    Public Overrides Function AttemptSleep() As Boolean
+        If MyBase.AttemptSleep() Then
+            Dim oldEnergy = Energy
+            Dim minutes = 0
+            While IsSleeping
+                World.NextRound()
+                minutes += 1
+            End While
+            AddMessage($"After {minutes} minutes asleep, {Name} gains {Energy - oldEnergy} energy.")
+            Return True
+        End If
+        Return False
+    End Function
 End Class

@@ -50,10 +50,16 @@ Module CharacterTypesExtensions
                 New Dictionary(Of TimerTypes, Action(Of ICharacter)) From
                 {
                     {TimerTypes.Hunger, AddressOf HandleHungerTimer},
-                    {TimerTypes.Fatigue, AddressOf HandleFatigueTimer}
+                    {TimerTypes.Fatigue, AddressOf HandleFatigueTimer},
+                    {TimerTypes.Sleep, AddressOf HandleSleepTimer}
                 }
             }
         }
+
+    Private Sub HandleSleepTimer(character As ICharacter)
+        character.Wake()
+        character.RemoveTimer(TimerTypes.Sleep)
+    End Sub
 
     Private Sub HandleFatigueTimer(character As ICharacter)
         If character.IsSleeping Then

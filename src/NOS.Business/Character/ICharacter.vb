@@ -7,13 +7,15 @@
     Sub AddMessage(line As String)
     ReadOnly Property HasMessages As Boolean
     Sub DismissMessages()
-    Sub AttemptSleep()
+    Function AttemptSleep() As Boolean
     Sub NextRound()
     Function AttemptForage() As Boolean
     Sub AttemptDropItems(itemQuantities As IEnumerable(Of (ItemTypes, Integer)))
     Sub AttemptTakeItems(itemQuantities As IEnumerable(Of (ItemTypes, Integer)))
     Sub AttemptTakeFeatureItems(feature As IFeature, itemQuantities As IEnumerable(Of (ItemTypes, Integer)))
     Sub AttemptEat(transferQuantities As IEnumerable(Of (ItemTypes, Integer)))
+    Sub Wake()
+    Sub RemoveTimer(timerType As TimerTypes)
     ReadOnly Property Messages As String()
     Property Energy As Integer
     ReadOnly Property MaximumEnergy As Integer

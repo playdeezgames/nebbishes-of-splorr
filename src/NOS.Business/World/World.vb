@@ -125,15 +125,6 @@ Public Class World
     Private Function CreateCharacter(name As String, location As ILocation, characterType As CharacterTypes) As ICharacter
         Return Character.Create(_worldData, Me, name, location, characterType)
     End Function
-    Public Function AdvanceTimeWhile(minutes As Integer, conditionCheck As Func(Of Boolean)) As Integer Implements IWorld.AdvanceTimeWhile
-        Dim counter = 0
-        While minutes > 0 AndAlso conditionCheck()
-            minutes -= 1
-            counter += 1
-            NextRound()
-        End While
-        Return counter
-    End Function
     Private ReadOnly Property Characters As IEnumerable(Of ICharacter)
         Get
             Return _worldData.Characters.Keys.Select(Function(x) New Character(_worldData, Me, x))

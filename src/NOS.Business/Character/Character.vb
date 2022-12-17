@@ -120,18 +120,23 @@
     Private Sub SetEffect(effect As Effects)
         _worldData.Characters(Id).Effects.Add(effect)
     End Sub
-    Public Sub AttemptSleep() Implements ICharacter.AttemptSleep
+    Public Overridable Function AttemptSleep() As Boolean Implements ICharacter.AttemptSleep
         DismissMessages()
-
         If IsDead Then
             AddMessage($"Despite claims to the contrary, {Name} cannot sleep while dead.")
-            Return
+            Return False
         End If
-        Dim oldEnergy = Energy
+        If IsSleeping Then
+            AddMessage($"{Name} is already asleep.")
+            Return False
+        End If
         SetEffect(Effects.Sleeping)
-        Dim minutes = World.AdvanceTimeWhile(60, Function() Me.IsSleeping)
-        ClearEffect(Effects.Sleeping)
-        AddMessage($"{Name} sleep for {minutes} minutes, +{Energy - oldEnergy} energy.")
+        SetTimer(TimerTypes.Sleep, 60)
+        AddMessage($"{Name} sleeps.")
+        Return True
+    End Function
+    Private Sub SetTimer(timerType As TimerTypes, value As Integer)
+        _worldData.Characters(Id).Timers(timerType) = New Integer() {0, value}
     End Sub
     Private Sub ClearEffect(effect As Effects)
         _worldData.Characters(Id).Effects.Remove(effect)
@@ -330,6 +335,14 @@
     End Sub
     Private Sub EatBerry(itemToEat As IItem)
         Hunger -= itemToEat.Satiety
+    End Sub
+
+    Public Sub Wake() Implements ICharacter.Wake
+        ClearEffect(Effects.Sleeping)
+    End Sub
+
+    Public Sub RemoveTimer(timerType As TimerTypes) Implements ICharacter.RemoveTimer
+        _worldData.Characters(Id).Timers.Remove(timerType)
     End Sub
 
     Public ReadOnly Property MaximumEnergy As Integer Implements ICharacter.MaximumEnergy
