@@ -109,7 +109,7 @@
     Private Function GetStatistic(statisticType As StatisticTypes) As Integer
         Return _worldData.Characters(Id).Statistics(statisticType)
     End Function
-    Private ReadOnly Property IsSleeping As Boolean
+    Public ReadOnly Property IsSleeping As Boolean Implements ICharacter.IsSleeping
         Get
             Return HasEffect(Effects.Sleeping)
         End Get
@@ -145,11 +145,6 @@
             Return
         End If
         AdvanceTimers()
-        If IsSleeping Then
-            Energy += 3
-        Else
-            Fatigue += 1
-        End If
         If HasEffect(Effects.Starving) Then
             Wounds += 1
         End If
@@ -158,7 +153,6 @@
         Else
             ClearEffect(Effects.Starving)
         End If
-        Hunger += 1
         If HasEffect(Effects.Foraging) Then
             ForagingXP += 1
             If ForagingXP >= ForagingXPGoal Then

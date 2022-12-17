@@ -12,11 +12,11 @@ Module CharacterTypesExtensions
                 New Dictionary(Of StatisticTypes, Integer) From
                 {
                     {StatisticTypes.Fatigue, 0},
-                    {StatisticTypes.MaximumEnergy, 1000},
+                    {StatisticTypes.MaximumEnergy, 100},
                     {StatisticTypes.Hunger, 0},
-                    {StatisticTypes.MaximumSatiety, 1000},
+                    {StatisticTypes.MaximumSatiety, 100},
                     {StatisticTypes.Wounds, 0},
-                    {StatisticTypes.MaximumHealth, 1000},
+                    {StatisticTypes.MaximumHealth, 100},
                     {StatisticTypes.ForagingXP, 0},
                     {StatisticTypes.ForagingLevel, 10}
                 }
@@ -56,9 +56,15 @@ Module CharacterTypesExtensions
         }
 
     Private Sub HandleFatigueTimer(character As ICharacter)
+        If character.IsSleeping Then
+            character.Energy += 3
+        Else
+            character.Energy -= 1
+        End If
     End Sub
 
     Private Sub HandleHungerTimer(character As ICharacter)
+        character.Satiety -= 1
     End Sub
 
     <Extension>
