@@ -2,18 +2,19 @@
     Inherits BaseThingie
     Implements ITimer
     Private ReadOnly _characterId As Integer
-    Private ReadOnly _timerType As TimerTypes
+    Public ReadOnly Property TimerType As TimerTypes Implements ITimer.TimerType
 
     Friend Sub New(worldData As WorldData, world As IWorld, characterId As Integer, timerType As TimerTypes)
         MyBase.New(worldData, world)
         _characterId = characterId
-        _timerType = timerType
+        Me.TimerType = timerType
     End Sub
 
+
     Public Function Advance() As Boolean Implements ITimer.Advance
-        Dim timerValue = _worldData.Characters(_characterId).Timers(_timerType)
+        Dim timerValue = _worldData.Characters(_characterId).Timers(TimerType)
         timerValue(0) += 1
-        Dim result As Boolean = False
+        Dim result As Boolean = timerValue(0) >= timerValue(1)
         If timerValue(0) >= timerValue(1) Then
             timerValue(0) -= timerValue(1)
         End If

@@ -31,6 +31,9 @@
         For Each statistic In characterType.StartingStatistics
             characterData.Statistics(statistic.Key) = statistic.Value
         Next
+        For Each timer In characterType.StartingTimers
+            characterData.Timers(timer.Key) = New Integer() {0, timer.Value}
+        Next
         worldData.Characters.Add(id, characterData)
         Return New Character(worldData, world, id)
     End Function
@@ -175,8 +178,14 @@
     End Sub
 
     Private Sub TriggerTimer(timer As ITimer)
-        'TODO: based on character type, call a handler
+        CharacterType.HandleTimer(timer.TimerType, Me)
     End Sub
+    Private ReadOnly Property CharacterType As CharacterTypes
+        Get
+            Return CType(_worldData.Characters(Id).CharacterType, CharacterTypes)
+        End Get
+    End Property
+
 
     Private ReadOnly Property Timers As IEnumerable(Of ITimer)
         Get
