@@ -18,6 +18,10 @@
         _worldData.Items.Remove(Id)
     End Sub
 
+    Public Sub NextRound() Implements IItem.NextRound
+        'TODO: things!
+    End Sub
+
     Public ReadOnly Property Name As String Implements IItem.Name
         Get
             Return ItemType.Name

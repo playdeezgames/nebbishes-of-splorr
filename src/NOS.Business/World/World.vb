@@ -150,7 +150,15 @@ Public Class World
         For Each location In Locations
             location.NextRound()
         Next
+        For Each item In Items
+            item.NextRound()
+        Next
     End Sub
+    ReadOnly Property Items As IEnumerable(Of IItem)
+        Get
+            Return _worldData.Items.Select(Function(x) New Item(_worldData, Me, x.Key))
+        End Get
+    End Property
     Public Sub Abandon() Implements IWorld.Abandon
         _worldData = Nothing
     End Sub
