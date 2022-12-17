@@ -32,6 +32,7 @@ Friend Class GeneralStateController
                 SetState(UIStates.GeneralHelp)
             Case InteractKeyName
                 Interact()
+                _world.NextRound()
             Case DropKeyName
                 SetState(UIStates.InventoryDrop)
             Case ZleepKeyName

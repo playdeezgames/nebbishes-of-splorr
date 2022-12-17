@@ -9,4 +9,5 @@
     Sub Load(slot As Integer)
     Property InteractionFeature As IFeature
     Function CreateItem(itemType As ItemTypes) As IItem
+    Sub NextRound()
 End Interface

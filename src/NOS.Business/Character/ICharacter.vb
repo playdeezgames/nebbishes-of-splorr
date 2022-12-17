@@ -1,7 +1,7 @@
 ﻿Public Interface ICharacter
     Inherits IThingie
     Sub SetAsPlayerCharacter()
-    Sub AttemptMove(direction As Directions)
+    Function AttemptMove(direction As Directions) As Boolean
     Property Location As ILocation
     ReadOnly Property Name As String
     Sub AddMessage(line As String)
@@ -9,7 +9,7 @@
     Sub DismissMessages()
     Sub AttemptSleep()
     Sub NextRound()
-    Sub AttemptForage()
+    Function AttemptForage() As Boolean
     Sub AttemptDropItems(itemQuantities As IEnumerable(Of (ItemTypes, Integer)))
     Sub AttemptTakeItems(itemQuantities As IEnumerable(Of (ItemTypes, Integer)))
     Sub AttemptTakeFeatureItems(feature As IFeature, itemQuantities As IEnumerable(Of (ItemTypes, Integer)))

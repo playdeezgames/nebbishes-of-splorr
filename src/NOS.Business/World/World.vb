@@ -14,7 +14,7 @@ Public Class World
     End Property
     Public ReadOnly Property PlayerCharacter As ICharacter Implements IWorld.PlayerCharacter
         Get
-            Return New Character(_worldData, Me, _worldData.PlayerCharacterId.Value)
+            Return New PlayerCharacter(_worldData, Me, _worldData.PlayerCharacterId.Value)
         End Get
     End Property
     Public ReadOnly Property Locations As IEnumerable(Of ILocation) Implements IWorld.Locations
@@ -152,7 +152,7 @@ Public Class World
             _interactionFeatureId = value.Id
         End Set
     End Property
-    Private Sub NextRound()
+    Public Sub NextRound() Implements IWorld.NextRound
         For Each character In Characters
             character.NextRound()
         Next

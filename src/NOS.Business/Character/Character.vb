@@ -37,28 +37,28 @@
         worldData.Characters.Add(id, characterData)
         Return New Character(worldData, world, id)
     End Function
-    Public Sub AttemptMove(direction As Directions) Implements ICharacter.AttemptMove
+    Public Overridable Function AttemptMove(direction As Directions) As Boolean Implements ICharacter.AttemptMove
         DismissMessages()
 
         If IsDead Then
             AddMessage($"{Name} too dead to move.")
-            Return
+            Return False
         End If
 
         If Energy = 0 Then
             AddMessage($"{Name} too tired to move.")
-            Return
+            Return False
         End If
 
         If Not Location.HasRoute(direction) Then
             AddMessage($"{Name} cannot go {direction.Name}.")
-            Return
+            Return False
         End If
 
         AddMessage($"{Name} go {direction.Name}.")
         Location = Location.Route(direction).ToLocation
-        NextRound()
-    End Sub
+        Return True
+    End Function
     Public Sub AddMessage(line As String) Implements ICharacter.AddMessage
         If IsPlayerCharacter Then
             _worldData.Messages.Add(line)
@@ -210,31 +210,31 @@
             SetStatistic(StatisticTypes.ForagingLevel, value)
         End Set
     End Property
-    Public Sub AttemptForage() Implements ICharacter.AttemptForage
+    Public Overridable Function AttemptForage() As Boolean Implements ICharacter.AttemptForage
         DismissMessages()
         If IsDead Then
             AddMessage($"{Name} too dead to forage.")
-            Return
+            Return False
         End If
         If Not Location.CanForage Then
             AddMessage($"{Name} cannot forage here.")
-            Return
+            Return False
         End If
         SetEffect(Effects.Foraging)
-        NextRound()
         ClearEffect(Effects.Foraging)
         If RNG.FromRange(0, ForagingLevel + Location.ForagingLevel) > ForagingLevel Then
             AddMessage($"{Name} finds nothing.")
-            Return
+            Return True
         End If
         Dim item As IItem = Location.Forage()
         If item Is Nothing Then
             AddMessage($"{Name} finds nothing.")
-            Return
+            Return True
         End If
         AddItem(item)
         AddMessage($"{Name} finds {item.Name}, and now has {ItemTypeCount(item.ItemType)}.")
-    End Sub
+        Return True
+    End Function
     Public ReadOnly Property Items As IEnumerable(Of IItem) Implements ICharacter.Items
         Get
             Return _worldData.Characters(Id).ItemIds.Select(Function(x) New Item(_worldData, World, x))
