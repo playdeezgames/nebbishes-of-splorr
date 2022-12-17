@@ -125,7 +125,7 @@ Public Class World
     Private Function CreateCharacter(name As String, location As ILocation, characterType As CharacterTypes) As ICharacter
         Return Character.Create(_worldData, Me, name, location, characterType)
     End Function
-    Public Function AdvanceTime(minutes As Integer, conditionCheck As Func(Of Boolean)) As Integer Implements IWorld.AdvanceTime
+    Public Function AdvanceTimeWhile(minutes As Integer, conditionCheck As Func(Of Boolean)) As Integer Implements IWorld.AdvanceTimeWhile
         Dim counter = 0
         While minutes > 0 AndAlso conditionCheck()
             minutes -= 1

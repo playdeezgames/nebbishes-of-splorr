@@ -5,4 +5,5 @@
     Public Property Effects As New HashSet(Of Integer)
     Public Property CharacterType As Integer
     Public Property ItemIds As New HashSet(Of Integer)
+    Public Property Timers As New Dictionary(Of Integer, Integer())
 End Class

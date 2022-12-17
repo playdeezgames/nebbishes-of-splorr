@@ -126,7 +126,7 @@
         End If
         Dim oldEnergy = Energy
         SetEffect(Effects.Sleeping)
-        Dim minutes = World.AdvanceTime(60, Function() Me.IsSleeping)
+        Dim minutes = World.AdvanceTimeWhile(60, Function() Me.IsSleeping)
         ClearEffect(Effects.Sleeping)
         AddMessage($"{Name} sleep for {minutes} minutes, +{Energy - oldEnergy} energy.")
     End Sub
@@ -141,6 +141,7 @@
             SetEffect(Effects.Dead)
             Return
         End If
+        AdvanceTimers()
         If IsSleeping Then
             Energy += 3
         Else
@@ -164,6 +165,26 @@
             End If
         End If
     End Sub
+
+    Private Sub AdvanceTimers()
+        For Each timer In Timers
+            If timer.Advance() Then
+                TriggerTimer(timer)
+            End If
+        Next
+    End Sub
+
+    Private Sub TriggerTimer(timer As ITimer)
+        'TODO: based on character type, call a handler
+    End Sub
+
+    Private ReadOnly Property Timers As IEnumerable(Of ITimer)
+        Get
+            Return _worldData.Characters(Id).Timers.Keys.Select(Function(x) New CharacterTimer(_worldData, World, Id, CType(x, TimerTypes)))
+        End Get
+    End Property
+
+
     Private Property ForagingXP As Integer
         Get
             Return GetStatistic(StatisticTypes.ForagingXP)
