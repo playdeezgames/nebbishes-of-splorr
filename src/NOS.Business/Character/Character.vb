@@ -250,7 +250,7 @@
             Return Items.Where(Function(x) x.ItemType = itemType).Count
         End Get
     End Property
-    Private Sub AddItem(item As IItem)
+    Public Sub AddItem(item As IItem) Implements ICharacter.AddItem
         _worldData.Characters(Id).ItemIds.Add(item.Id)
     End Sub
 
@@ -268,7 +268,7 @@
     End Sub
 
     Private Sub DropItem(itemToDrop As IItem)
-        _worldData.Characters(Id).ItemIds.Remove(itemToDrop.Id)
+        RemoveItem(itemToDrop)
         Location.AddItem(itemToDrop)
     End Sub
 
@@ -345,6 +345,10 @@
         _worldData.Characters(Id).Timers.Remove(timerType)
     End Sub
 
+    Public Sub RemoveItem(item As IItem) Implements IItemHolder.RemoveItem
+        _worldData.Characters(Id).ItemIds.Remove(item.Id)
+    End Sub
+
     Public ReadOnly Property MaximumEnergy As Integer Implements ICharacter.MaximumEnergy
         Get
             Return GetStatistic(StatisticTypes.MaximumEnergy)
@@ -395,6 +399,12 @@
     Public ReadOnly Property IsDead As Boolean Implements ICharacter.IsDead
         Get
             Return HasEffect(Effects.Dead)
+        End Get
+    End Property
+
+    Public ReadOnly Property HasItems As Boolean Implements IItemHolder.HasItems
+        Get
+            Return _worldData.Characters(Id).ItemIds.Any
         End Get
     End Property
 End Class

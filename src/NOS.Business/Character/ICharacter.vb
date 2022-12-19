@@ -1,5 +1,6 @@
 ﻿Public Interface ICharacter
     Inherits IThingie
+    Inherits IItemHolder
     Sub SetAsPlayerCharacter()
     Function AttemptMove(direction As Directions) As Boolean
     Property Location As ILocation
@@ -24,6 +25,5 @@
     Property Health As Integer
     ReadOnly Property MaximumHealth As Integer
     ReadOnly Property IsDead As Boolean
-    ReadOnly Property Items As IEnumerable(Of IItem)
     ReadOnly Property IsSleeping As Boolean
 End Interface
