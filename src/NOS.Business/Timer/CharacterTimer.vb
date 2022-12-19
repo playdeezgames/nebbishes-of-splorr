@@ -20,4 +20,8 @@
         End If
         Return result
     End Function
+
+    Public Sub Destroy() Implements ITimer.Destroy
+        _worldData.Characters(_characterId).Timers.Remove(TimerType)
+    End Sub
 End Class

@@ -9,7 +9,6 @@
     ReadOnly Property HasMessages As Boolean
     Sub DismissMessages()
     Function AttemptSleep() As Boolean
-    Sub NextRound()
     Function AttemptForage() As Boolean
     Sub AttemptDropItems(itemQuantities As IEnumerable(Of (ItemTypes, Integer)))
     Sub AttemptTakeItems(itemQuantities As IEnumerable(Of (ItemTypes, Integer)))

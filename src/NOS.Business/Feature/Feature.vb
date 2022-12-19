@@ -30,7 +30,7 @@
         featureType.Populate(result)
         Return result
     End Function
-    Public Sub NextRound() Implements IFeature.NextRound
+    Public Overrides Sub NextRound()
         AdvanceTimers()
     End Sub
     Private Sub AdvanceTimers()
@@ -38,7 +38,7 @@
 
         Next
     End Sub
-    Private ReadOnly Property Timers As IEnumerable(Of ITimer)
+    Protected Overrides ReadOnly Property Timers As IEnumerable(Of ITimer)
         Get
             Return _worldData.Features(Id).Timers.Keys.Select(Function(x) New FeatureTimer(_worldData, World, Id, CType(x, TimerTypes)))
         End Get
@@ -55,5 +55,9 @@
     End Sub
     Public Sub RemoveItem(item As IItem) Implements IFeature.RemoveItem
         _worldData.Features(Id).ItemIds.Remove(item.Id)
+    End Sub
+
+    Protected Overrides Sub OnTriggerTimer(timerType As TimerTypes)
+        'TODO: feature type based effect
     End Sub
 End Class

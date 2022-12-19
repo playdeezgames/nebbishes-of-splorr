@@ -18,8 +18,8 @@
         _worldData.Items.Remove(Id)
     End Sub
 
-    Public Sub NextRound() Implements IItem.NextRound
-        'TODO: things!
+    Protected Overrides Sub OnTriggerTimer(timerType As TimerTypes)
+        'TODO: item type effects!
     End Sub
 
     Public ReadOnly Property Name As String Implements IItem.Name
@@ -43,6 +43,12 @@
     Public ReadOnly Property Satiety As Integer Implements IItem.Satiety
         Get
             Return ItemType.Satiety
+        End Get
+    End Property
+
+    Protected Overrides ReadOnly Property Timers As IEnumerable(Of ITimer)
+        Get
+            Return Array.Empty(Of ITimer)
         End Get
     End Property
 End Class

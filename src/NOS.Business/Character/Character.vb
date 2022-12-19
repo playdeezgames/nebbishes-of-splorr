@@ -141,7 +141,7 @@
     Private Sub ClearEffect(effect As Effects)
         _worldData.Characters(Id).Effects.Remove(effect)
     End Sub
-    Public Sub NextRound() Implements ICharacter.NextRound
+    Public Overrides Sub NextRound()
         If IsDead Then
             Return
         End If
@@ -149,7 +149,7 @@
             SetEffect(Effects.Dead)
             Return
         End If
-        AdvanceTimers()
+        MyBase.NextRound()
         If HasEffect(Effects.Starving) Then
             Wounds += 1
         End If
@@ -168,25 +168,13 @@
         End If
     End Sub
 
-    Private Sub AdvanceTimers()
-        For Each timer In Timers
-            If timer.Advance() Then
-                TriggerTimer(timer)
-            End If
-        Next
-    End Sub
-
-    Private Sub TriggerTimer(timer As ITimer)
-        CharacterType.HandleTimer(timer.TimerType, Me)
-    End Sub
     Private ReadOnly Property CharacterType As CharacterTypes
         Get
             Return CType(_worldData.Characters(Id).CharacterType, CharacterTypes)
         End Get
     End Property
 
-
-    Private ReadOnly Property Timers As IEnumerable(Of ITimer)
+    Protected Overrides ReadOnly Property Timers As IEnumerable(Of ITimer)
         Get
             Return _worldData.Characters(Id).Timers.Keys.Select(Function(x) New CharacterTimer(_worldData, World, Id, CType(x, TimerTypes)))
         End Get
@@ -347,6 +335,10 @@
 
     Public Sub RemoveItem(item As IItem) Implements IItemHolder.RemoveItem
         _worldData.Characters(Id).ItemIds.Remove(item.Id)
+    End Sub
+
+    Protected Overrides Sub OnTriggerTimer(timerType As TimerTypes)
+        CharacterType.HandleTimer(timerType, Me)
     End Sub
 
     Public ReadOnly Property MaximumEnergy As Integer Implements ICharacter.MaximumEnergy

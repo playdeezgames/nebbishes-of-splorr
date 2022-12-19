@@ -11,6 +11,10 @@
 
     Public ReadOnly Property TimerType As TimerTypes Implements ITimer.TimerType
 
+    Public Sub Destroy() Implements ITimer.Destroy
+        _worldData.Features(_featureId).Timers.Remove(TimerType)
+    End Sub
+
     Public Function Advance() As Boolean Implements ITimer.Advance
         Dim timerValue = _worldData.Features(_featureId).Timers(TimerType)
         timerValue(0) += 1

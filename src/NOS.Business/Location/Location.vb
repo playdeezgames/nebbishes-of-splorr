@@ -59,6 +59,12 @@
         End Get
     End Property
 
+    Protected Overrides ReadOnly Property Timers As IEnumerable(Of ITimer)
+        Get
+            Return Array.Empty(Of ITimer)
+        End Get
+    End Property
+
     Private Function GetStatistic(statisticType As StatisticTypes) As Integer
         Return _worldData.Locations(Id).Statistics(statisticType)
     End Function
@@ -97,9 +103,13 @@
         _worldData.Locations(Id).ItemIds.Remove(item.Id)
     End Sub
 
-    Public Sub NextRound() Implements ILocation.NextRound
+    Public Overrides Sub NextRound()
         For Each feature In Features
             feature.NextRound()
         Next
+    End Sub
+
+    Protected Overrides Sub OnTriggerTimer(timerType As TimerTypes)
+        'TODO: effect of timer on location
     End Sub
 End Class
