@@ -286,7 +286,7 @@
     End Sub
 
     Private Sub TakeItem(itemToTake As IItem)
-        _worldData.Characters(Id).ItemIds.Add(itemToTake.Id)
+        AddItem(itemToTake)
         Location.RemoveItem(itemToTake)
     End Sub
 
@@ -304,7 +304,7 @@
     End Sub
 
     Private Sub TakeFeatureItem(feature As IFeature, itemToTake As IItem)
-        _worldData.Characters(Id).ItemIds.Add(itemToTake.Id)
+        AddItem(itemToTake)
         feature.RemoveItem(itemToTake)
     End Sub
 
@@ -326,7 +326,7 @@
     End Sub
 
     Private Sub EatItem(itemToEat As IItem)
-        _worldData.Characters(Id).ItemIds.Remove(itemToEat.Id)
+        RemoveItem(itemToEat)
         Select Case itemToEat.ItemType
             Case ItemTypes.Berry
                 EatBerry(itemToEat)
