@@ -1,9 +1,7 @@
 ﻿Public Interface IFeature
     Inherits IThingie
+    Inherits IItemHolder
     ReadOnly Property Name As String
     ReadOnly Property FeatureType As FeatureTypes
     Sub NextRound()
-    Sub AddItem(item As IItem)
-    Sub RemoveItem(item As IItem)
-    ReadOnly Property Items As IEnumerable(Of IItem)
 End Interface
