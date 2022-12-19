@@ -16,7 +16,7 @@
     Sub AttemptTakeFeatureItems(feature As IFeature, itemQuantities As IEnumerable(Of (ItemTypes, Integer)))
     Sub AttemptEat(transferQuantities As IEnumerable(Of (ItemTypes, Integer)))
     Sub Wake()
-    Sub RemoveTimer(timerType As TimerTypes)
+    Sub ClearTimer(timerType As TimerTypes)
     ReadOnly Property Messages As String()
     Property Energy As Integer
     ReadOnly Property MaximumEnergy As Integer

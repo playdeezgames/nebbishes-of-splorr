@@ -58,7 +58,7 @@ Module CharacterTypesExtensions
 
     Private Sub HandleSleepTimer(character As ICharacter)
         character.Wake()
-        character.RemoveTimer(TimerTypes.Sleep)
+        character.ClearTimer(TimerTypes.Sleep)
     End Sub
 
     Private Sub HandleFatigueTimer(character As ICharacter)

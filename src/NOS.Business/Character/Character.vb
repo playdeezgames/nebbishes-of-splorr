@@ -341,7 +341,7 @@
         ClearEffect(Effects.Sleeping)
     End Sub
 
-    Public Sub RemoveTimer(timerType As TimerTypes) Implements ICharacter.RemoveTimer
+    Public Sub ClearTimer(timerType As TimerTypes) Implements ICharacter.ClearTimer
         _worldData.Characters(Id).Timers.Remove(timerType)
     End Sub
 
